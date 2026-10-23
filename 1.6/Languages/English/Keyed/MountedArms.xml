@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<MA_BarrelHeat>Barrel heat</MA_BarrelHeat>
+	<MA_BarrelCooling>overheated, cooling down</MA_BarrelCooling>
+	<MA_BarrelOverheated>{0} has overheated and stopped firing until the barrel cools down.</MA_BarrelOverheated>
+	<MA_OutOfArc>Target is outside this turret's fire arc.</MA_OutOfArc>
+</LanguageData>

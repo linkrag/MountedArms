@@ -1,0 +1,836 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--=============== Bases ===============-->
+
+  <ThingDef Name="MA_TurretBase" ParentName="BuildingBase" Abstract="True">
+    <thingClass>Building_TurretGun</thingClass>
+    <drawerType>MapMeshAndRealTime</drawerType>
+    <drawHighlight>true</drawHighlight>
+    <drawHighlightOnlyForHostile>true</drawHighlightOnlyForHostile>
+    <graphicData>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawSize>(2,2)</drawSize>
+      <damageData>
+        <rect>(0.15,0.15,0.7,0.7)</rect>
+      </damageData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <stealable>false</stealable>
+    <size>(2,2)</size>
+    <tickerType>Normal</tickerType>
+    <passability>PassThroughOnly</passability>
+    <pathCost>50</pathCost>
+    <fillPercent>0.5</fillPercent>
+    <hasTooltip>true</hasTooltip>
+    <terrainAffordanceNeeded>Heavy</terrainAffordanceNeeded>
+    <designationCategory>Security</designationCategory>
+    <statBases>
+      <Flammability>0.7</Flammability>
+      <Beauty>-20</Beauty>
+    </statBases>
+    <building>
+      <ai_combatDangerous>true</ai_combatDangerous>
+    </building>
+    <placeWorkers>
+      <li>PlaceWorker_TurretTop</li>
+      <li>PlaceWorker_ShowTurretRadius</li>
+    </placeWorkers>
+    <comps>
+      <li Class="CompProperties_Forbiddable"/>
+      <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>Stun</li>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!-- Automatic: needs power, can be switched off, barrel refurbished with steel -->
+  <ThingDef Name="MA_AutoTurretBase" ParentName="MA_TurretBase" Abstract="True">
+    <rotatable>false</rotatable>
+    <comps>
+      <li Class="CompProperties_Flickable"/>
+      <li Class="CompProperties_Breakdownable"/>
+    </comps>
+  </ThingDef>
+
+  <!-- Manned: no power, a colonist must operate it (like the mortar) -->
+  <ThingDef Name="MA_MannedTurretBase" ParentName="MA_TurretBase" Abstract="True">
+    <rotatable>true</rotatable>
+    <hasInteractionCell>true</hasInteractionCell>
+    <interactionCellOffset>(0,0,-1)</interactionCellOffset>
+    <placeWorkers>
+      <li>PlaceWorker_PreventInteractionSpotOverlap</li>
+    </placeWorkers>
+    <comps>
+      <li Class="CompProperties_Mannable">
+        <manWorkType>Violent</manWorkType>
+        <planetLayerWhitelist>
+          <li>Surface</li>
+        </planetLayerWhitelist>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <!--=============== M240 (automatic) ===============-->
+
+  <ThingDef ParentName="MA_AutoTurretBase">
+    <defName>MA_Turret_M240_MG</defName>
+    <label>M240 turret</label>
+    <description>An automated mount for a belt-fed general-purpose machine gun. Long bursts of rifle-caliber rounds make it a good all-round defense. Its barrel must be refurbished with steel after use. May explode when damaged.</description>
+    <graphicData>
+      <texPath>MountedArms/M240_Base</texPath>
+    </graphicData>
+    <uiIconPath>MountedArms/M240_Icon</uiIconPath>
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <WorkToBuild>9000</WorkToBuild>
+      <Mass>40</Mass>
+      <ShootingAccuracyTurret>0.96</ShootingAccuracyTurret>
+    </statBases>
+    <costList>
+      <Steel>220</Steel>
+      <ComponentIndustrial>4</ComponentIndustrial>
+    </costList>
+    <constructionSkillPrerequisite>5</constructionSkillPrerequisite>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>100</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>3.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="MountedArms.CompProperties_BarrelHeat">
+        <heatPerShot>0.0318</heatPerShot>
+        <coolPerSecond>0.02</coolPerSecond>
+        <resumeAt>0.5</resumeAt>
+        <smokeAt>0.7</smokeAt>
+        <heatSpread>2.0</heatSpread>
+        <burstSpread>0.05</burstSpread>
+      </li>
+      <li Class="MountedArms.CompProperties_TurretSlew">
+        <degreesPerSecond>55</degreesPerSecond>
+        <aimTolerance>4</aimTolerance>
+        <arcDegrees>0</arcDegrees>
+      </li>
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+        <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>150</fuelCapacity>      <!-- 30 bursts of 5 -->
+        <fuelMultiplier>2</fuelMultiplier>    <!-- 75 steel per full rearm -->
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>true</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+    </comps>
+    <building>
+      <turretGunDef>MA_Gun_M240_MG</turretGunDef>
+      <turretBurstWarmupTime>0.6</turretBurstWarmupTime>
+      <turretBurstCooldownTime>3.4</turretBurstCooldownTime>
+      <turretTopDrawSize>2.12</turretTopDrawSize>
+    </building>
+    <modExtensions>
+      <li Class="MountedArms.MuzzleExtension">
+        <distance>0.6</distance>
+        <flashScale>9</flashScale>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>MA_Research_GPMG</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--=============== M134 Minigun (automatic) ===============-->
+
+  <ThingDef ParentName="MA_AutoTurretBase">
+    <defName>MA_Turret_M134_Minigun</defName>
+    <label>M134 minigun turret</label>
+    <description>An automated mount for a six-barrel rotary gun. It spins up before firing and then unleashes a very long burst, at the cost of high power use and a lot of steel. The barrels must be refurbished with steel after use. May explode when damaged.</description>
+    <graphicData>
+      <texPath>MountedArms/M134_Base</texPath>
+    </graphicData>
+    <uiIconPath>MountedArms/M134_Icon</uiIconPath>
+    <statBases>
+      <MaxHitPoints>350</MaxHitPoints>
+      <WorkToBuild>18000</WorkToBuild>
+      <Mass>70</Mass>
+      <ShootingAccuracyTurret>0.93</ShootingAccuracyTurret>
+    </statBases>
+    <costList>
+      <Steel>320</Steel>
+      <Plasteel>40</Plasteel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+    </costList>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>350</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>4.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="MountedArms.CompProperties_BarrelHeat">
+        <heatPerShot>0.0173</heatPerShot>
+        <coolPerSecond>0.02</coolPerSecond>
+        <resumeAt>0.5</resumeAt>
+        <smokeAt>0.7</smokeAt>
+        <heatSpread>2.5</heatSpread>
+        <burstSpread>0.04</burstSpread>
+      </li>
+      <li Class="MountedArms.CompProperties_TurretSlew">
+        <degreesPerSecond>40</degreesPerSecond>
+        <aimTolerance>4</aimTolerance>
+        <arcDegrees>0</arcDegrees>
+      </li>
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+        <outOfFuelMessage>Needs new barrels</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>320</fuelCapacity>      <!-- 20 bursts of 16 -->
+        <fuelMultiplier>4</fuelMultiplier>    <!-- 80 steel per full rearm -->
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>true</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+    </comps>
+    <building>
+      <turretGunDef>MA_Gun_M134_Minigun</turretGunDef>
+      <turretBurstWarmupTime>1.2</turretBurstWarmupTime>
+      <turretBurstCooldownTime>4.2</turretBurstCooldownTime>
+      <turretTopDrawSize>2.16</turretTopDrawSize>
+    </building>
+    <modExtensions>
+      <li Class="MountedArms.MuzzleExtension">
+        <distance>0.6</distance>
+        <flashScale>8</flashScale>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>MA_Research_Rotary</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--=============== M2 Browning (manned) ===============-->
+
+  <ThingDef ParentName="MA_MannedTurretBase">
+    <defName>MA_Turret_M2_Browning</defName>
+    <label>M2 Browning turret</label>
+    <description>A manned mount for a .50 caliber heavy machine gun. Needs a colonist at the gun, but has long range and armor-piercing rounds, and needs no power. Its barrel must be refurbished with steel after use. May explode when damaged.</description>
+    <graphicData>
+      <texPath>MountedArms/M2_Base</texPath>
+    </graphicData>
+    <uiIconPath>MountedArms/M2_Icon</uiIconPath>
+    <statBases>
+      <MaxHitPoints>300</MaxHitPoints>
+      <WorkToBuild>10000</WorkToBuild>
+      <Mass>60</Mass>
+      <ShootingAccuracyTurret>0.98</ShootingAccuracyTurret>
+    </statBases>
+    <costList>
+      <Steel>260</Steel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>4.5</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="MountedArms.CompProperties_BarrelHeat">
+        <heatPerShot>0.0377</heatPerShot>
+        <coolPerSecond>0.02</coolPerSecond>
+        <resumeAt>0.5</resumeAt>
+        <smokeAt>0.7</smokeAt>
+        <heatSpread>1.5</heatSpread>
+        <burstSpread>0.08</burstSpread>
+      </li>
+      <li Class="MountedArms.CompProperties_TurretSlew">
+        <degreesPerSecond>40</degreesPerSecond>
+        <aimTolerance>4</aimTolerance>
+        <arcDegrees>0</arcDegrees>
+      </li>
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+        <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>120</fuelCapacity>      <!-- 30 bursts of 4 -->
+        <fuelMultiplier>1.5</fuelMultiplier>  <!-- 80 steel per full rearm -->
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>true</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+    </comps>
+    <building>
+      <turretGunDef>MA_Gun_M2_Browning</turretGunDef>
+      <turretBurstWarmupTime>1.0</turretBurstWarmupTime>
+      <turretBurstCooldownTime>3.4</turretBurstCooldownTime>
+      <turretTopDrawSize>2.06</turretTopDrawSize>
+    </building>
+    <modExtensions>
+      <li Class="MountedArms.MuzzleExtension">
+        <distance>0.6</distance>
+        <flashScale>12</flashScale>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>MA_Research_HMG</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--=============== Mk19 (manned) ===============-->
+
+  <ThingDef ParentName="MA_MannedTurretBase">
+    <defName>MA_Turret_Mk19_AGL</defName>
+    <label>Mk19 turret</label>
+    <description>A manned mount for a 40 mm automatic grenade launcher. Needs a colonist at the gun and advanced materials to build. Lobs explosive grenades in bursts at long range, but cannot hit close targets. Its barrel must be refurbished with steel after use. May explode when damaged.</description>
+    <graphicData>
+      <texPath>MountedArms/Mk19_Base</texPath>
+    </graphicData>
+    <uiIconPath>MountedArms/Mk19_Icon</uiIconPath>
+    <statBases>
+      <MaxHitPoints>300</MaxHitPoints>
+      <WorkToBuild>20000</WorkToBuild>
+      <Mass>60</Mass>
+      <ShootingAccuracyTurret>0.96</ShootingAccuracyTurret>
+    </statBases>
+    <costList>
+      <Steel>400</Steel>
+      <Plasteel>80</Plasteel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+      <ComponentSpacer>2</ComponentSpacer>
+    </costList>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>5.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.35</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="MountedArms.CompProperties_BarrelHeat">
+        <heatPerShot>0.0489</heatPerShot>
+        <coolPerSecond>0.02</coolPerSecond>
+        <resumeAt>0.5</resumeAt>
+        <smokeAt>0.7</smokeAt>
+        <heatSpread>1.0</heatSpread>
+        <burstSpread>0.1</burstSpread>
+      </li>
+      <li Class="MountedArms.CompProperties_TurretSlew">
+        <degreesPerSecond>30</degreesPerSecond>
+        <aimTolerance>4</aimTolerance>
+        <arcDegrees>0</arcDegrees>
+      </li>
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+        <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>80</fuelCapacity>       <!-- 20 bursts of 4 -->
+        <fuelMultiplier>1</fuelMultiplier>    <!-- 80 steel per full rearm -->
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>true</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+    </comps>
+    <building>
+      <turretGunDef>MA_Gun_Mk19_AGL</turretGunDef>
+      <turretBurstWarmupTime>1.6</turretBurstWarmupTime>
+      <turretBurstCooldownTime>4.5</turretBurstCooldownTime>
+      <turretTopDrawSize>2.24</turretTopDrawSize>
+    </building>
+    <modExtensions>
+      <li Class="MountedArms.MuzzleExtension">
+        <distance>0.6</distance>
+        <flashScale>10</flashScale>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>MA_Research_AGL</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+
+  <!--=============== Mk44 Bushmaster 30 mm (automatic) ===============-->
+
+  <ThingDef ParentName="MA_AutoTurretBase">
+    <defName>MA_Turret_Mk44_Autocannon</defName>
+    <label>Mk44 turret</label>
+    <description>An automated mount for a 30 mm chain-driven cannon. Slow to aim and to turn, but its heavy armor-piercing shells hit hard at long range, making it the backbone against armored targets. Costs advanced materials and a lot of power. Its barrel must be refurbished with steel after use. May explode when damaged.</description>
+    <graphicData>
+      <texPath>MountedArms/Mk44_Base</texPath>
+    </graphicData>
+    <uiIconPath>MountedArms/Mk44_Icon</uiIconPath>
+    <statBases>
+      <MaxHitPoints>400</MaxHitPoints>
+      <WorkToBuild>22000</WorkToBuild>
+      <Mass>90</Mass>
+      <ShootingAccuracyTurret>0.96</ShootingAccuracyTurret>
+    </statBases>
+    <costList>
+      <Steel>450</Steel>
+      <Plasteel>90</Plasteel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+    </costList>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>250</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>5.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="MountedArms.CompProperties_BarrelHeat">
+        <heatPerShot>0.0303</heatPerShot>
+        <coolPerSecond>0.02</coolPerSecond>
+        <resumeAt>0.5</resumeAt>
+        <smokeAt>0.7</smokeAt>
+        <heatSpread>1.5</heatSpread>
+        <burstSpread>0.06</burstSpread>
+      </li>
+      <li Class="MountedArms.CompProperties_TurretSlew">
+        <degreesPerSecond>35</degreesPerSecond>
+        <aimTolerance>4</aimTolerance>
+        <arcDegrees>0</arcDegrees>
+      </li>
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+        <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>120</fuelCapacity>      <!-- 20 bursts of 6 -->
+        <fuelMultiplier>1</fuelMultiplier>    <!-- 120 steel per full rearm -->
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>true</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+    </comps>
+    <building>
+      <turretGunDef>MA_Gun_Mk44_Autocannon</turretGunDef>
+      <turretBurstWarmupTime>1.8</turretBurstWarmupTime>
+      <turretBurstCooldownTime>3.0</turretBurstCooldownTime>
+      <turretTopDrawSize>2.06</turretTopDrawSize>
+    </building>
+    <modExtensions>
+      <li Class="MountedArms.MuzzleExtension">
+        <distance>0.6</distance>
+        <flashScale>13</flashScale>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>MA_Research_Autocannon</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+
+  <!--=============== TOW ATGM (manned) ===============-->
+
+  <ThingDef ParentName="MA_MannedTurretBase">
+    <defName>MA_Turret_TOW_ATGM</defName>
+    <label>TOW turret</label>
+    <description>A manned mount for a wire-guided anti-tank missile. One devastating shot at long range, but it cannot hit close targets and needs a long time to reload. Each missile costs steel to rearm. Needs a colonist at the gun and no power. May explode when damaged.</description>
+    <graphicData>
+      <texPath>MountedArms/TOW_Base</texPath>
+    </graphicData>
+    <uiIconPath>MountedArms/TOW_Icon</uiIconPath>
+    <statBases>
+      <MaxHitPoints>300</MaxHitPoints>
+      <WorkToBuild>22000</WorkToBuild>
+      <Mass>55</Mass>
+      <ShootingAccuracyTurret>0.98</ShootingAccuracyTurret>
+    </statBases>
+    <costList>
+      <Steel>300</Steel>
+      <Plasteel>60</Plasteel>
+      <ComponentIndustrial>6</ComponentIndustrial>
+      <ComponentSpacer>2</ComponentSpacer>
+    </costList>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>4.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="MountedArms.CompProperties_TurretSlew">
+        <degreesPerSecond>30</degreesPerSecond>
+        <aimTolerance>4</aimTolerance>
+        <arcDegrees>0</arcDegrees>
+      </li>
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Missiles left</fuelLabel>
+        <fuelGizmoLabel>Missile rack</fuelGizmoLabel>
+        <outOfFuelMessage>Needs missiles</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>4</fuelCapacity>
+        <fuelMultiplier>0.04</fuelMultiplier>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>true</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+    </comps>
+    <building>
+      <turretGunDef>MA_Gun_TOW_ATGM</turretGunDef>
+      <turretBurstWarmupTime>2.5</turretBurstWarmupTime>
+      <turretBurstCooldownTime>8.0</turretBurstCooldownTime>
+      <turretTopDrawSize>2.34</turretTopDrawSize>
+    </building>
+    <modExtensions>
+      <li Class="MountedArms.MuzzleExtension">
+        <distance>0.6</distance>
+        <flashScale>12</flashScale>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>MA_Research_ATGM</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--=============== 70mm rocket pod (automatic) ===============-->
+
+  <ThingDef ParentName="MA_AutoTurretBase">
+    <defName>MA_Turret_Hydra_Pod</defName>
+    <label>80mm rocket turret</label>
+    <description>An automated mount for a pod of unguided 80 mm rockets. Slow to reload but each salvo showers an area with explosions, so it is best against groups. Cannot hit close targets. Rockets cost steel to rearm. Needs power. May explode when damaged.</description>
+    <graphicData>
+      <texPath>MountedArms/Hydra_Base</texPath>
+    </graphicData>
+    <uiIconPath>MountedArms/Hydra_Icon</uiIconPath>
+    <statBases>
+      <MaxHitPoints>300</MaxHitPoints>
+      <WorkToBuild>20000</WorkToBuild>
+      <Mass>65</Mass>
+      <ShootingAccuracyTurret>0.90</ShootingAccuracyTurret>
+    </statBases>
+    <costList>
+      <Steel>350</Steel>
+      <Plasteel>50</Plasteel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+    </costList>
+    <constructionSkillPrerequisite>7</constructionSkillPrerequisite>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>200</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>4.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="MountedArms.CompProperties_TurretSlew">
+        <degreesPerSecond>40</degreesPerSecond>
+        <aimTolerance>4</aimTolerance>
+        <arcDegrees>0</arcDegrees>
+      </li>
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Rockets left</fuelLabel>
+        <fuelGizmoLabel>Rocket pod</fuelGizmoLabel>
+        <outOfFuelMessage>Needs rockets</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>21</fuelCapacity>
+        <fuelMultiplier>0.35</fuelMultiplier>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>true</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+    </comps>
+    <building>
+      <turretGunDef>MA_Gun_Hydra_Pod</turretGunDef>
+      <turretBurstWarmupTime>2.4</turretBurstWarmupTime>
+      <turretBurstCooldownTime>5.5</turretBurstCooldownTime>
+      <turretTopDrawSize>2.28</turretTopDrawSize>
+    </building>
+    <modExtensions>
+      <li Class="MountedArms.MuzzleExtension">
+        <distance>0.6</distance>
+        <flashScale>14</flashScale>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>MA_Research_Rockets</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--=============== CIWS 20mm (automatic) ===============-->
+
+  <ThingDef ParentName="MA_AutoTurretBase">
+    <defName>MA_Turret_CIWS_Vulcan</defName>
+    <label>CIWS turret</label>
+    <description>An automated mount for a six-barrel 20 mm rotary cannon with a radar-driven, very fast traverse. It unloads an enormous burst in a short time, at the cost of high power use, a lot of steel and quick barrel heating. May explode when damaged.</description>
+    <graphicData>
+      <texPath>MountedArms/CIWS_Base</texPath>
+    </graphicData>
+    <uiIconPath>MountedArms/CIWS_Icon</uiIconPath>
+    <statBases>
+      <MaxHitPoints>350</MaxHitPoints>
+      <WorkToBuild>30000</WorkToBuild>
+      <Mass>80</Mass>
+      <ShootingAccuracyTurret>0.93</ShootingAccuracyTurret>
+    </statBases>
+    <costList>
+      <Steel>400</Steel>
+      <Plasteel>120</Plasteel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+      <ComponentSpacer>2</ComponentSpacer>
+    </costList>
+    <constructionSkillPrerequisite>9</constructionSkillPrerequisite>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>450</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>5.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="MountedArms.CompProperties_BarrelHeat">
+        <heatPerShot>0.0036</heatPerShot>
+        <coolPerSecond>0.02</coolPerSecond>
+        <resumeAt>0.5</resumeAt>
+        <smokeAt>0.7</smokeAt>
+        <heatSpread>2.0</heatSpread>
+        <burstSpread>0.03</burstSpread>
+      </li>
+      <li Class="MountedArms.CompProperties_TurretSlew">
+        <degreesPerSecond>60</degreesPerSecond>
+        <aimTolerance>4</aimTolerance>
+        <arcDegrees>0</arcDegrees>
+      </li>
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+        <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>1200</fuelCapacity>
+        <fuelMultiplier>10</fuelMultiplier>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>true</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+    </comps>
+    <building>
+      <turretGunDef>MA_Gun_CIWS_Vulcan</turretGunDef>
+      <turretBurstWarmupTime>0.8</turretBurstWarmupTime>
+      <turretBurstCooldownTime>3.0</turretBurstCooldownTime>
+      <turretTopDrawSize>2.06</turretTopDrawSize>
+    </building>
+    <modExtensions>
+      <li Class="MountedArms.MuzzleExtension">
+        <distance>0.6</distance>
+        <flashScale>9</flashScale>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>MA_Research_CIWS</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <!--=============== M252 81mm mortar (manned, portable) ===============-->
+
+  <ThingDef ParentName="BaseArtilleryBuilding">
+    <defName>MA_Turret_M252_Mortar</defName>
+    <label>M252 mortar</label>
+    <description>An 81 mm light mortar built to be moved. It is light and quick to set up, so it can be packed up and carried by caravan to another map or reinstalled in minutes. More accurate than the heavy mortar, but with a shorter reach. Launches all kinds of shells, needs a colonist at the gun, and its barrel must be refurbished with steel after use.</description>
+    <graphicData>
+      <texPath>MountedArms/M252_Base</texPath>
+      <drawSize>(2,2)</drawSize>
+      <shadowData>
+        <volume>(0.5,0.4,0.5)</volume>
+        <offset>(0,-0.3,0)</offset>
+      </shadowData>
+    </graphicData>
+    <uiIconPath>MountedArms/M252_Icon</uiIconPath>
+    <uiIconScale>1</uiIconScale>
+    <statBases>
+      <MaxHitPoints>150</MaxHitPoints>
+      <WorkToBuild>1200</WorkToBuild>
+      <Mass>12</Mass>
+    </statBases>
+    <costStuffCount>30</costStuffCount>
+    <costList>
+      <Steel>30</Steel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>3.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="CompProperties_Stunnable">
+        <affectedDamageDefs>
+          <li>Stun</li>
+          <li>EMP</li>
+        </affectedDamageDefs>
+      </li>
+      <li Class="MountedArms.CompProperties_TurretSlew">
+        <degreesPerSecond>30</degreesPerSecond>
+        <aimTolerance>4</aimTolerance>
+        <arcDegrees>0</arcDegrees>
+      </li>
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+        <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>30</fuelCapacity>
+        <fuelMultiplier>0.5</fuelMultiplier>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>true</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+    </comps>
+    <building>
+      <turretGunDef>MA_Gun_M252_Mortar</turretGunDef>
+      <turretBurstWarmupTime>3.0</turretBurstWarmupTime>
+      <turretBurstCooldownTime>14.0</turretBurstCooldownTime>
+      <turretTopDrawSize>2.46</turretTopDrawSize>
+    </building>
+    <modExtensions>
+      <li Class="MountedArms.MuzzleExtension">
+        <distance>0.6</distance>
+        <flashScale>12</flashScale>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>MA_Research_Mortar</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+
+  <!--=============== Guided rocket battery (automatic, indirect fire) ===============-->
+
+  <ThingDef ParentName="MA_AutoTurretBase">
+    <defName>MA_Turret_APKWS_Battery</defName>
+    <label>guided rocket battery</label>
+    <description>An automated battery that lobs laser-guided 70 mm rockets in a high arc over walls, with the reach of a mortar but better accuracy. It cannot hit close targets and is slow between salvos. Rockets cost steel to rearm. Needs power. May explode when damaged.</description>
+    <graphicData>
+      <texPath>MountedArms/Hydra_Base</texPath>
+    </graphicData>
+    <uiIconPath>MountedArms/Hydra_Icon</uiIconPath>
+    <statBases>
+      <MaxHitPoints>300</MaxHitPoints>
+      <WorkToBuild>26000</WorkToBuild>
+      <Mass>70</Mass>
+      <ShootingAccuracyTurret>1.10</ShootingAccuracyTurret>
+    </statBases>
+    <costList>
+      <Steel>380</Steel>
+      <Plasteel>60</Plasteel>
+      <ComponentIndustrial>8</ComponentIndustrial>
+      <ComponentSpacer>1</ComponentSpacer>
+    </costList>
+    <constructionSkillPrerequisite>8</constructionSkillPrerequisite>
+    <placeWorkers Inherit="False">
+      <li>PlaceWorker_TurretTop</li>
+    </placeWorkers>
+    <comps>
+      <li Class="CompProperties_Power">
+        <compClass>CompPowerTrader</compClass>
+        <basePowerConsumption>250</basePowerConsumption>
+      </li>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>4.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="MountedArms.CompProperties_TurretSlew">
+        <degreesPerSecond>40</degreesPerSecond>
+        <aimTolerance>4</aimTolerance>
+        <arcDegrees>0</arcDegrees>
+      </li>
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Rockets left</fuelLabel>
+        <fuelGizmoLabel>Rocket rack</fuelGizmoLabel>
+        <outOfFuelMessage>Needs rockets</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>24</fuelCapacity>
+        <fuelMultiplier>0.4</fuelMultiplier>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>true</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+    </comps>
+    <building>
+      <turretGunDef>MA_Gun_APKWS_Battery</turretGunDef>
+      <turretBurstWarmupTime>3.0</turretBurstWarmupTime>
+      <turretBurstCooldownTime>22.0</turretBurstCooldownTime>
+      <ai_combatDangerous>false</ai_combatDangerous>
+      <turretTopDrawSize>2.28</turretTopDrawSize>
+    </building>
+    <modExtensions>
+      <li Class="MountedArms.NoWorldStrikeExtension" />
+    </modExtensions>
+    <researchPrerequisites>
+      <li>MA_Research_Missiles</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+</Defs>

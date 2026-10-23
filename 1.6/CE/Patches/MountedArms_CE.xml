@@ -1,0 +1,817 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Mounted Arms - Combat Extended compatibility layer.
+  Loaded only when CE is active (see LoadFolders.xml).
+  - Guns are converted with CE's PatchOperationMakeGunCECompatible (CE verb, ammo, fire modes).
+  - Aim time in CE comes from the VERB warmupTime (CE ignores building.turretBurstWarmupTime).
+  - Muzzle position uses CE's MultiBarrelExtension: offset (lateral, forward) in cells from the turret center.
+  - Turrets become CombatExtended.Building_TurretGunCE; the steel "barrel" refuel is removed (ammo replaces it).
+-->
+<Patch>
+
+	<!-- ================================================================= -->
+	<!--  GUNS                                                              -->
+	<!-- ================================================================= -->
+
+	<!-- M240: 7.62x51mm NATO, belt-fed, automatic -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>MA_Gun_M240_MG</defName>
+		<statBases>
+			<RangedWeapon_Cooldown>0.36</RangedWeapon_Cooldown>
+			<SightsEfficiency>1</SightsEfficiency>
+			<ShotSpread>0.05</ShotSpread>
+			<SwayFactor>0.84</SwayFactor>
+			<Bulk>15</Bulk>
+		</statBases>
+		<Properties>
+			<recoilAmount>0.95</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_762x51mmNATO_FMJ</defaultProjectile>
+			<warmupTime>1.0</warmupTime>
+			<range>62</range>
+			<ticksBetweenBurstShots>6</ticksBetweenBurstShots>
+			<burstShotCount>10</burstShotCount>
+			<soundCast>MediumMG</soundCast>
+			<soundCastTail>GunTail_Medium</soundCastTail>
+			<muzzleFlashScale>11</muzzleFlashScale>
+			<recoilPattern>Mounted</recoilPattern>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>100</magazineSize>
+			<reloadTime>8.5</reloadTime>
+			<ammoSet>AmmoSet_762x51mmNATO</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aiUseBurstMode>FALSE</aiUseBurstMode>
+			<aiAimMode>AimedShot</aiAimMode>
+			<noSnapshot>true</noSnapshot>
+			<noSingleShot>true</noSingleShot>
+		</FireModes>
+	</Operation>
+
+	<!-- M2 Browning: .50 BMG, manned -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>MA_Gun_M2_Browning</defName>
+		<statBases>
+			<RangedWeapon_Cooldown>0.37</RangedWeapon_Cooldown>
+			<SightsEfficiency>1</SightsEfficiency>
+			<ShotSpread>0.02</ShotSpread>
+			<SwayFactor>1.30</SwayFactor>
+			<Bulk>38</Bulk>
+		</statBases>
+		<Properties>
+			<recoilAmount>1.35</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_50BMG_FMJ</defaultProjectile>
+			<warmupTime>1.8</warmupTime>
+			<range>75</range>
+			<ticksBetweenBurstShots>7</ticksBetweenBurstShots>
+			<burstShotCount>6</burstShotCount>
+			<soundCast>HeavyMG</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+			<muzzleFlashScale>16</muzzleFlashScale>
+			<recoilPattern>Mounted</recoilPattern>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>100</magazineSize>
+			<reloadTime>9</reloadTime>
+			<ammoSet>AmmoSet_50BMG</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aiUseBurstMode>FALSE</aiUseBurstMode>
+			<aiAimMode>AimedShot</aiAimMode>
+			<noSnapshot>true</noSnapshot>
+			<noSingleShot>true</noSingleShot>
+		</FireModes>
+	</Operation>
+
+	<!-- Mk19: 40x53mm grenades, manned -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>MA_Gun_Mk19_AGL</defName>
+		<statBases>
+			<RangedWeapon_Cooldown>0.5</RangedWeapon_Cooldown>
+			<SightsEfficiency>1</SightsEfficiency>
+			<ShotSpread>0.10</ShotSpread>
+			<SwayFactor>1.40</SwayFactor>
+			<Bulk>35</Bulk>
+		</statBases>
+		<Properties>
+			<recoilAmount>1.6</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_40x53mmGrenade_HE</defaultProjectile>
+			<warmupTime>2.2</warmupTime>
+			<range>62</range>
+			<minRange>8</minRange>
+			<ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+			<burstShotCount>4</burstShotCount>
+			<soundCast>Shot_IncendiaryLauncher</soundCast>
+			<soundCastTail>GunTail_Medium</soundCastTail>
+			<muzzleFlashScale>12</muzzleFlashScale>
+			<recoilPattern>Mounted</recoilPattern>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>32</magazineSize>
+			<reloadTime>9.5</reloadTime>
+			<ammoSet>AmmoSet_40x53mmGrenade</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aiUseBurstMode>FALSE</aiUseBurstMode>
+			<aiAimMode>AimedShot</aiAimMode>
+			<noSingleShot>true</noSingleShot>
+		</FireModes>
+	</Operation>
+
+	<!-- M134 Minigun: 7.62x51mm NATO, rotary, automatic -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>MA_Gun_M134_Minigun</defName>
+		<statBases>
+			<RangedWeapon_Cooldown>0.35</RangedWeapon_Cooldown>
+			<SightsEfficiency>1</SightsEfficiency>
+			<ShotSpread>0.06</ShotSpread>
+			<SwayFactor>1.20</SwayFactor>
+			<Bulk>25</Bulk>
+		</statBases>
+		<Properties>
+			<recoilAmount>0.90</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_762x51mmNATO_FMJ</defaultProjectile>
+			<warmupTime>2.0</warmupTime>
+			<range>62</range>
+			<ticksBetweenBurstShots>2</ticksBetweenBurstShots>
+			<burstShotCount>30</burstShotCount>
+			<soundCast>Shot_Minigun</soundCast>
+			<soundCastTail>GunTail_Medium</soundCastTail>
+			<muzzleFlashScale>9</muzzleFlashScale>
+			<recoilPattern>Mounted</recoilPattern>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>300</magazineSize>
+			<reloadTime>9.2</reloadTime>
+			<ammoSet>AmmoSet_762x51mmNATO</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aiUseBurstMode>FALSE</aiUseBurstMode>
+			<aiAimMode>AimedShot</aiAimMode>
+			<noSnapshot>true</noSnapshot>
+			<noSingleShot>true</noSingleShot>
+		</FireModes>
+	</Operation>
+
+	<!-- Muzzle position for CE projectiles: (lateral, forward) in cells from the turret center -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[
+			defName="MA_Gun_M240_MG" or
+			defName="MA_Gun_M2_Browning" or
+			defName="MA_Gun_Mk19_AGL" or
+			defName="MA_Gun_M134_Minigun" or
+			defName="MA_Gun_Mk44_Autocannon" or
+			defName="MA_Gun_TOW_ATGM" or
+			defName="MA_Gun_Hydra_Pod" or
+			defName="MA_Gun_CIWS_Vulcan"
+			]</xpath>
+		<value>
+			<li Class="CombatExtended.MultiBarrelExtension">
+				<offsets>
+					<li>(0,0.6)</li>
+				</offsets>
+			</li>
+		</value>
+	</Operation>
+
+	<!-- ================================================================= -->
+	<!--  TURRET BUILDINGS                                                  -->
+	<!-- ================================================================= -->
+
+	<!-- thingClass is declared once on the abstract base (patches run before inheritance) -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[@Name="MA_TurretBase"]/thingClass</xpath>
+		<value>
+			<thingClass>CombatExtended.Building_TurretGunCE</thingClass>
+		</value>
+	</Operation>
+
+	<!-- Ammo replaces the steel barrel refurbishing -->
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[
+			defName="MA_Turret_M240_MG" or
+			defName="MA_Turret_M2_Browning" or
+			defName="MA_Turret_Mk19_AGL" or
+			defName="MA_Turret_M134_Minigun" or
+			defName="MA_Turret_Mk44_Autocannon" or
+			defName="MA_Turret_TOW_ATGM" or
+			defName="MA_Turret_Hydra_Pod" or
+			defName="MA_Turret_CIWS_Vulcan" or
+			defName="MA_Turret_M252_Mortar"
+			]/comps/li[@Class="CompProperties_Refuelable"]</xpath>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="MA_Turret_M240_MG"]/statBases</xpath>
+		<value>
+			<AimingAccuracy>0.75</AimingAccuracy>
+			<Bulk>120</Bulk>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="MA_Turret_M134_Minigun"]/statBases</xpath>
+		<value>
+			<AimingAccuracy>0.75</AimingAccuracy>
+			<Bulk>200</Bulk>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="MA_Turret_M2_Browning"]/statBases</xpath>
+		<value>
+			<AimingAccuracy>1.0</AimingAccuracy>
+			<Bulk>180</Bulk>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Mk19_AGL"]/statBases</xpath>
+		<value>
+			<AimingAccuracy>1.0</AimingAccuracy>
+			<Bulk>180</Bulk>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_M2_Browning"]/statBases/ShootingAccuracyTurret</xpath>
+		<value>
+			<ShootingAccuracyTurret>1.25</ShootingAccuracyTurret>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[
+			defName="MA_Turret_M240_MG" or
+			defName="MA_Turret_Mk19_AGL" or
+			defName="MA_Turret_M134_Minigun" or
+			defName="MA_Turret_Mk44_Autocannon"
+			]/statBases/ShootingAccuracyTurret</xpath>
+		<value>
+			<ShootingAccuracyTurret>1.0</ShootingAccuracyTurret>
+		</value>
+	</Operation>
+
+	<!-- Cooldown between bursts (ammo and reloading are the real limit in CE) -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_M240_MG"]/building/turretBurstCooldownTime</xpath>
+		<value>
+			<turretBurstCooldownTime>1.0</turretBurstCooldownTime>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_M2_Browning"]/building/turretBurstCooldownTime</xpath>
+		<value>
+			<turretBurstCooldownTime>1.2</turretBurstCooldownTime>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Mk19_AGL"]/building/turretBurstCooldownTime</xpath>
+		<value>
+			<turretBurstCooldownTime>2.0</turretBurstCooldownTime>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_M134_Minigun"]/building/turretBurstCooldownTime</xpath>
+		<value>
+			<turretBurstCooldownTime>1.5</turretBurstCooldownTime>
+		</value>
+	</Operation>
+
+	<!-- Descriptions: no more barrel refurbishing, ammo instead -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_M240_MG"]/description</xpath>
+		<value>
+			<description>An automated mount for a belt-fed general-purpose machine gun firing 7.62x51mm NATO. Long bursts make it a good all-round defense. Needs ammunition loaded. May explode when damaged.</description>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_M134_Minigun"]/description</xpath>
+		<value>
+			<description>An automated mount for a six-barrel rotary gun firing 7.62x51mm NATO. It spins up before firing and then unleashes a very long burst, at the cost of high power use and a lot of ammunition. May explode when damaged.</description>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_M2_Browning"]/description</xpath>
+		<value>
+			<description>A manned mount for a .50 BMG heavy machine gun. Needs a colonist at the gun and ammunition loaded, but has long range and heavy rounds, and needs no power. May explode when damaged.</description>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Mk19_AGL"]/description</xpath>
+		<value>
+			<description>A manned mount for a 40x53mm automatic grenade launcher. Needs a colonist at the gun and grenades loaded, and cannot hit close targets. Needs advanced materials to build. May explode when damaged.</description>
+		</value>
+	</Operation>
+
+
+	<!-- Barrel heat: CE fires faster (shorter cooldowns), so less heat per shot -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_M240_MG"]/comps/li[@Class="MountedArms.CompProperties_BarrelHeat"]/heatPerShot</xpath>
+		<value><heatPerShot>0.0106</heatPerShot></value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_M134_Minigun"]/comps/li[@Class="MountedArms.CompProperties_BarrelHeat"]/heatPerShot</xpath>
+		<value><heatPerShot>0.0067</heatPerShot></value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_M2_Browning"]/comps/li[@Class="MountedArms.CompProperties_BarrelHeat"]/heatPerShot</xpath>
+		<value><heatPerShot>0.0186</heatPerShot></value>
+	</Operation>
+
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Mk19_AGL"]/comps/li[@Class="MountedArms.CompProperties_BarrelHeat"]/heatPerShot</xpath>
+		<value><heatPerShot>0.0333</heatPerShot></value>
+	</Operation>
+
+
+	<!-- Realism (CE): turret slew speed (degrees PER TICK) via CE NonSnap, (all four mounts have a full 360 degree arc, so no CompFireArc) -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="MA_Turret_M240_MG"]</xpath>
+		<value>
+			<li Class="CombatExtended.NonSnapTurretExtension">
+				<speed>0.9</speed>
+				<angleWeightMultiplier>2</angleWeightMultiplier>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="MA_Turret_M134_Minigun"]</xpath>
+		<value>
+			<li Class="CombatExtended.NonSnapTurretExtension">
+				<speed>0.65</speed>
+				<angleWeightMultiplier>2</angleWeightMultiplier>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="MA_Turret_M2_Browning"]</xpath>
+		<value>
+			<li Class="CombatExtended.NonSnapTurretExtension">
+				<speed>0.65</speed>
+				<angleWeightMultiplier>2</angleWeightMultiplier>
+			</li>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Mk19_AGL"]</xpath>
+		<value>
+			<li Class="CombatExtended.NonSnapTurretExtension">
+				<speed>0.5</speed>
+				<angleWeightMultiplier>2</angleWeightMultiplier>
+			</li>
+		</value>
+	</Operation>
+
+
+
+
+	<!-- ================================================================= -->
+	<!--  Mk44 Bushmaster 30 mm (CE): analog = CE Gun_AutocannonTurret (range 78) -->
+	<!-- ================================================================= -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>MA_Gun_Mk44_Autocannon</defName>
+		<statBases>
+			<RangedWeapon_Cooldown>0.5</RangedWeapon_Cooldown>
+			<SightsEfficiency>1</SightsEfficiency>
+			<ShotSpread>0.07</ShotSpread>
+			<SwayFactor>1.10</SwayFactor>
+			<Bulk>45</Bulk>
+		</statBases>
+		<Properties>
+			<recoilAmount>2.0</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_30x173mmNATO_AP</defaultProjectile>
+			<warmupTime>2.0</warmupTime>
+			<range>78</range>
+			<ticksBetweenBurstShots>12</ticksBetweenBurstShots>
+			<burstShotCount>6</burstShotCount>
+			<soundCast>Shot_Autocannon</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+			<muzzleFlashScale>14</muzzleFlashScale>
+			<recoilPattern>Mounted</recoilPattern>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>60</magazineSize>
+			<reloadTime>9.5</reloadTime>
+			<ammoSet>AmmoSet_30x173mmNATO</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aiUseBurstMode>FALSE</aiUseBurstMode>
+			<aiAimMode>AimedShot</aiAimMode>
+			<noSingleShot>true</noSingleShot>
+		</FireModes>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Mk44_Autocannon"]/statBases</xpath>
+		<value>
+			<AimingAccuracy>0.75</AimingAccuracy>
+			<Bulk>220</Bulk>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Mk44_Autocannon"]/building/turretBurstCooldownTime</xpath>
+		<value>
+			<turretBurstCooldownTime>1.5</turretBurstCooldownTime>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Mk44_Autocannon"]/description</xpath>
+		<value>
+			<description>An automated mount for a 30 mm chain-driven cannon. Slow to aim and to turn, but its heavy shells hit hard at long range, making it the backbone against armored targets. Costs advanced materials and a lot of power, and needs ammunition loaded. May explode when damaged.</description>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Mk44_Autocannon"]/comps/li[@Class="MountedArms.CompProperties_BarrelHeat"]/heatPerShot</xpath>
+		<value><heatPerShot>0.0250</heatPerShot></value>
+	</Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Mk44_Autocannon"]</xpath>
+		<value>
+			<li Class="CombatExtended.NonSnapTurretExtension">
+				<speed>0.6</speed>
+				<angleWeightMultiplier>2</angleWeightMultiplier>
+			</li>
+		</value>
+	</Operation>
+
+	<!-- ================================================================= -->
+	<!--  Batch 2 (CE): TOW, 70mm pod, CIWS 20mm, M252 mortar              -->
+	<!-- ================================================================= -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>MA_Gun_TOW_ATGM</defName>
+		<statBases>
+			<RangedWeapon_Cooldown>0.5</RangedWeapon_Cooldown>
+			<SightsEfficiency>1.5</SightsEfficiency>
+			<ShotSpread>0.02</ShotSpread>
+			<SwayFactor>1.0</SwayFactor>
+			<Bulk>30</Bulk>
+		</statBases>
+		<Properties>
+			<recoilAmount>1.0</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_BGM71_HEAT</defaultProjectile>
+			<warmupTime>2.5</warmupTime>
+			<range>100</range>
+			<minRange>24</minRange>
+			<burstShotCount>1</burstShotCount>
+			<soundCast>InfernoCannon_Fire</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+			<muzzleFlashScale>0</muzzleFlashScale>
+			<recoilPattern>Mounted</recoilPattern>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>1</magazineSize>
+			<reloadTime>8</reloadTime>
+			<ammoSet>AmmoSet_BGM71</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aiAimMode>AimedShot</aiAimMode>
+		</FireModes>
+	</Operation>
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>MA_Gun_Hydra_Pod</defName>
+		<statBases>
+			<RangedWeapon_Cooldown>0.5</RangedWeapon_Cooldown>
+			<SightsEfficiency>1</SightsEfficiency>
+			<ShotSpread>0.15</ShotSpread>
+			<SwayFactor>1.3</SwayFactor>
+			<Bulk>40</Bulk>
+		</statBases>
+		<Properties>
+			<recoilAmount>1.4</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_80mmRocket_HE</defaultProjectile>
+			<warmupTime>2.4</warmupTime>
+			<range>62</range>
+			<minRange>12</minRange>
+			<ticksBetweenBurstShots>5</ticksBetweenBurstShots>
+			<burstShotCount>7</burstShotCount>
+			<soundCast>RocketswarmLauncher_Fire</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+			<muzzleFlashScale>0</muzzleFlashScale>
+			<recoilPattern>Mounted</recoilPattern>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>21</magazineSize>
+			<reloadTime>9</reloadTime>
+			<ammoSet>AmmoSet_80mmRocket_direct</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aiUseBurstMode>FALSE</aiUseBurstMode>
+			<aiAimMode>AimedShot</aiAimMode>
+			<noSingleShot>true</noSingleShot>
+		</FireModes>
+	</Operation>
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>MA_Gun_CIWS_Vulcan</defName>
+		<statBases>
+			<RangedWeapon_Cooldown>0.5</RangedWeapon_Cooldown>
+			<SightsEfficiency>1</SightsEfficiency>
+			<ShotSpread>0.09</ShotSpread>
+			<SwayFactor>1.2</SwayFactor>
+			<Bulk>55</Bulk>
+		</statBases>
+		<Properties>
+			<recoilAmount>1.5</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_20x102mmNATO_AP</defaultProjectile>
+			<warmupTime>1.0</warmupTime>
+			<range>68</range>
+			<ticksBetweenBurstShots>2</ticksBetweenBurstShots>
+			<burstShotCount>60</burstShotCount>
+			<soundCast>Shot_Minigun</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+			<muzzleFlashScale>9</muzzleFlashScale>
+			<recoilPattern>Mounted</recoilPattern>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>600</magazineSize>
+			<reloadTime>10</reloadTime>
+			<ammoSet>AmmoSet_20x102mmNATO</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aiUseBurstMode>FALSE</aiUseBurstMode>
+			<aiAimMode>AimedShot</aiAimMode>
+			<noSingleShot>true</noSingleShot>
+		</FireModes>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="MA_Gun_M252_Mortar"]</xpath>
+		<value>
+			<statBases>
+				<SightsEfficiency>0.5</SightsEfficiency>
+			</statBases>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="MA_Gun_M252_Mortar"]/comps</xpath>
+		<value>
+			<li Class="CombatExtended.CompProperties_Charges">
+				<chargeSpeeds>
+					<li>30</li>
+					<li>50</li>
+					<li>70</li>
+				</chargeSpeeds>
+			</li>
+			<li Class="CombatExtended.CompProperties_AmmoUser">
+				<magazineSize>1</magazineSize>
+				<reloadTime>3</reloadTime>
+				<ammoSet>AmmoSet_81mmMortarShell</ammoSet>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="MA_Gun_M252_Mortar"]/weaponTags</xpath>
+		<value>
+			<li>TurretGun</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Gun_M252_Mortar"]/verbs</xpath>
+		<value>
+			<verbs>
+				<li Class="CombatExtended.VerbPropertiesCE">
+					<verbClass>CombatExtended.Verb_ShootMortarCE</verbClass>
+					<forceNormalTimeSpeed>false</forceNormalTimeSpeed>
+					<hasStandardCommand>true</hasStandardCommand>
+					<defaultProjectile>Bullet_81mmMortarShell_HE</defaultProjectile>
+					<warmupTime>3.5</warmupTime>
+					<minRange>24</minRange>
+					<range>450</range>
+					<burstShotCount>1</burstShotCount>
+					<soundCast>Mortar_LaunchA</soundCast>
+					<muzzleFlashScale>0</muzzleFlashScale>
+					<circularError>0.8</circularError>
+					<indirectFirePenalty>0.2</indirectFirePenalty>
+					<targetParams>
+						<canTargetLocations>true</canTargetLocations>
+					</targetParams>
+				</li>
+			</verbs>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="MA_Turret_M252_Mortar"]</xpath>
+		<value>
+			<li Class="MountedArms.NoWorldStrikeExtension" />
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="MA_Turret_M252_Mortar"]/statBases</xpath>
+		<value>
+			<Bulk>45</Bulk>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_M252_Mortar"]/description</xpath>
+		<value><description>An 81 mm light mortar built to be moved. It is light and quick to set up, so it can be packed up and carried by caravan to another map or reinstalled in minutes. More accurate than the heavy mortar but with a shorter reach. Needs a colonist at the gun and mortar shells loaded.</description></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="MA_Turret_TOW_ATGM"]/statBases</xpath>
+		<value>
+			<AimingAccuracy>1.0</AimingAccuracy>
+			<Bulk>150</Bulk>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_TOW_ATGM"]/statBases/ShootingAccuracyTurret</xpath>
+		<value><ShootingAccuracyTurret>1.0</ShootingAccuracyTurret></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_TOW_ATGM"]/description</xpath>
+		<value><description>A manned mount for a wire-guided anti-tank missile. One devastating shot at long range, but it cannot hit close targets and needs a long time to reload. Needs a colonist at the gun and missiles loaded. May explode when damaged.</description></value>
+	</Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="MA_Turret_TOW_ATGM"]</xpath>
+		<value>
+			<li Class="CombatExtended.NonSnapTurretExtension">
+				<speed>0.5</speed>
+				<angleWeightMultiplier>2</angleWeightMultiplier>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_TOW_ATGM"]/building/turretBurstCooldownTime</xpath>
+		<value><turretBurstCooldownTime>2.0</turretBurstCooldownTime></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Hydra_Pod"]/statBases</xpath>
+		<value>
+			<AimingAccuracy>0.75</AimingAccuracy>
+			<Bulk>200</Bulk>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Hydra_Pod"]/statBases/ShootingAccuracyTurret</xpath>
+		<value><ShootingAccuracyTurret>1.0</ShootingAccuracyTurret></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Hydra_Pod"]/description</xpath>
+		<value><description>An automated mount for a pod of unguided 80 mm rockets. Each salvo showers an area with explosions, best against groups. Cannot hit close targets. Needs power and rockets loaded. May explode when damaged.</description></value>
+	</Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Hydra_Pod"]</xpath>
+		<value>
+			<li Class="CombatExtended.NonSnapTurretExtension">
+				<speed>0.65</speed>
+				<angleWeightMultiplier>2</angleWeightMultiplier>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Hydra_Pod"]/building/turretBurstCooldownTime</xpath>
+		<value><turretBurstCooldownTime>2.0</turretBurstCooldownTime></value>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="MA_Turret_CIWS_Vulcan"]/statBases</xpath>
+		<value>
+			<AimingAccuracy>0.75</AimingAccuracy>
+			<Bulk>250</Bulk>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_CIWS_Vulcan"]/statBases/ShootingAccuracyTurret</xpath>
+		<value><ShootingAccuracyTurret>1.0</ShootingAccuracyTurret></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_CIWS_Vulcan"]/description</xpath>
+		<value><description>An automated mount for a six-barrel 20 mm rotary cannon with a radar-driven, very fast traverse. It unloads an enormous burst in a short time, at the cost of high power use and quick barrel heating. Needs ammunition loaded. May explode when damaged.</description></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_CIWS_Vulcan"]/comps/li[@Class="MountedArms.CompProperties_BarrelHeat"]/heatPerShot</xpath>
+		<value><heatPerShot>0.0028</heatPerShot></value>
+	</Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="MA_Turret_CIWS_Vulcan"]</xpath>
+		<value>
+			<li Class="CombatExtended.NonSnapTurretExtension">
+				<speed>1.0</speed>
+				<angleWeightMultiplier>2</angleWeightMultiplier>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_CIWS_Vulcan"]/building/turretBurstCooldownTime</xpath>
+		<value><turretBurstCooldownTime>1.5</turretBurstCooldownTime></value>
+	</Operation>
+
+
+	<!-- ================================================================= -->
+	<!--  Guided rocket battery (CE): same setup as Glitter Tech missile   -->
+	<!--  turret (Verb_ShootMortarCE + Charges, AmmoSet_70mmAPKWS)         -->
+	<!-- ================================================================= -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>MA_Gun_APKWS_Battery</defName>
+		<statBases>
+			<RangedWeapon_Cooldown>0.36</RangedWeapon_Cooldown>
+			<SightsEfficiency>1</SightsEfficiency>
+			<ShotSpread>0.05</ShotSpread>
+			<SwayFactor>0.1</SwayFactor>
+			<Bulk>12.9</Bulk>
+		</statBases>
+		<Properties>
+			<verbClass>CombatExtended.Verb_ShootMortarCE</verbClass>
+			<forceNormalTimeSpeed>false</forceNormalTimeSpeed>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_70mmAPKWS_HEAT</defaultProjectile>
+			<warmupTime>3.0</warmupTime>
+			<minRange>32</minRange>
+			<range>700</range>
+			<ticksBetweenBurstShots>10</ticksBetweenBurstShots>
+			<burstShotCount>6</burstShotCount>
+			<circularError>0.7</circularError>
+			<indirectFirePenalty>0.2</indirectFirePenalty>
+			<soundCast>RocketswarmLauncher_Fire</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+			<muzzleFlashScale>0</muzzleFlashScale>
+			<requireLineOfSight>false</requireLineOfSight>
+			<targetParams>
+				<canTargetLocations>true</canTargetLocations>
+			</targetParams>
+			<recoilPattern>Mounted</recoilPattern>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>24</magazineSize>
+			<reloadTime>8</reloadTime>
+			<ammoSet>AmmoSet_70mmAPKWS</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aiUseBurstMode>FALSE</aiUseBurstMode>
+			<aiAimMode>AimedShot</aiAimMode>
+			<noSnapshot>true</noSnapshot>
+			<noSingleShot>true</noSingleShot>
+		</FireModes>
+		<weaponTags>
+			<li>TurretGun</li>
+		</weaponTags>
+	</Operation>
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="MA_Gun_APKWS_Battery"]/comps</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="MA_Gun_APKWS_Battery"]/comps</xpath>
+			<value>
+				<li Class="CombatExtended.CompProperties_Charges">
+				<chargeSpeeds>
+					<li>30</li>
+					<li>50</li>
+					<li>70</li>
+					<li>90</li>
+				</chargeSpeeds>
+			</li>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="MA_Gun_APKWS_Battery"]</xpath>
+			<value>
+				<comps>
+					<li Class="CombatExtended.CompProperties_Charges">
+				<chargeSpeeds>
+					<li>30</li>
+					<li>50</li>
+					<li>70</li>
+					<li>90</li>
+				</chargeSpeeds>
+			</li>
+				</comps>
+			</value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[defName="MA_Turret_APKWS_Battery"]/comps/li[@Class="CompProperties_Refuelable"]</xpath>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="MA_Turret_APKWS_Battery"]/statBases</xpath>
+		<value>
+			<AimingAccuracy>1.0</AimingAccuracy>
+			<Bulk>220</Bulk>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_APKWS_Battery"]/statBases/ShootingAccuracyTurret</xpath>
+		<value><ShootingAccuracyTurret>0.875</ShootingAccuracyTurret></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_APKWS_Battery"]/building/turretBurstCooldownTime</xpath>
+		<value><turretBurstCooldownTime>6.0</turretBurstCooldownTime></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_APKWS_Battery"]/description</xpath>
+		<value><description>An automated battery that lobs laser-guided 70 mm rockets in a high arc over walls at targets far away. It cannot hit close targets. Needs power and rockets loaded. May explode when damaged.</description></value>
+	</Operation>
+
+</Patch>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ResearchTabDef>
+    <defName>MA_Tab</defName>
+    <label>Mounted Arms</label>
+    <generalTitle>Mounted weapons</generalTitle>
+    <generalDescription>Research mounted weapon systems adapted from modern military hardware. Turrets unlocked here appear in the Security build menu.</generalDescription>
+  </ResearchTabDef>
+
+  <ResearchProjectDef>
+    <defName>MA_Research_GPMG</defName>
+    <label>general-purpose machine guns</label>
+    <description>Belt-fed machine guns on automated mounts. Unlocks the M240 turret.</description>
+    <baseCost>900</baseCost>
+    <techLevel>Industrial</techLevel>
+    <tab>MA_Tab</tab>
+    <prerequisites>
+      <li>GunTurrets</li>
+    </prerequisites>
+    <hideWhen>
+      <turretsDisabled>true</turretsDisabled>
+    </hideWhen>
+    <researchViewX>0.00</researchViewX>
+    <researchViewY>0.50</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>MA_Research_HMG</defName>
+    <label>heavy machine guns</label>
+    <description>Large-caliber .50 machine guns on manned mounts. Unlocks the M2 Browning turret.</description>
+    <baseCost>1500</baseCost>
+    <techLevel>Industrial</techLevel>
+    <tab>MA_Tab</tab>
+    <prerequisites>
+      <li>MA_Research_GPMG</li>
+    </prerequisites>
+    <hideWhen>
+      <turretsDisabled>true</turretsDisabled>
+    </hideWhen>
+    <researchViewX>1.00</researchViewX>
+    <researchViewY>0.00</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>MA_Research_AGL</defName>
+    <label>automatic grenade launchers</label>
+    <description>Belt-fed 40 mm grenade launchers on manned mounts. Unlocks the Mk19 turret.</description>
+    <baseCost>3200</baseCost>
+    <techLevel>Industrial</techLevel>
+    <tab>MA_Tab</tab>
+    <prerequisites>
+      <li>MA_Research_HMG</li>
+      <li>AdvancedFabrication</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <hideWhen>
+      <turretsDisabled>true</turretsDisabled>
+    </hideWhen>
+    <researchViewX>2.00</researchViewX>
+    <researchViewY>0.00</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>MA_Research_Rotary</defName>
+    <label>mounted rotary guns</label>
+    <description>Power-driven multi-barrel guns on automated mounts. Unlocks the M134 minigun turret.</description>
+    <baseCost>2800</baseCost>
+    <techLevel>Industrial</techLevel>
+    <tab>MA_Tab</tab>
+    <prerequisites>
+      <li>MA_Research_GPMG</li>
+      <li>MultibarrelWeapons</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <hideWhen>
+      <turretsDisabled>true</turretsDisabled>
+    </hideWhen>
+    <researchViewX>1.00</researchViewX>
+    <researchViewY>1.00</researchViewY>
+  </ResearchProjectDef>
+
+
+  <ResearchProjectDef>
+    <defName>MA_Research_Autocannon</defName>
+    <label>mounted autocannons</label>
+    <description>Chain-driven 30 mm cannons on automated mounts. Unlocks the Mk44 turret.</description>
+    <baseCost>3600</baseCost>
+    <techLevel>Industrial</techLevel>
+    <tab>MA_Tab</tab>
+    <prerequisites>
+      <li>MA_Research_HMG</li>
+      <li>HeavyTurrets</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <hideWhen>
+      <turretsDisabled>true</turretsDisabled>
+    </hideWhen>
+    <researchViewX>2.00</researchViewX>
+    <researchViewY>1.00</researchViewY>
+  </ResearchProjectDef>
+
+
+  <ResearchProjectDef>
+    <defName>MA_Research_Mortar</defName>
+    <label>light mortars</label>
+    <description>Portable 81 mm mortars that can be packed up and moved. Unlocks the M252 mortar.</description>
+    <baseCost>1200</baseCost>
+    <techLevel>Industrial</techLevel>
+    <tab>MA_Tab</tab>
+    <prerequisites>
+      <li>Mortars</li>
+    </prerequisites>
+    <hideWhen>
+      <turretsDisabled>true</turretsDisabled>
+    </hideWhen>
+    <researchViewX>0.0</researchViewX>
+    <researchViewY>2.0</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>MA_Research_ATGM</defName>
+    <label>mounted anti-tank missiles</label>
+    <description>Wire-guided missiles on manned mounts. Unlocks the TOW turret.</description>
+    <baseCost>4200</baseCost>
+    <techLevel>Industrial</techLevel>
+    <tab>MA_Tab</tab>
+    <prerequisites>
+      <li>MA_Research_AGL</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <hideWhen>
+      <turretsDisabled>true</turretsDisabled>
+    </hideWhen>
+    <researchViewX>3.0</researchViewX>
+    <researchViewY>0.0</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>MA_Research_Rockets</defName>
+    <label>mounted rocket pods</label>
+    <description>Unguided 80 mm rocket pods on automated mounts. Unlocks the 80mm rocket turret.</description>
+    <baseCost>3000</baseCost>
+    <techLevel>Industrial</techLevel>
+    <tab>MA_Tab</tab>
+    <prerequisites>
+      <li>MA_Research_HMG</li>
+      <li>Mortars</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <hideWhen>
+      <turretsDisabled>true</turretsDisabled>
+    </hideWhen>
+    <researchViewX>3.0</researchViewX>
+    <researchViewY>1.0</researchViewY>
+  </ResearchProjectDef>
+
+  <ResearchProjectDef>
+    <defName>MA_Research_CIWS</defName>
+    <label>close-in weapon systems</label>
+    <description>Radar-driven 20 mm rotary cannons. Unlocks the CIWS turret.</description>
+    <baseCost>4800</baseCost>
+    <techLevel>Industrial</techLevel>
+    <tab>MA_Tab</tab>
+    <prerequisites>
+      <li>MA_Research_Rotary</li>
+      <li>MA_Research_Autocannon</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <hideWhen>
+      <turretsDisabled>true</turretsDisabled>
+    </hideWhen>
+    <researchViewX>3.0</researchViewX>
+    <researchViewY>2.0</researchViewY>
+  </ResearchProjectDef>
+
+
+  <ResearchProjectDef>
+    <defName>MA_Research_Missiles</defName>
+    <label>guided rocket batteries</label>
+    <description>Laser-guided 70 mm rockets lobbed in a high arc. Unlocks the guided rocket battery.</description>
+    <baseCost>4500</baseCost>
+    <techLevel>Industrial</techLevel>
+    <tab>MA_Tab</tab>
+    <prerequisites>
+      <li>MA_Research_Rockets</li>
+      <li>MA_Research_ATGM</li>
+    </prerequisites>
+    <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>
+    <hideWhen>
+      <turretsDisabled>true</turretsDisabled>
+    </hideWhen>
+    <researchViewX>4.00</researchViewX>
+    <researchViewY>1.00</researchViewY>
+  </ResearchProjectDef>
+
+</Defs>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+	<MA_BarrelHeat>Temperatura do cano</MA_BarrelHeat>
+	<MA_BarrelCooling>superaquecido, esfriando</MA_BarrelCooling>
+	<MA_BarrelOverheated>{0} superaqueceu e parou de atirar até o cano esfriar.</MA_BarrelOverheated>
+	<MA_OutOfArc>O alvo está fora do campo de tiro desta torreta.</MA_OutOfArc>
+</LanguageData>

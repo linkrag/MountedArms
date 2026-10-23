@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Mounted Arms</name>
+  <author>Felipe</author>
+  <packageId>linkrag.mountedarms</packageId>
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+  <description>Adds turrets based on mounted weapons of modern militaries.
+
+Automatic turrets (need power):
+- M240 general-purpose machine gun
+- M134 minigun
+
+Manned turrets (need a colonist to operate them, no power):
+- M2 Browning heavy machine gun (.50 BMG)
+- Mk19 automatic grenade launcher (40 mm)
+
+Own research tab: "Mounted Arms".
+Vanilla balance: barrels are refurbished with steel, like the vanilla turrets.
+Combat Extended: compatibility layer included (loaded only when CE is active). Turrets use CE ammo (7.62x51mm NATO, .50 BMG, 40x53mm grenades) instead of steel barrels.
+
+Requires Harmony. No DLC needed. Target: RimWorld 1.6.
+Projectiles and muzzle flash come out of the gun barrel (small Harmony patch).</description>
+  <modDependencies>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+      <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>brrainz.harmony</li>
+    <li>Ludeon.RimWorld</li>
+    <li>Ludeon.RimWorld.Royalty</li>
+    <li>Ludeon.RimWorld.Ideology</li>
+    <li>Ludeon.RimWorld.Biotech</li>
+    <li>Ludeon.RimWorld.Anomaly</li>
+    <li>Ludeon.RimWorld.Odyssey</li>
+    <li>CETeam.CombatExtended</li>
+  </loadAfter>
+</ModMetaData>
