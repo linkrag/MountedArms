@@ -461,6 +461,90 @@ def top_bofors_quad():
         circ(d, x, 188, 9, STEEL_D); circ(d, x, 188, 4, BLACK)
     return img
 
+# ------------------------------------------------------------------ batch 4: ZU-23-2, Avenger, Goalkeeper, laser CIWS
+def base_zu23():
+    img = canvas(); d = ImageDraw.Draw(img)
+    # triangular ground platform with three jacks, two wheels folded at the sides
+    for (ex, ey) in ((40, 212), (216, 212), (128, 30)):
+        line(d, (128, 128), (ex, ey), 14, BLACK); line(d, (128, 128), (ex, ey), 9, OLIVE_D)
+        circ(d, ex, ey, 12, STEEL_D); circ(d, ex, ey, 5, BLACK)
+    for x in (52, 204):
+        rect(d, x - 12, 100, x + 12, 156, BLACK, r=8, hl=False)
+    circ(d, 128, 128, 40, OLIVE_D); circ(d, 128, 128, 30, GUN)
+    ammo_can(d, 150, 168, 40, 28)
+    return shadow(img)
+
+def top_zu23():
+    img = canvas(); d = ImageDraw.Draw(img)
+    for x in (110, 146):
+        poly(d, [(x - 6, 10), (x + 6, 10), (x + 4, 22), (x - 4, 22)], STEEL_D)   # flash hider
+        rect(d, x - 3, 20, x + 3, 120, GUN, r=1.5)
+        rect(d, x - 9, 110, x + 9, 170, STEEL, r=3)                               # receiver
+        rect(d, x - 7, 150, x + 7, 176, OLIVE, r=2, hl=False)                     # ammo box
+    rect(d, 120, 128, 136, 180, OLIVE_D, r=4)                                     # gunner seat between
+    circ(d, 128, 120, 7, (30, 60, 80, 255), outline=BLACK)
+    return img
+
+def base_avenger():
+    img = canvas(); d = ImageDraw.Draw(img)
+    base_common(d, 84, 32)
+    rect(d, 92, 206, 164, 236, OLIVE_D, r=4, hl=False)
+    return shadow(img)
+
+def top_avenger():
+    img = canvas(); d = ImageDraw.Draw(img)
+    rect(d, 102, 96, 154, 168, OLIVE, r=8)                                        # turret cab
+    rect(d, 112, 104, 144, 124, (30, 60, 80, 255), r=3, hl=False)
+    for x0 in (56, 158):                                                          # two 4-tube pods
+        rect(d, x0, 40, x0 + 42, 168, OLIVE_D, r=5)
+        for k in range(2):
+            for j in range(2):
+                circ(d, x0 + 11 + j * 20, 54 + k * 20, 7, BLACK, outline=GUN_L, w=int(1.2 * S))
+    rect(d, 98, 120, 102, 130, STEEL_D, r=1); rect(d, 154, 120, 158, 130, STEEL_D, r=1)
+    return img
+
+def base_goalkeeper():
+    img = canvas(); d = ImageDraw.Draw(img)
+    poly(d, octagon(128, 128, 92), STEEL_D)
+    poly(d, octagon(128, 128, 82), (180, 186, 188, 255))
+    circ(d, 128, 128, 56, STEEL_D); circ(d, 128, 128, 46, GUN)
+    rect(d, 96, 208, 160, 238, STEEL_D, r=4, hl=False)
+    return shadow(img)
+
+def top_goalkeeper():
+    img = canvas(); d = ImageDraw.Draw(img)
+    for x in (110, 119, 128, 137, 146):                                           # 7-barrel cluster (5 visible)
+        rect(d, x - 4, 14, x + 4, 118, GUN if x % 2 else GUN_L, r=1.5, hl=False)
+    rect(d, 100, 24, 156, 34, STEEL_D, r=3); rect(d, 100, 80, 156, 90, STEEL_D, r=3)
+    rect(d, 90, 112, 166, 178, (200, 204, 206, 255), r=8)                         # gun house
+    rect(d, 70, 120, 92, 168, STEEL, r=4); rect(d, 164, 120, 186, 168, STEEL, r=4) # feed housings
+    circ(d, 128, 196, 26, STEEL_L); circ(d, 128, 196, 18, (220, 222, 224, 255))   # tracking radar dish
+    return img
+
+def base_laser():
+    img = canvas(); d = ImageDraw.Draw(img)
+    rect(d, 26, 26, 230, 230, STEEL_D, r=14, hl=False)
+    rect(d, 36, 36, 220, 220, (170, 176, 180, 255), r=10, hl=False)
+    for (x, y) in ((50, 50), (206, 50), (50, 206), (206, 206)):
+        circ(d, x, y, 9, (60, 140, 200, 255))                                    # coolant ports
+    circ(d, 128, 128, 52, STEEL_D); circ(d, 128, 128, 42, GUN)
+    return shadow(img)
+
+def top_laser():
+    img = canvas(); d = ImageDraw.Draw(img)
+    rect(d, 96, 92, 160, 190, (210, 214, 216, 255), r=10)                         # beam director housing
+    rect(d, 108, 30, 148, 100, STEEL, r=6)                                        # telescope
+    circ(d, 128, 34, 18, (60, 140, 200, 255), outline=BLACK)                      # output aperture (lens)
+    circ(d, 128, 34, 8, (190, 230, 255, 255), outline=(190, 230, 255, 255))
+    rect(d, 70, 120, 94, 170, STEEL_D, r=4); rect(d, 162, 120, 186, 170, STEEL_D, r=4)  # sensor pods
+    return img
+
+def stinger_item():
+    img = canvas(); d = ImageDraw.Draw(img)
+    rect(d, 112, 20, 144, 236, OLIVE_D, r=8)                                      # launch tube
+    rect(d, 106, 30, 150, 46, OLIVE, r=4); rect(d, 106, 210, 150, 226, OLIVE, r=4)
+    return shadow(img, (3, 4), 4, 100)
+
 def icon(base, top, scale_top=1.0):
     a = base.copy()
     a.alpha_composite(top)
@@ -493,7 +577,9 @@ def icon2(base, top_east, ds, base_cells=2.0):
 
 os.makedirs(OUT, exist_ok=True)
 items = {"M240": (base_m240, top_m240), "M2": (base_m2, top_m2), "Mk19": (base_mk19, top_mk19), "M134": (base_m134, top_m134), "Mk44": (base_mk44, top_mk44), "TOW": (base_tow, top_tow), "Hydra": (base_hydra, top_hydra), "CIWS": (base_ciws, top_ciws), "M252": (base_m252, top_m252),
-         "BoforsTwin": (base_bofors, top_bofors_twin), "BoforsQuad": (lambda: base_bofors(True), top_bofors_quad)}
+         "BoforsTwin": (base_bofors, top_bofors_twin), "BoforsQuad": (lambda: base_bofors(True), top_bofors_quad),
+         "ZU23": (base_zu23, top_zu23), "Avenger": (base_avenger, top_avenger),
+         "Goalkeeper": (base_goalkeeper, top_goalkeeper), "LaserCIWS": (base_laser, top_laser)}
 BASE_CELLS = {"BoforsQuad": 3.0}       # buildings whose base texture is drawn at 3x3
 only = sys.argv[2:]
 if only: items = {k: v for k, v in items.items() if k in only}
@@ -506,4 +592,6 @@ for name, (fb, ft) in items.items():
     finish(b, os.path.join(OUT, f"{name}_Base.png"))
     finish(shadow(t, (2, 3), 4, 90), os.path.join(OUT, f"{name}_Top.png"))
     finish(icon2(b, t, ds, BASE_CELLS.get(name, 2.0)), os.path.join(OUT, f"{name}_Icon.png"))
+if not only or "Stinger" in only:
+    finish(stinger_item(), os.path.join(OUT, "Stinger_Item.png"))   # CE ammo item
 import json; print(json.dumps(sizes))

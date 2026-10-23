@@ -18,6 +18,10 @@ Mod de RimWorld 1.6 que adiciona **torretas baseadas em armas montadas modernas*
 | CIWS 20 mm | automática | rotativa 20 mm, rajada de 60 |
 | Morteiro M252 | tripulada, **portátil** | 81 mm, minifiável, montagem rápida |
 | Bateria de foguetes guiados | automática | fogo indireto em arco, como morteiro |
+| ZU-23-2 | tripulada | 23 mm duplo leve e barato; no CE intercepta projéteis e drop pods |
+| Avenger (Stinger) | automática | vanilla: mísseis leves contra o chão; CE: só abate drop pods |
+| Goalkeeper 30 mm | automática | CIWS pesado de 7 canos; no CE intercepta projéteis |
+| Sistema laser | automática (2000 W) | sem munição; no CE intercepta projéteis |
 | Bofors 40 mm duplo / quádruplo | tripulada, 360° | antiaéreo naval L/60; no CE intercepta projéteis e drop pods |
 
 Detalhes e números: `Docs/TURRETS.md`.

@@ -16,6 +16,10 @@ Valores conferidos nos XML em out/2026. "Testado" = confirmado pelo usuário em 
 | MA_Turret_M252_Mortar / MA_Gun_M252_Mortar | tripulada, portátil (BaseArtilleryBuilding, minifiável, Mass 12) | 30/0/3/0 | – | 1200 | MA_Research_Mortar | 200 · 19,9 · 1 (isMortar) | 3,0 / 14,0 | NÃO confirmado |
 | MA_Turret_Bofors_Twin / MA_Gun_Bofors_Twin | tripulada 2x2 | 380/0/6/0 | – | 16000 | MA_Research_Bofors | 42,9 · – · 4 · 15 | 1,4 / 3,5 | NÃO confirmado |
 | MA_Turret_Bofors_Quad / MA_Gun_Bofors_Quad | tripulada 3x3 (interação (0,0,-2)) | 600/60/10/0 | – | 26000 | MA_Research_BoforsQuad | 42,9 · – · 8 · 8 | 1,6 / 3,5 | NÃO confirmado |
+| MA_Turret_ZU23 / MA_Gun_ZU23 | tripulada 2x2 | 260/0/4/0 | – | 9000 | MA_Research_ZU23 | 36,9 · – · 10 · 3 | 1,0 / 3,0 | NÃO confirmado |
+| MA_Turret_Avenger / MA_Gun_Avenger | auto 2x2 | 240/0/6/0 | 150 W | 14000 | MA_Research_Stinger | 49,9 · 7,9 · 2 · 40 | 2,0 / 8,0 | NÃO confirmado |
+| MA_Turret_Goalkeeper / MA_Gun_Goalkeeper | auto 2x2 | 550/150/12/3 | 900 W | 34000 | MA_Research_Goalkeeper | 38,9 · – · 40 · 1 | 0,6 / 3,5 | NÃO confirmado |
+| MA_Turret_LaserCIWS / MA_Gun_LaserCIWS | auto 2x2 (+20 ouro) | 300/120/8/4 | 2000 W | 30000 | MA_Research_LaserCIWS | 44,9 · – · 3 · 10 | 1,5 / 2,0 | NÃO confirmado |
 | MA_Turret_APKWS_Battery / MA_Gun_APKWS_Battery | auto, fogo indireto (isMortar, projétil flyOverhead) | 380/60/8/1 | 250 W | 26000 | MA_Research_Missiles | 500 · 29,9 · 6 · 10 | 3,0 / 22,0 | NÃO confirmado |
 
 Notas vanilla:

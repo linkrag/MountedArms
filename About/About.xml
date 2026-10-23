@@ -10,17 +10,19 @@
 
 Automatic turrets (power):
 - M240 machine gun, M134 minigun, Mk44 Bushmaster chain gun
-- 80 mm rocket pod, 20 mm CIWS
+- 80 mm rocket pod, 20 mm CIWS, Goalkeeper 30 mm CIWS
+- Avenger Stinger missile turret, laser weapon system (no ammunition, huge power draw)
 - Guided rocket battery (indirect arcing fire, mortar-like)
 
 Manned turrets (colonist operates):
 - M2 Browning .50, Mk19 grenade launcher, TOW anti-tank missile
 - Bofors 40 mm L/60 naval anti-aircraft gun, twin and quad mounts
+- ZU-23-2 twin 23 mm anti-aircraft gun
 
 Portable:
 - M252 81 mm mortar (minifiable)
 
-Features: barrel overheating, turret slew speed, shot dispersion, muzzle at the barrel. Requires Harmony. Combat Extended is optional; with it, the Bofors and the CIWS also shoot down incoming shells and missiles (and the Bofors, drop pods).</description>
+Features: barrel overheating, turret slew speed, shot dispersion, muzzle at the barrel. Requires Harmony. Combat Extended is optional; with it, the Bofors, ZU-23-2, CIWS, Goalkeeper and laser also shoot down incoming shells and missiles, and the Bofors, ZU-23-2 and Avenger shoot down drop pods.</description>
   <modDependencies>
     <li>
       <packageId>brrainz.harmony</packageId>
