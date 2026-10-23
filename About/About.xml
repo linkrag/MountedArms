@@ -6,22 +6,20 @@
   <supportedVersions>
     <li>1.6</li>
   </supportedVersions>
-  <description>Adds turrets based on mounted weapons of modern militaries.
+  <description>Adds modern mounted-weapon turrets, balanced for vanilla and with a full Combat Extended layer.
 
-Automatic turrets (need power):
-- M240 general-purpose machine gun
-- M134 minigun
+Automatic turrets (power):
+- M240 machine gun, M134 minigun, Mk44 Bushmaster chain gun
+- 80 mm rocket pod, 20 mm CIWS
+- Guided rocket battery (indirect arcing fire, mortar-like)
 
-Manned turrets (need a colonist to operate them, no power):
-- M2 Browning heavy machine gun (.50 BMG)
-- Mk19 automatic grenade launcher (40 mm)
+Manned turrets (colonist operates):
+- M2 Browning .50, Mk19 grenade launcher, TOW anti-tank missile
 
-Own research tab: "Mounted Arms".
-Vanilla balance: barrels are refurbished with steel, like the vanilla turrets.
-Combat Extended: compatibility layer included (loaded only when CE is active). Turrets use CE ammo (7.62x51mm NATO, .50 BMG, 40x53mm grenades) instead of steel barrels.
+Portable:
+- M252 81 mm mortar (minifiable)
 
-Requires Harmony. No DLC needed. Target: RimWorld 1.6.
-Projectiles and muzzle flash come out of the gun barrel (small Harmony patch).</description>
+Features: barrel overheating, turret slew speed, shot dispersion, muzzle at the barrel. Requires Harmony. Combat Extended is optional.</description>
   <modDependencies>
     <li>
       <packageId>brrainz.harmony</packageId>

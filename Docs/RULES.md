@@ -68,7 +68,7 @@ Outras âncoras CE: MediumTurret 55, HeavyTurret 55, Autocannon 78, Sniper turre
 4. Checar: referências, defNames, texturas, XML do patch (scripts `check.py`, `check_ce.py`).
 5. Compilar DLL se mudou C#.
 6. Testar vanilla e CE: construir, energia/operador, mirar, atirar, recarregar, tomar dano (explosão), ver log.
-- Bug CE conhecido/corrigido: Mk19 mirava e não atirava; resolvido alinhando range/minRange/`aimedBurstShotCount` ao padrão do CE e sem `noSnapshot`.
+- Bug CE conhecido/corrigido: Mk19 mirava e não atirava; causa: `FireModes` ausente/errado (snapshot). Resolvido com `aiAimMode AimedShot`, `aiUseBurstMode FALSE`, `noSingleShot` e sem `noSnapshot` (ver Docs/CE_NOTES.md).
 
 ## 6b. Superaquecimento do cano (implementado)
 - `MountedArms.CompProperties_BarrelHeat` (Source/BarrelHeat.cs), vale para vanilla e CE (usa só API pública + o campo `burstCooldownTicksLeft`).
@@ -78,7 +78,7 @@ Outras âncoras CE: MediumTurret 55, HeavyTurret 55, Autocannon 78, Sniper turre
 - Textos em `1.6/Languages/{English,PortugueseBrazilian}/Keyed`.
 - Pendente de teste em jogo; ajustar T se travar cedo/tarde demais.
 
-## 6c. (decisão: as quatro montadas têm arco de 360°, `arcDegrees` 0 e sem CompFireArc no CE; o sistema de arco fica pronto para torretas futuras que tenham arco limitado)
+## 6c-a. (decisão: as quatro montadas têm arco de 360°, `arcDegrees` 0 e sem CompFireArc no CE; o sistema de arco fica pronto para torretas futuras que tenham arco limitado)
 ## 6c. Giro, arco e dispersão (implementado, pendente de teste)
 - **Vanilla** (`Source/SlewArc.cs`, `CompProperties_TurretSlew`): topo gira `degreesPerSecond` (Harmony em `TurretTop.TurretTopTick`) e a rajada só começa com o cano a menos de `aimTolerance`° do alvo; `arcDegrees` limita o campo de tiro (centro = rotação do prédio; só faz sentido nas manuais, que são rotacionáveis); alvos fora do arco são recusados (`IsValidTarget`/`OrderAttack`). Linhas do arco aparecem ao selecionar.
 - **CE**: a mesma coisa usa os sistemas do CE: `CombatExtended.NonSnapTurretExtension` (`speed` em graus POR TICK) e `CompProperties_FireArc` (M2 e Mk19). O comp vanilla fica inerte em `Building_TurretGunCE`.
@@ -115,10 +115,7 @@ O M252 só faz sentido se for realmente móvel: é um prédio minifiável (empac
 - `DrawRadiusRing` (colocação) falha com raio 120; manter range CE ≤ ~100 para torretas não-morteiro.
 - CE: toda arma com burst 1 também precisa de `<FireModes><aiAimMode>AimedShot</aiAimMode></FireModes>` (sem isso o padrão é snapshot e a torreta mira mas não dispara, como no Mk19 e TOW).
 
-## Bateria de foguetes guiados (fogo indireto)
-- `MA_Turret_APKWS_Battery`: auto, 250 W, pesquisa `MA_Research_Missiles`. Fogo em arco sobre paredes, alvo em ponto do chão, rajada de 6, sem calor.
-- Vanilla: verbo `isMortar` com projétil `flyOverhead`, range 250, min 29,9. Sem `PlaceWorker_ShowTurretRadius` (anel de raio quebra com alcance grande).
-- CE: mesma config da torreta de mísseis do Glitter Tech: `Verb_ShootMortarCE` + `CompProperties_Charges` (30/50/70/90), `AmmoSet_70mmAPKWS`, range 700 (min 32, igual ao morteiro CE), cooldown 6, FireModes com `noSnapshot` e `noSingleShot`. Em CE o tempo de voo vem das cargas (`chargeSpeeds`), não da `speed` do projétil.
-- Botão de ataque ao mundo escondido (`NoWorldStrikeExtension`).
-- Torreta vanilla com alcance grande precisa de `ai_combatDangerous=false` (senão o AvoidGrid estoura: 'Not enough squares to get to radius ...'); morteiros vanilla não têm essa flag.
-- Artilharia/morteiro em CE: NÃO usar NonSnapTurretExtension (tiros iam para fora do mapa); o morteiro do CE não tem.
+## Bateria de foguetes guiados (fogo indireto, estilo morteiro)
+- `MA_Turret_APKWS_Battery`: auto, 250 W, pesquisa `MA_Research_Missiles`. Fogo em arco, alvo em ponto do chão, rajada de 6, sem calor. Botão "atacar mundo" escondido (`NoWorldStrikeExtension`).
+- Vanilla: verbo `isMortar` + projétil `flyOverhead`, range 500 (= morteiro vanilla), min 29,9, forcedMissRadius 5 (morteiro: 9), cooldown 22, mira 3,0 s, `ai_combatDangerous` false, `placeWorkers Inherit="False"` só com TurretTop (anel de raio e AvoidGrid quebram com alcance grande).
+- CE: `Verb_ShootMortarCE` range 700, min 32, `CompProperties_Charges` 30/50/70/90, mag 24, reload 8, `noSnapshot`/`noSingleShot`, sem `NonSnapTurretExtension`. Bug aberto: tiros fora do mapa (ver Docs/STATUS.md).

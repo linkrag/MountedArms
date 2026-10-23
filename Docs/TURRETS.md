@@ -1,0 +1,39 @@
+# Catálogo de torretas
+
+Valores conferidos nos XML em out/2026. "Testado" = confirmado pelo usuário em jogo. Custos: Steel/Plasteel/CompInd (ComponentIndustrial)/CompSp (ComponentSpacer). Todas têm `CompProperties_Explosive` (explode ao tomar dano), `CompProperties_TurretSlew` (arcDegrees 0 = 360°) e MuzzleExtension (exceto morteiro/bateria).
+
+## Vanilla
+| defName (turret / gun) | Tipo / base | Custo | Energia | WorkToBuild | Pesquisa | Verbo (alcance, min, rajada, ticks) | Warmup / cooldown | Status |
+|---|---|---|---|---|---|---|---|---|
+| MA_Turret_M240_MG / MA_Gun_M240_MG | auto (MA_AutoTurretBase) | 220/0/4/0 | 100 W | 9000 | MA_Research_GPMG | 31,9 · – · 5 · 5 | 0,6 / 3,4 | testado |
+| MA_Turret_M134_Minigun / MA_Gun_M134_Minigun | auto | 320/40/8/0 | 350 W | 18000 | MA_Research_Rotary | 28,9 · – · 16 · 3 | 1,2 / 4,2 | testado |
+| MA_Turret_M2_Browning / MA_Gun_M2_Browning | tripulada (MA_MannedTurretBase) | 260/0/3/0 | – | 10000 | MA_Research_HMG | 40,9 · – · 4 · 9 | 1,0 / 3,4 | testado |
+| MA_Turret_Mk19_AGL / MA_Gun_Mk19_AGL | tripulada | 400/80/8/2 | – | 20000 | MA_Research_AGL | 38,9 · 8,9 · 4 · 16 | 1,6 / 4,5 | testado |
+| MA_Turret_Mk44_Autocannon / MA_Gun_Mk44_Autocannon | auto | 450/90/10/0 | 250 W | 22000 | MA_Research_Autocannon | 44,9 · – · 6 · 10 | 1,8 / 3,0 | testado |
+| MA_Turret_TOW_ATGM / MA_Gun_TOW_ATGM | tripulada | 300/60/6/2 | – | 22000 | MA_Research_ATGM | 71,9 · 14,9 · 1 | 2,5 / 8,0 | NÃO confirmado |
+| MA_Turret_Hydra_Pod / MA_Gun_Hydra_Pod | auto (foguetes 80mm S-8; defNames guardam "Hydra/70mm" por histórico) | 350/50/8/0 | 200 W | 20000 | MA_Research_Rockets | 49,9 · 9,9 · 7 · 5 | 2,4 / 5,5 | NÃO confirmado |
+| MA_Turret_CIWS_Vulcan / MA_Gun_CIWS_Vulcan | auto | 400/120/8/2 | 450 W | 30000 | MA_Research_CIWS | 33,9 · – · 60 · 2 | 0,8 / 3,0 | NÃO confirmado |
+| MA_Turret_M252_Mortar / MA_Gun_M252_Mortar | tripulada, portátil (BaseArtilleryBuilding, minifiável, Mass 12) | 30/0/3/0 | – | 1200 | MA_Research_Mortar | 200 · 19,9 · 1 (isMortar) | 3,0 / 14,0 | NÃO confirmado |
+| MA_Turret_APKWS_Battery / MA_Gun_APKWS_Battery | auto, fogo indireto (isMortar, projétil flyOverhead) | 380/60/8/1 | 250 W | 26000 | MA_Research_Missiles | 500 · 29,9 · 6 · 10 | 3,0 / 22,0 | NÃO confirmado |
+
+Notas vanilla:
+- Calor (CompProperties_BarrelHeat): M240/M134/M2/Mk19/Mk44/CIWS (alvos de T: 60/40/90/120/75/60 s). TOW, foguetes, morteiro e bateria não têm calor.
+- Refuelable (aço): barril (M240...), mísseis (TOW cap 4), foguetes (cap 21), CIWS (cap 1200, mult 10), M252 (cap 30), bateria (cap 24).
+- Pesquisas extras: MA_Research_Mortar (prereq vanilla Mortars), MA_Research_ATGM (AGL), MA_Research_Rockets (HMG+Mortars), MA_Research_CIWS (Rotary+Autocannon), MA_Research_Missiles (Rockets+ATGM).
+
+## Combat Extended (camada em `1.6/CE/Patches/MountedArms_CE.xml`)
+| Arma | Munição (AmmoSet → projétil padrão) | alcance (min) | warmup | burst × ticks | carregador / recarga | Notas |
+|---|---|---|---|---|---|---|
+| M240 | AmmoSet_762x51mmNATO → Bullet_762x51mmNATO_FMJ | 62 | 1,0 | 10 × 6 | 100 / 8,5 | |
+| M134 | AmmoSet_762x51mmNATO | 62 | 2,0 | 30 × 2 | 300 / 9,2 | |
+| M2 | AmmoSet_50BMG → Bullet_50BMG_FMJ | 75 | 1,8 | 6 × 7 | 100 / 9 | |
+| Mk19 | AmmoSet_40x53mmGrenade → Bullet_40x53mmGrenade_HE | 62 (8) | 2,2 | 4 × 10 | 32 / 9,5 | testado em todas as munições |
+| Mk44 | AmmoSet_30x173mmNATO → Bullet_30x173mmNATO_AP | 78 | 2,0 | 6 × 12 | 60 / 9,5 | |
+| TOW | AmmoSet_BGM71 → Bullet_BGM71_HEAT | 100 (24) | 2,5 | 1 | 1 / 8 | FireModes só com aiAimMode AimedShot |
+| Foguetes | AmmoSet_80mmRocket_direct → Bullet_80mmRocket_HE | 62 (12) | 2,4 | 7 × 5 | 21 / 9 | NÃO usar o APKWS 70mm direto (projétil flyOverhead, voo de minutos) |
+| CIWS | AmmoSet_20x102mmNATO → Bullet_20x102mmNATO_AP | 68 | 1,0 | 60 × 2 | 600 / 10 | |
+| M252 | AmmoSet_81mmMortarShell → Bullet_81mmMortarShell_HE | 450 (24) | 3,5 | 1 | 1 / 3 | Verb_ShootMortarCE; cargas 30/50/70 |
+| Bateria | AmmoSet_70mmAPKWS → Bullet_70mmAPKWS_HEAT | 700 (32) | 3,0 | 6 × 10 | 24 / 8 | Verb_ShootMortarCE; cargas 30/50/70/90; sem NonSnap |
+
+NonSnapTurretExtension (graus por TICK): M240 0,9 · M134 0,65 · M2 0,65 · Mk19 0,5 · Mk44 0,6 · TOW 0,5 · Foguetes 0,65 · CIWS 1,0 · (M252 e bateria: nenhum).
+heatPerShot no CE: M240 0,0106 · M134 0,0067 · M2 0,0186 · Mk19 0,0333 · Mk44 0,0250 · CIWS 0,0028.
