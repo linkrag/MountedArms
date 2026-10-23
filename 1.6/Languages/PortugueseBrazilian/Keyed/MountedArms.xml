@@ -4,4 +4,6 @@
 	<MA_BarrelCooling>superaquecido, esfriando</MA_BarrelCooling>
 	<MA_BarrelOverheated>{0} superaqueceu e parou de atirar até o cano esfriar.</MA_BarrelOverheated>
 	<MA_OutOfArc>O alvo está fora do campo de tiro desta torreta.</MA_OutOfArc>
+	<MA_UnloadDesc>Retira toda a munição carregada e a deixa ao lado da torreta. Use para esvaziar a torreta ou, depois de escolher outro tipo de munição no menu de recarga, para trocar o que está carregado.</MA_UnloadDesc>
+	<MA_UnloadEmpty>Nada carregado.</MA_UnloadEmpty>
 </LanguageData>

@@ -139,7 +139,7 @@
 
   <ThingDef ParentName="BaseWeaponTurret">
     <defName>MA_Gun_Mk19_AGL</defName>
-    <label>Mk19 grenade launcher</label>
+    <label>Mk 19 grenade launcher</label>
     <description>A belt-fed 40 mm automatic grenade launcher designed to be fired from a manned mount. The grenades need some distance to arm.</description>
     <graphicData>
       <texPath>MountedArms/Mk19_Top</texPath>
@@ -225,7 +225,7 @@
 
   <ThingDef ParentName="BaseWeaponTurret">
     <defName>MA_Gun_Mk44_Autocannon</defName>
-    <label>Mk44 Bushmaster cannon</label>
+    <label>Mk44 Bushmaster II 30mm cannon</label>
     <description>A 30 mm chain-driven automatic cannon designed to attach to a turret.</description>
     <graphicData>
       <texPath>MountedArms/Mk44_Top</texPath>
@@ -262,7 +262,7 @@
 
   <ThingDef ParentName="BaseBullet">
     <defName>MA_Missile_TOW</defName>
-    <label>TOW missile</label>
+    <label>BGM-71 TOW missile</label>
     <graphicData>
       <texPath>Things/Projectile/Rocket_Big</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -279,7 +279,7 @@
 
   <ThingDef ParentName="BaseWeaponTurret">
     <defName>MA_Gun_TOW_ATGM</defName>
-    <label>TOW launcher</label>
+    <label>BGM-71 TOW launcher</label>
     <description>A wire-guided anti-tank missile launcher designed to attach to a manned mount.</description>
     <graphicData>
       <texPath>MountedArms/TOW_Top</texPath>
@@ -314,7 +314,7 @@
 
   <ThingDef ParentName="BaseBullet">
     <defName>MA_Rocket_70mm</defName>
-    <label>80mm rocket</label>
+    <label>S-8 80mm rocket</label>
     <graphicData>
       <texPath>Things/Projectile/Rocket_Big</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -332,7 +332,7 @@
 
   <ThingDef ParentName="BaseWeaponTurret">
     <defName>MA_Gun_Hydra_Pod</defName>
-    <label>80mm rocket pod</label>
+    <label>B-8 rocket pod</label>
     <description>A pod of unguided 80 mm rockets designed to attach to a turret. Salvos saturate an area.</description>
     <graphicData>
       <texPath>MountedArms/Hydra_Top</texPath>
@@ -383,7 +383,7 @@
 
   <ThingDef ParentName="BaseWeaponTurret">
     <defName>MA_Gun_CIWS_Vulcan</defName>
-    <label>20mm rotary cannon</label>
+    <label>M61 Vulcan 20mm rotary cannon</label>
     <description>A six-barrel 20 mm rotary cannon with an extreme rate of fire, designed to attach to a turret.</description>
     <graphicData>
       <texPath>MountedArms/CIWS_Top</texPath>
@@ -392,8 +392,8 @@
     <statBases>
       <AccuracyTouch>0.70</AccuracyTouch>
       <AccuracyShort>0.80</AccuracyShort>
-      <AccuracyMedium>0.65</AccuracyMedium>
-      <AccuracyLong>0.40</AccuracyLong>
+      <AccuracyMedium>0.72</AccuracyMedium>
+      <AccuracyLong>0.50</AccuracyLong>
       <RangedWeapon_Cooldown>3.0</RangedWeapon_Cooldown>
       <DeteriorationRate>0</DeteriorationRate>
       <Mass>60</Mass>
@@ -476,7 +476,7 @@
 
   <ThingDef ParentName="BaseBullet">
     <defName>MA_Missile_APKWS</defName>
-    <label>guided rocket</label>
+    <label>APKWS rocket</label>
     <graphicData>
       <texPath>Things/Projectile/Rocket_Big</texPath>
       <graphicClass>Graphic_Single</graphicClass>
@@ -500,7 +500,7 @@
 
   <ThingDef ParentName="BaseWeaponTurret">
     <defName>MA_Gun_APKWS_Battery</defName>
-    <label>guided rocket launcher</label>
+    <label>APKWS rocket launcher</label>
     <description>A launcher for laser-guided 70 mm rockets fired in a high arc over walls and obstacles at targets far away.</description>
     <graphicData>
       <texPath>MountedArms/Hydra_Top</texPath>
@@ -715,7 +715,7 @@
 
   <ThingDef ParentName="BaseWeaponTurret">
     <defName>MA_Gun_Avenger</defName>
-    <label>Avenger missile pods</label>
+    <label>Avenger Stinger pods</label>
     <description>Two four-tube pods of Stinger missiles on a powered turret.</description>
     <graphicData>
       <texPath>MountedArms/Avenger_Top</texPath>
@@ -751,7 +751,7 @@
 
   <ThingDef ParentName="BaseWeaponTurret">
     <defName>MA_Gun_Goalkeeper</defName>
-    <label>Goalkeeper 30mm rotary cannon</label>
+    <label>GAU-8 Avenger 30mm rotary cannon</label>
     <description>A seven-barrel 30 mm rotary cannon with its own search and tracking radar.</description>
     <graphicData>
       <texPath>MountedArms/Goalkeeper_Top</texPath>
@@ -785,7 +785,7 @@
 
   <ThingDef ParentName="BaseWeaponTurret">
     <defName>MA_Gun_LaserCIWS</defName>
-    <label>laser weapon system</label>
+    <label>Iron Beam beam director</label>
     <description>A high-energy laser beam director. Needs no ammunition, only a lot of power.</description>
     <graphicData>
       <texPath>MountedArms/LaserCIWS_Top</texPath>

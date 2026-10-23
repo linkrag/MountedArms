@@ -1,5 +1,6 @@
 # build output (rebuild with Source/build.sh)
 1.6/Assemblies/*.dll
+1.6/CE/Assemblies/*.dll
 *.pdb
 Thumbs.db
 .DS_Store

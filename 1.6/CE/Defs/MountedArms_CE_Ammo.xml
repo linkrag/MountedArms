@@ -23,7 +23,7 @@
 	<ThingDef ParentName="Base70mmAPKWS">
 		<defName>MA_Bullet_APKWS_Indirect_HE</defName>
 		<thingClass>CombatExtended.ProjectileCE_Explosive</thingClass>
-		<label>70mm guided rocket (HE)</label>
+		<label>APKWS rocket (HE)</label>
 		<graphicData>
 			<texPath>Things/Projectile/Rocket/70mmAPKWS</texPath>
 			<graphicClass>Graphic_Single</graphicClass>

@@ -309,7 +309,7 @@
 
   <ThingDef ParentName="MA_MannedTurretBase">
     <defName>MA_Turret_Mk19_AGL</defName>
-    <label>Mk19 turret</label>
+    <label>Mk 19 grenade launcher</label>
     <description>A manned mount for a 40 mm automatic grenade launcher. Needs a colonist at the gun and advanced materials to build. Lobs explosive grenades in bursts at long range, but cannot hit close targets. Its barrel must be refurbished with steel after use. May explode when damaged.</description>
     <graphicData>
       <texPath>MountedArms/Mk19_Base</texPath>
@@ -386,7 +386,7 @@
 
   <ThingDef ParentName="MA_AutoTurretBase">
     <defName>MA_Turret_Mk44_Autocannon</defName>
-    <label>Mk44 turret</label>
+    <label>Mk44 Bushmaster II turret</label>
     <description>An automated mount for a 30 mm chain-driven cannon. Slow to aim and to turn, but its heavy armor-piercing shells hit hard at long range, making it the backbone against armored targets. Costs advanced materials and a lot of power. Its barrel must be refurbished with steel after use. May explode when damaged.</description>
     <graphicData>
       <texPath>MountedArms/Mk44_Base</texPath>
@@ -466,7 +466,7 @@
 
   <ThingDef ParentName="MA_MannedTurretBase">
     <defName>MA_Turret_TOW_ATGM</defName>
-    <label>TOW turret</label>
+    <label>BGM-71 TOW launcher</label>
     <description>A manned mount for a wire-guided anti-tank missile. One devastating shot at long range, but it cannot hit close targets and needs a long time to reload. Each missile costs steel to rearm. Needs a colonist at the gun and no power. May explode when damaged.</description>
     <graphicData>
       <texPath>MountedArms/TOW_Base</texPath>
@@ -534,7 +534,7 @@
 
   <ThingDef ParentName="MA_AutoTurretBase">
     <defName>MA_Turret_Hydra_Pod</defName>
-    <label>80mm rocket turret</label>
+    <label>B-8 rocket pod (S-8 80mm)</label>
     <description>An automated mount for a pod of unguided 80 mm rockets. Slow to reload but each salvo showers an area with explosions, so it is best against groups. Cannot hit close targets. Rockets cost steel to rearm. Needs power. May explode when damaged.</description>
     <graphicData>
       <texPath>MountedArms/Hydra_Base</texPath>
@@ -605,7 +605,7 @@
 
   <ThingDef ParentName="MA_AutoTurretBase">
     <defName>MA_Turret_CIWS_Vulcan</defName>
-    <label>CIWS turret</label>
+    <label>Mk 15 Phalanx CIWS</label>
     <description>An automated mount for a six-barrel 20 mm rotary cannon with a radar-driven, very fast traverse. It unloads an enormous burst in a short time, at the cost of high power use, a lot of steel and quick barrel heating. May explode when damaged.</description>
     <graphicData>
       <texPath>MountedArms/CIWS_Base</texPath>
@@ -640,8 +640,8 @@
         <coolPerSecond>0.02</coolPerSecond>
         <resumeAt>0.5</resumeAt>
         <smokeAt>0.7</smokeAt>
-        <heatSpread>2.0</heatSpread>
-        <burstSpread>0.03</burstSpread>
+        <heatSpread>1.0</heatSpread>
+        <burstSpread>0.012</burstSpread>
       </li>
       <li Class="MountedArms.CompProperties_TurretSlew">
         <degreesPerSecond>100</degreesPerSecond>      <!-- Phalanx-class servo, ~100 deg/s -->
@@ -764,7 +764,7 @@
 
   <ThingDef ParentName="MA_AutoTurretBase">
     <defName>MA_Turret_APKWS_Battery</defName>
-    <label>guided rocket battery</label>
+    <label>APKWS rocket battery</label>
     <description>An automated battery that lobs laser-guided 70 mm rockets in a high arc over walls, with the reach of a mortar but better accuracy. It cannot hit close targets and is slow between salvos. Rockets cost steel to rearm. Needs power. May explode when damaged.</description>
     <graphicData>
       <texPath>MountedArms/Hydra_Base</texPath>
@@ -838,7 +838,7 @@
 
   <ThingDef ParentName="MA_MannedTurretBase">
     <defName>MA_Turret_Bofors_Twin</defName>
-    <label>twin Bofors 40mm</label>
+    <label>Bofors 40mm L/60 twin</label>
     <description>A manned twin mount for 40 mm Bofors L/60 automatic guns, the classic naval anti-aircraft weapon. The gunner sits between the guns and the mount traverses a full circle. Fires steady bursts of heavy shells at long range and needs no power. Its barrels must be refurbished with steel after use. May explode when damaged.</description>
     <graphicData>
       <texPath>MountedArms/BoforsTwin_Base</texPath>
@@ -910,7 +910,7 @@
 
   <ThingDef ParentName="MA_MannedTurretBase">
     <defName>MA_Turret_Bofors_Quad</defName>
-    <label>quad Bofors 40mm</label>
+    <label>Bofors 40mm L/60 quad</label>
     <description>A manned quadruple mount for 40 mm Bofors L/60 automatic guns, as fitted to battleships and cruisers. Twice the barrels of the twin mount for a much heavier volume of fire, but large and expensive. Needs no power. Its barrels must be refurbished with steel after use. May explode when damaged.</description>
     <graphicData>
       <texPath>MountedArms/BoforsQuad_Base</texPath>
@@ -1061,7 +1061,7 @@
 
   <ThingDef ParentName="MA_AutoTurretBase">
     <defName>MA_Turret_Avenger</defName>
-    <label>Avenger missile turret</label>
+    <label>AN/TWQ-1 Avenger</label>
     <description>A powered turret with two pods of four Stinger heat-seeking missiles. Fires pairs of light guided missiles at long range. Missiles cost steel to rearm. Needs power. May explode when damaged.</description>
     <graphicData>
       <texPath>MountedArms/Avenger_Base</texPath>
@@ -1207,7 +1207,7 @@
 
   <ThingDef ParentName="MA_AutoTurretBase">
     <defName>MA_Turret_LaserCIWS</defName>
-    <label>laser weapon system</label>
+    <label>Iron Beam laser</label>
     <description>A powered high-energy laser turret. It needs no ammunition at all, but draws a huge amount of power and must pause when its optics overheat. Very accurate at long range. May explode when damaged.</description>
     <graphicData>
       <texPath>MountedArms/LaserCIWS_Base</texPath>

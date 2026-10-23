@@ -4,4 +4,6 @@
 	<MA_BarrelCooling>overheated, cooling down</MA_BarrelCooling>
 	<MA_BarrelOverheated>{0} has overheated and stopped firing until the barrel cools down.</MA_BarrelOverheated>
 	<MA_OutOfArc>Target is outside this turret's fire arc.</MA_OutOfArc>
+	<MA_UnloadDesc>Remove all loaded ammunition and drop it next to the turret. Use it to empty the turret or, after picking another ammunition type in the reload menu, to swap what is loaded.</MA_UnloadDesc>
+	<MA_UnloadEmpty>Nothing loaded.</MA_UnloadEmpty>
 </LanguageData>

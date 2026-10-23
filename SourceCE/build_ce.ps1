@@ -1,0 +1,22 @@
+# Builds 1.6/CE/Assemblies/MountedArmsCE.dll (CE-only; loaded through LoadFolders only with Combat Extended).
+# .NET Framework compiler (C# 5), against the game's own mscorlib. -Out: alternative output folder
+# (e.g. to check the build while the game has the DLL open).
+param(
+    [string]$RW = "F:\Steam\steamapps\common\RimWorld",
+    [string]$CE = "F:\Steam\steamapps\workshop\content\294100\2890901044",
+    [string]$Harmony = "F:\Steam\steamapps\workshop\content\294100\2009463077\1.6\Assemblies\0Harmony.dll",
+    [string]$Out = ""
+)
+$ErrorActionPreference = "Stop"
+$csc = "C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe"
+$m = "$RW\RimWorldWin64_Data\Managed"
+$root = Split-Path $PSScriptRoot -Parent
+$out = if ($Out) { $Out } else { "$root\1.6\CE\Assemblies" }
+New-Item -ItemType Directory -Force $out | Out-Null
+& $csc /nologo /noconfig /target:library /optimize+ /debug- /nostdlib /out:"$out\MountedArmsCE.dll" `
+    /r:"$m\mscorlib.dll" /r:"$m\System.dll" /r:"$m\System.Core.dll" /r:"$m\Assembly-CSharp.dll" `
+    /r:"$m\UnityEngine.dll" /r:"$m\UnityEngine.CoreModule.dll" /r:"$m\netstandard.dll" `
+    /r:"$CE\Assemblies\CombatExtended.dll" /r:"$Harmony" `
+    "$PSScriptRoot\*.cs"
+if ($LASTEXITCODE -ne 0) { throw "csc failed ($LASTEXITCODE)" }
+Get-FileHash "$out\MountedArmsCE.dll" -Algorithm MD5 | Select-Object Hash, Path
