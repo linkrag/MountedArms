@@ -43,7 +43,7 @@ tools/                   scripts de geração de textura e checagem de XML
 10. **Edição de arquivos com replace em massa:** confira que o padrão casou na linha certa (já trocamos o `burstShotCount` do Mk19 em vez do da bateria). Depois de editar, valide o XML e releia o trecho.
 
 ## Fluxo para criar/alterar uma torreta
-Use `Docs/TEMPLATE_NOVA_TORRETA.md` (checklist + esqueletos XML). Resumo: arma real + análogos vanilla/CE → gun/projétil/building/pesquisa/3 texturas (vanilla) → patch CE → checar (`tools/check.py`, `tools/check_ce.py`, lxml) → compilar se mudou C# → testar vanilla **e** CE → atualizar `Docs/` → commit.
+Use `Docs/TEMPLATE_NOVA_TORRETA.md` (checklist + esqueletos XML). Resumo: arma real + análogos vanilla/CE → gun/projétil/building/pesquisa/3 texturas (vanilla) → patch CE → checar (`tools/check_defnames.py`, `tools/check.py`, `tools/check_ce.py`, lxml) → compilar se mudou C# → testar vanilla **e** CE → atualizar `Docs/` → commit.
 
 ## Estado atual
 Veja `Docs/STATUS.md` (o que está testado, o que está pendente de teste, bugs abertos). Em resumo: M240/M134/M2/Mk19/Mk44 testados e funcionando (vanilla e CE); TOW/foguetes 80mm/CIWS/M252/bateria foram escritos e ajustados em várias rodadas e **ainda não foram confirmados em jogo**; bug aberto: bateria de foguetes guiados em CE dispara e os tiros vão para fora do mapa.

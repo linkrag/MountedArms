@@ -64,12 +64,12 @@
 		<defName>MA_AmmoSet_FIM92</defName>
 		<label>Stinger missiles</label>
 		<ammoTypes>
-			<MA_Ammo_FIM92>MA_Bullet_FIM92</MA_Ammo_FIM92>
+			<MA_Ammo_FIM92_Stinger>MA_Bullet_FIM92_Stinger</MA_Ammo_FIM92_Stinger>
 		</ammoTypes>
 	</CombatExtended.AmmoSetDef>
 
 	<ThingDef Class="CombatExtended.AmmoDef" ParentName="HeavyAmmoBase">
-		<defName>MA_Ammo_FIM92</defName>
+		<defName>MA_Ammo_FIM92_Stinger</defName>
 		<label>Stinger missile</label>
 		<description>An infrared-homing surface-to-air missile in its launch tube, for the Avenger missile turret.</description>
 		<graphicData>
@@ -93,7 +93,7 @@
 	</ThingDef>
 
 	<ThingDef ParentName="BaseBulletCE">
-		<defName>MA_Bullet_FIM92</defName>
+		<defName>MA_Bullet_FIM92_Stinger</defName>
 		<label>Stinger missile</label>
 		<graphicData>
 			<texPath>Things/Projectile/Rocket_Big</texPath>
@@ -114,7 +114,7 @@
 
 	<!-- CE ammo injector looks the recipe up as "Make" + ammo defName -->
 	<RecipeDef ParentName="AmmoRecipeBase">
-		<defName>MakeMA_Ammo_FIM92</defName>
+		<defName>MakeMA_Ammo_FIM92_Stinger</defName>
 		<label>make Stinger missiles x4</label>
 		<description>Assemble four Stinger missiles.</description>
 		<jobString>Assembling Stinger missiles.</jobString>
@@ -129,7 +129,7 @@
 			<li><filter><thingDefs><li>ComponentIndustrial</li></thingDefs></filter><count>2</count></li>
 		</ingredients>
 		<fixedIngredientFilter><thingDefs><li>Steel</li><li>FSX</li><li>ComponentIndustrial</li></thingDefs></fixedIngredientFilter>
-		<products><MA_Ammo_FIM92>4</MA_Ammo_FIM92></products>
+		<products><MA_Ammo_FIM92_Stinger>4</MA_Ammo_FIM92_Stinger></products>
 	</RecipeDef>
 
 	<!-- Laser pulse for the laser CIWS: a very fast CE projectile with the charge-lance graphic.

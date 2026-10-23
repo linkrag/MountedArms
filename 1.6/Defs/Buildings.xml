@@ -988,7 +988,7 @@
   <!--=============== Batch 4: ZU-23-2, Avenger, Goalkeeper, laser CIWS ===============-->
 
   <ThingDef ParentName="MA_MannedTurretBase">
-    <defName>MA_Turret_ZU23</defName>
+    <defName>MA_Turret_ZU23_AA</defName>
     <label>ZU-23-2</label>
     <description>A light manned mount with two 23 mm autocannons, the classic cheap anti-aircraft gun. Very fast to traverse by hand, it pours out long bursts of medium-caliber shells. Needs no power. Its barrels must be refurbished with steel after use. May explode when damaged.</description>
     <graphicData>
@@ -1043,7 +1043,7 @@
       </li>
     </comps>
     <building>
-      <turretGunDef>MA_Gun_ZU23</turretGunDef>
+      <turretGunDef>MA_Gun_ZU23_AA</turretGunDef>
       <turretBurstWarmupTime>1.0</turretBurstWarmupTime>
       <turretBurstCooldownTime>3.0</turretBurstCooldownTime>
       <turretTopDrawSize>2.43</turretTopDrawSize>

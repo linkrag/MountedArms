@@ -14,7 +14,7 @@ M240, M134, M2, Mk19 (CE com burst 4), Mk44 (vanilla e CE), sistemas de calor/gi
 
 - **Lote 4 (implementado, NÃO testado)**, vanilla e CE:
   - **ZU-23-2** (tripulada 2x2, 60°/s, sem energia): vanilla 36,9 · rajada 10 × 3; CE `AmmoSet_23x152mmB` (APHE), 75, mag 100, intercepta projéteis (90) e drop pods (110).
-  - **Avenger** (auto 2x2, 150 W, 60°/s): vanilla = 2 mísseis Stinger explosivos contra o chão (49,9, mín 7,9; o vanilla não tem interceptação); CE = **só** abate drop pods (110), com munição própria `MA_Ammo_FIM92` (`1.6/CE/Defs`), verbo de chão removido como no patch do CE para o VFE anti-air, sem `PlaceWorker_ShowTurretRadius`.
+  - **Avenger** (auto 2x2, 150 W, 60°/s): vanilla = 2 mísseis Stinger explosivos contra o chão (49,9, mín 7,9; o vanilla não tem interceptação); CE = **só** abate drop pods (110), com munição própria `MA_Ammo_FIM92_Stinger` (`1.6/CE/Defs`), verbo de chão removido como no patch do CE para o VFE anti-air, sem `PlaceWorker_ShowTurretRadius`.
   - **Goalkeeper** (auto 2x2, 900 W, 100°/s): vanilla 38,9 · rajada 40 × 1 (30 mm do Mk44); CE `AmmoSet_30x173mmNATO`, 78, mag 600, intercepta projéteis (100).
   - **Sistema laser** (auto 2x2, 2000 W, 100°/s, pesquisa Spacer com ChargedShot): sem munição e sem troca de cano no vanilla (só calor); CE: `MakeGunCECompatible` **sem AmmoUser** e projétil próprio `MA_Bullet_LaserPulse` (speed 400); intercepta projéteis (100). Verificado no código do CE: `AmmoUser` é opcional em `PatchOperationMakeGunCECompatible`, e o `<comps>` é criado quando há `AmmoUser` ou `FireModes`.
 

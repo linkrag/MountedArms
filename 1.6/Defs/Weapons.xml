@@ -680,7 +680,7 @@
   </ThingDef>
 
   <ThingDef ParentName="BaseWeaponTurret">
-    <defName>MA_Gun_ZU23</defName>
+    <defName>MA_Gun_ZU23_AA</defName>
     <label>ZU-23-2 twin cannon</label>
     <description>Two 23 mm autocannons on a light manned mount, fed from 50-round boxes.</description>
     <graphicData>

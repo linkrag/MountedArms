@@ -1184,7 +1184,7 @@
 
 	<!-- ZU-23-2: CE 23x152mmB (analog: KPV, range 75); intercepts shells and drop pods -->
 	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
-		<defName>MA_Gun_ZU23</defName>
+		<defName>MA_Gun_ZU23_AA</defName>
 		<statBases>
 			<RangedWeapon_Cooldown>0.5</RangedWeapon_Cooldown>
 			<SightsEfficiency>1</SightsEfficiency>
@@ -1218,7 +1218,7 @@
 		</FireModes>
 	</Operation>
 	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[defName="MA_Gun_ZU23"]/verbs</xpath>
+		<xpath>Defs/ThingDef[defName="MA_Gun_ZU23_AA"]/verbs</xpath>
 		<value>
 			<li Class="CombatExtended.VerbProperties_CIWSProjectile">
 				<verbClass>CombatExtended.VerbCIWSProjectile</verbClass>
@@ -1254,9 +1254,9 @@
 		</value>
 	</Operation>
 	<Operation Class="PatchOperationConditional">
-		<xpath>Defs/ThingDef[defName="MA_Gun_ZU23"]/comps</xpath>
+		<xpath>Defs/ThingDef[defName="MA_Gun_ZU23_AA"]/comps</xpath>
 		<match Class="PatchOperationAdd">
-			<xpath>Defs/ThingDef[defName="MA_Gun_ZU23"]/comps</xpath>
+			<xpath>Defs/ThingDef[defName="MA_Gun_ZU23_AA"]/comps</xpath>
 			<value>
 				<li>
 					<compClass>CombatExtended.CompVerbDisabler</compClass>
@@ -1264,7 +1264,7 @@
 			</value>
 		</match>
 		<nomatch Class="PatchOperationAdd">
-			<xpath>Defs/ThingDef[defName="MA_Gun_ZU23"]</xpath>
+			<xpath>Defs/ThingDef[defName="MA_Gun_ZU23_AA"]</xpath>
 			<value>
 				<comps>
 					<li>
@@ -1275,7 +1275,7 @@
 		</nomatch>
 	</Operation>
 	<Operation Class="PatchOperationAddModExtension">
-		<xpath>Defs/ThingDef[defName="MA_Gun_ZU23"]</xpath>
+		<xpath>Defs/ThingDef[defName="MA_Gun_ZU23_AA"]</xpath>
 		<value>
 			<li Class="CombatExtended.MultiBarrelExtension">
 				<offsets>
@@ -1286,31 +1286,31 @@
 		</value>
 	</Operation>
 	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[defName="MA_Turret_ZU23"]</xpath>
+		<xpath>Defs/ThingDef[defName="MA_Turret_ZU23_AA"]</xpath>
 		<value>
 			<thingClass>CombatExtended.Building_CIWS_CE</thingClass>
 		</value>
 	</Operation>
 	<Operation Class="PatchOperationAdd">
-		<xpath>Defs/ThingDef[defName="MA_Turret_ZU23"]/statBases</xpath>
+		<xpath>Defs/ThingDef[defName="MA_Turret_ZU23_AA"]/statBases</xpath>
 		<value>
 			<AimingAccuracy>1.0</AimingAccuracy>
 			<Bulk>150</Bulk>
 		</value>
 	</Operation>
 	<Operation Class="PatchOperationReplace">
-		<xpath>Defs/ThingDef[defName="MA_Turret_ZU23"]/building/turretBurstCooldownTime</xpath>
+		<xpath>Defs/ThingDef[defName="MA_Turret_ZU23_AA"]/building/turretBurstCooldownTime</xpath>
 		<value><turretBurstCooldownTime>1.5</turretBurstCooldownTime></value>
 	</Operation>
 	<Operation Class="PatchOperationRemove">
-		<xpath>Defs/ThingDef[defName="MA_Turret_ZU23"]/comps/li[@Class="CompProperties_Refuelable"]</xpath>
+		<xpath>Defs/ThingDef[defName="MA_Turret_ZU23_AA"]/comps/li[@Class="CompProperties_Refuelable"]</xpath>
 	</Operation>
 	<Operation Class="PatchOperationReplace">
-		<xpath>Defs/ThingDef[defName="MA_Turret_ZU23"]/comps/li[@Class="MountedArms.CompProperties_BarrelHeat"]/heatPerShot</xpath>
+		<xpath>Defs/ThingDef[defName="MA_Turret_ZU23_AA"]/comps/li[@Class="MountedArms.CompProperties_BarrelHeat"]/heatPerShot</xpath>
 		<value><heatPerShot>0.0118</heatPerShot></value>
 	</Operation>
 	<Operation Class="PatchOperationAddModExtension">
-		<xpath>Defs/ThingDef[defName="MA_Turret_ZU23"]</xpath>
+		<xpath>Defs/ThingDef[defName="MA_Turret_ZU23_AA"]</xpath>
 		<value>
 			<li Class="CombatExtended.NonSnapTurretExtension">
 				<speed>1.0</speed>
@@ -1319,7 +1319,7 @@
 		</value>
 	</Operation>
 	<Operation Class="PatchOperationReplace">
-		<xpath>Defs/ThingDef[defName="MA_Turret_ZU23"]/description</xpath>
+		<xpath>Defs/ThingDef[defName="MA_Turret_ZU23_AA"]/description</xpath>
 		<value><description>A light manned mount with two 23 mm autocannons, the classic cheap anti-aircraft gun. Very fast to traverse by hand. Besides ground targets, it shoots down incoming artillery shells, missiles and drop pods. Needs no power, but needs 23 mm ammunition loaded. May explode when damaged.</description></value>
 	</Operation>
 
@@ -1354,7 +1354,7 @@
 				<verbClass>CombatExtended.VerbCIWSSkyfaller</verbClass>
 				<recoilAmount>0.5</recoilAmount>
 				<hasStandardCommand>true</hasStandardCommand>
-				<defaultProjectile>MA_Bullet_FIM92</defaultProjectile>
+				<defaultProjectile>MA_Bullet_FIM92_Stinger</defaultProjectile>
 				<warmupTime>0.8</warmupTime>
 				<range>110</range>
 				<ticksBetweenBurstShots>40</ticksBetweenBurstShots>

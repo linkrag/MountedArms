@@ -6,7 +6,8 @@
 com `M=<RimWorld>/RimWorldWin64_Data/Managed`. A DLL é ignorada pelo git.
 
 ## Validadores
-`python tools/check.py` e `python tools/check_ce.py` (env `RW_ROOT`, `CE_ROOT`). Falsos positivos conhecidos: `MISSING manWorkType Violent` e `XPATH MATCHES NOTHING` nos Conditionals de `comps` (bateria, Bofors, CIWS, ZU-23, Avenger, Goalkeeper, laser), e `MISSING` para `MA_AmmoSet_APKWS_Indirect`/`MA_Bullet_APKWS_Indirect_HE`/`MA_AmmoSet_FIM92`/`MA_Bullet_FIM92`/`MA_Bullet_LaserPulse` (definidos em `1.6/CE/Defs`, que o script não lê). `check_ce.py` precisa de `lxml` (`pip install lxml`).
+`python tools/check.py` e `python tools/check_ce.py` (env `RW_ROOT`, `CE_ROOT`). Falsos positivos conhecidos: `MISSING manWorkType Violent` e `XPATH MATCHES NOTHING` nos Conditionals de `comps` (bateria, Bofors, CIWS, ZU-23, Avenger, Goalkeeper, laser), e `MISSING` para `MA_AmmoSet_APKWS_Indirect`/`MA_Bullet_APKWS_Indirect_HE`/`MA_AmmoSet_FIM92`/`MA_Bullet_FIM92_Stinger`/`MA_Bullet_LaserPulse` (definidos em `1.6/CE/Defs`, que o script não lê). `check_ce.py` precisa de `lxml` (`pip install lxml`).
+`python tools/check_defnames.py`: falha se algum ThingDef termina em dígito (rodar SEMPRE antes de entregar).
 `python tools/gen_tex.py` gera texturas.
 
 ## Armadilhas
