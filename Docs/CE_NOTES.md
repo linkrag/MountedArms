@@ -24,6 +24,7 @@ Fonte local do CE: `F:\Steam\steamapps\workshop\content\294100\2890901044` (defs
 10. `ProjectilePropertiesCE`: `gravityFactor`, `trajectoryWorker`, `shellingProps`, `isInstant`, `speed`. Altura/queda são calculadas por ângulo+velocidade+gravidade; em `Verb_ShootMortarCE` a velocidade vem da carga (`chargeSpeeds`).
 
 ## CIWS (interceptação) — lido no código e em defs em uso
+- **Só funciona com a opção do CE "Enable CIWS" ligada** (`Controller.settings.EnableCIWS`; confirmado em jogo: desligada, nada era abatido).
 - Exemplo do CE em `Defs/ThingDefs_Buildings/CIWSExample.xml` está **comentado**; usos reais: `Turret_KPV` do CE (tripulada, `VerbCIWSSkyfaller`) e o patch do CE para o antiaéreo do VFE Security (`ModPatches/Vanilla Furniture Expanded - Security/.../ThingDefs_AntiAir.xml`).
 - Padrão: prédio `CombatExtended.Building_CIWS_CE` (deriva de `Building_Turret_MultiVerbs` → `Building_TurretGunCE`); na gun, `PatchOperationMakeGunCECompatible` e depois **adicionar** verbos `VerbProperties_CIWSProjectile`/`VerbProperties_CIWSSkyfaller` em `verbs` + comp `CombatExtended.CompVerbDisabler`. Os verbos CIWS têm prioridade na busca de alvo (`TryFindNewTarget`).
 - `VerbCIWSProjectile` mira em `ProjectileCE` com `flyOverhead` e `speed` < `maximumSpeed` (padrão 80): granadas de morteiro e mísseis com speed 0 entram. Projétil comum vira `ProjectileCE_CIWS` sozinho.

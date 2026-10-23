@@ -47,7 +47,7 @@ tools/                   scripts de geração de textura e checagem de XML
 Use `Docs/TEMPLATE_NOVA_TORRETA.md` (checklist + esqueletos XML). Resumo: arma real + análogos vanilla/CE → gun/projétil/building/pesquisa/3 texturas (vanilla) → patch CE → checar (`tools/check_defnames.py`, `tools/check.py`, `tools/check_ce.py`, lxml) → compilar se mudou C# → testar vanilla **e** CE → atualizar `Docs/` → commit.
 
 ## Estado atual
-Veja `Docs/STATUS.md` (o que está testado, o que está pendente de teste, bugs abertos). Em resumo: M240/M134/M2/Mk19/Mk44 testados e funcionando (vanilla e CE); TOW/foguetes 80mm/CIWS/M252/bateria foram escritos e ajustados em várias rodadas e **ainda não foram confirmados em jogo**; bug aberto: bateria de foguetes guiados em CE dispara e os tiros vão para fora do mapa.
+Veja `Docs/STATUS.md`. Em resumo: M240/M134/M2/Mk 19/Mk44 testados (vanilla e CE); bateria APKWS (CE) corrigida e confirmada; Phalanx intercepta no CE (com a opção "Enable CIWS"); botão Descarregar e nomes reais confirmados. Bofors, ZU-23-2, Avenger, Goalkeeper, Iron Beam, TOW, B-8 e M252 ainda **não confirmados**. Companheiro: `../MountedArmsStrategic` (mísseis/artilharia estratégica, só-CE).
 
 ## Convenções
 - Git: branch `main`; commits curtos e no imperativo. Não versione a DLL nem o `.git` de terceiros. Sem remote ainda (o usuário criará o remote).
