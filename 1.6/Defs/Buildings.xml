@@ -833,4 +833,155 @@
     </researchPrerequisites>
   </ThingDef>
 
+
+  <!--=============== Bofors 40 mm L/60 twin and quad (manned, 360 deg) ===============-->
+
+  <ThingDef ParentName="MA_MannedTurretBase">
+    <defName>MA_Turret_Bofors_Twin</defName>
+    <label>twin Bofors 40mm</label>
+    <description>A manned twin mount for 40 mm Bofors L/60 automatic guns, the classic naval anti-aircraft weapon. The gunner sits between the guns and the mount traverses a full circle. Fires steady bursts of heavy shells at long range and needs no power. Its barrels must be refurbished with steel after use. May explode when damaged.</description>
+    <graphicData>
+      <texPath>MountedArms/BoforsTwin_Base</texPath>
+    </graphicData>
+    <uiIconPath>MountedArms/BoforsTwin_Icon</uiIconPath>
+    <statBases>
+      <MaxHitPoints>350</MaxHitPoints>
+      <WorkToBuild>16000</WorkToBuild>
+      <Mass>70</Mass>
+      <ShootingAccuracyTurret>0.97</ShootingAccuracyTurret>
+    </statBases>
+    <costList>
+      <Steel>380</Steel>
+      <ComponentIndustrial>6</ComponentIndustrial>
+    </costList>
+    <constructionSkillPrerequisite>6</constructionSkillPrerequisite>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>4.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="MountedArms.CompProperties_BarrelHeat">
+        <heatPerShot>0.0484</heatPerShot>
+        <coolPerSecond>0.02</coolPerSecond>
+        <resumeAt>0.5</resumeAt>
+        <smokeAt>0.7</smokeAt>
+        <heatSpread>1.5</heatSpread>
+        <burstSpread>0.06</burstSpread>
+      </li>
+      <li Class="MountedArms.CompProperties_TurretSlew">
+        <degreesPerSecond>45</degreesPerSecond>
+        <aimTolerance>4</aimTolerance>
+        <arcDegrees>0</arcDegrees>
+      </li>
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+        <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>160</fuelCapacity>      <!-- 40 bursts of 4 -->
+        <fuelMultiplier>1</fuelMultiplier>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>true</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+    </comps>
+    <building>
+      <turretGunDef>MA_Gun_Bofors_Twin</turretGunDef>
+      <turretBurstWarmupTime>1.4</turretBurstWarmupTime>
+      <turretBurstCooldownTime>3.5</turretBurstCooldownTime>
+      <turretTopDrawSize>2.24</turretTopDrawSize>
+    </building>
+    <modExtensions>
+      <li Class="MountedArms.MuzzleExtension">
+        <distance>0.6</distance>
+        <flashScale>13</flashScale>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>MA_Research_Bofors</li>
+    </researchPrerequisites>
+  </ThingDef>
+
+  <ThingDef ParentName="MA_MannedTurretBase">
+    <defName>MA_Turret_Bofors_Quad</defName>
+    <label>quad Bofors 40mm</label>
+    <description>A manned quadruple mount for 40 mm Bofors L/60 automatic guns, as fitted to battleships and cruisers. Twice the barrels of the twin mount for a much heavier volume of fire, but large and expensive. Needs no power. Its barrels must be refurbished with steel after use. May explode when damaged.</description>
+    <graphicData>
+      <texPath>MountedArms/BoforsQuad_Base</texPath>
+      <drawSize>(3,3)</drawSize>
+    </graphicData>
+    <uiIconPath>MountedArms/BoforsQuad_Icon</uiIconPath>
+    <size>(3,3)</size>
+    <interactionCellOffset>(0,0,-2)</interactionCellOffset>
+    <statBases>
+      <MaxHitPoints>550</MaxHitPoints>
+      <WorkToBuild>26000</WorkToBuild>
+      <Mass>140</Mass>
+      <ShootingAccuracyTurret>0.97</ShootingAccuracyTurret>
+    </statBases>
+    <costList>
+      <Steel>600</Steel>
+      <Plasteel>60</Plasteel>
+      <ComponentIndustrial>10</ComponentIndustrial>
+    </costList>
+    <constructionSkillPrerequisite>7</constructionSkillPrerequisite>
+    <comps>
+      <li Class="CompProperties_Explosive">
+        <wickTicks>240</wickTicks>
+        <explosiveRadius>4.9</explosiveRadius>
+        <explosiveDamageType>Bomb</explosiveDamageType>
+        <chanceNeverExplodeFromDamage>0.5</chanceNeverExplodeFromDamage>
+      </li>
+      <li Class="MountedArms.CompProperties_BarrelHeat">
+        <heatPerShot>0.0259</heatPerShot>
+        <coolPerSecond>0.02</coolPerSecond>
+        <resumeAt>0.5</resumeAt>
+        <smokeAt>0.7</smokeAt>
+        <heatSpread>1.5</heatSpread>
+        <burstSpread>0.06</burstSpread>
+      </li>
+      <li Class="MountedArms.CompProperties_TurretSlew">
+        <degreesPerSecond>35</degreesPerSecond>
+        <aimTolerance>4</aimTolerance>
+        <arcDegrees>0</arcDegrees>
+      </li>
+      <li Class="CompProperties_Refuelable">
+        <fuelLabel>Shots until barrel change</fuelLabel>
+        <fuelGizmoLabel>Barrel durability</fuelGizmoLabel>
+        <outOfFuelMessage>Needs new barrel</outOfFuelMessage>
+        <fuelFilter><thingDefs><li>Steel</li></thingDefs></fuelFilter>
+        <fuelCapacity>320</fuelCapacity>      <!-- 40 bursts of 8 -->
+        <fuelMultiplier>1</fuelMultiplier>
+        <initialFuelPercent>1</initialFuelPercent>
+        <autoRefuelPercent>0.5</autoRefuelPercent>
+        <showFuelGizmo>true</showFuelGizmo>
+        <minimumFueledThreshold>1</minimumFueledThreshold>
+        <factorByDifficulty>true</factorByDifficulty>
+        <consumeFuelOnlyWhenUsed>true</consumeFuelOnlyWhenUsed>
+        <fuelIconPath>UI/Overlays/Barrel</fuelIconPath>
+      </li>
+    </comps>
+    <building>
+      <turretGunDef>MA_Gun_Bofors_Quad</turretGunDef>
+      <turretBurstWarmupTime>1.6</turretBurstWarmupTime>
+      <turretBurstCooldownTime>3.5</turretBurstCooldownTime>
+      <turretTopDrawSize>2.19</turretTopDrawSize>
+    </building>
+    <modExtensions>
+      <li Class="MountedArms.MuzzleExtension">
+        <distance>0.6</distance>
+        <flashScale>13</flashScale>
+      </li>
+    </modExtensions>
+    <researchPrerequisites>
+      <li>MA_Research_BoforsQuad</li>
+    </researchPrerequisites>
+  </ThingDef>
+
 </Defs>

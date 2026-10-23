@@ -12,7 +12,8 @@
 - **Bateria de foguetes guiados**: queria fogo **indireto em arco, como morteiro**, com o **mesmo alcance do morteiro do jogo** (vanilla 500 / CE 700), compensando com mais precisão e mais cooldown. Configuração base: a torreta de mísseis do mod Glitter Tech (já nos patches do CE).
 - **Foguetes diretos** continuam existindo como torreta separada (80 mm S-8).
 - TOW: alcance deve ser longo ("achei pequeno").
-- CIWS: rajada maior (60).
+- CIWS: rajada maior (60). Depois (out/2026): no CE vira CIWS real, interceptando projéteis.
+- **Bofors 40 mm L/60**: o usuário descreveu o antiaéreo naval de 40 mm com 2 ou 4 canos e atirador sentado entre eles; pediu **as duas versões** (duplo Mk 1 e quádruplo Mk 2). No CE intercepta **projéteis e drop pods** além do tiro no chão.
 - Torretas pedidas depois do Mk44: TOW, foguetes 70 mm, CIWS 20 mm, morteiro 81 mm ("pode fazer os outros 4").
 
 ## Técnicas (minhas)

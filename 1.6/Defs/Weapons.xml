@@ -541,4 +541,88 @@
     </verbs>
   </ThingDef>
 
+
+  <!-- ===================== Bofors 40 mm L/60 (naval AA, twin Mk 1 / quad Mk 2) ===================== -->
+
+  <ThingDef ParentName="BaseBullet">
+    <defName>MA_Bullet_40mm_Bofors</defName>
+    <label>40mm Bofors shell</label>
+    <graphicData>
+      <texPath>Things/Projectile/Bullet_Big</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <projectile>
+      <damageDef>Bullet</damageDef>
+      <damageAmountBase>30</damageAmountBase>
+      <armorPenetrationBase>0.60</armorPenetrationBase>
+      <speed>105</speed>
+    </projectile>
+  </ThingDef>
+
+  <ThingDef Name="MA_BoforsGunBase" ParentName="BaseWeaponTurret" Abstract="True">
+    <statBases>
+      <AccuracyTouch>0.45</AccuracyTouch>
+      <AccuracyShort>0.70</AccuracyShort>
+      <AccuracyMedium>0.66</AccuracyMedium>
+      <AccuracyLong>0.52</AccuracyLong>
+      <RangedWeapon_Cooldown>3.5</RangedWeapon_Cooldown>
+      <DeteriorationRate>0</DeteriorationRate>
+      <Flammability>0</Flammability>
+    </statBases>
+  </ThingDef>
+
+  <ThingDef ParentName="MA_BoforsGunBase">
+    <defName>MA_Gun_Bofors_Twin</defName>
+    <label>twin Bofors 40mm gun</label>
+    <description>Two 40 mm Bofors L/60 automatic guns on a single manned mount, fed by four-round clips.</description>
+    <graphicData>
+      <texPath>MountedArms/BoforsTwin_Top</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>60</Mass>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>MA_Bullet_40mm_Bofors</defaultProjectile>
+        <warmupTime>0</warmupTime>
+        <range>42.9</range>
+        <ticksBetweenBurstShots>15</ticksBetweenBurstShots>
+        <burstShotCount>4</burstShotCount>
+        <soundCast>Shot_Autocannon</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>0</muzzleFlashScale>
+        <consumeFuelPerShot>1</consumeFuelPerShot>
+      </li>
+    </verbs>
+  </ThingDef>
+
+  <ThingDef ParentName="MA_BoforsGunBase">
+    <defName>MA_Gun_Bofors_Quad</defName>
+    <label>quad Bofors 40mm gun</label>
+    <description>Four 40 mm Bofors L/60 automatic guns on a single manned mount, fed by four-round clips.</description>
+    <graphicData>
+      <texPath>MountedArms/BoforsQuad_Top</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <statBases>
+      <Mass>110</Mass>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>MA_Bullet_40mm_Bofors</defaultProjectile>
+        <warmupTime>0</warmupTime>
+        <range>42.9</range>
+        <ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+        <burstShotCount>8</burstShotCount>
+        <soundCast>Shot_Autocannon</soundCast>
+        <soundCastTail>GunTail_Heavy</soundCastTail>
+        <muzzleFlashScale>0</muzzleFlashScale>
+        <consumeFuelPerShot>1</consumeFuelPerShot>
+      </li>
+    </verbs>
+  </ThingDef>
+
 </Defs>

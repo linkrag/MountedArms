@@ -412,6 +412,55 @@ def top_m252():
     circ(d, 158, 120, 5, (30, 60, 80, 255), outline=BLACK)
     return img
 
+# ------------------------------------------------------------------ batch 3: Bofors 40 mm L/60 (twin / quad)
+def base_bofors(quad=False):
+    img = canvas(); d = ImageDraw.Draw(img)
+    # round naval deck mount on a plate, with clip racks around it
+    rect(d, 22, 22, 234, 234, STEEL_D, r=12, hl=False)
+    rect(d, 30, 30, 226, 226, STEEL, r=10, hl=False)
+    rivets(d, [(40, 40), (216, 40), (40, 216), (216, 216)])
+    circ(d, 128, 128, 74 if quad else 70, STEEL_D)
+    circ(d, 128, 128, 62 if quad else 58, GUN)
+    circ(d, 128, 128, 30, STEEL_D)
+    # ready-use clip racks (four-round clips, brass tips)
+    for (x, y) in ((40, 92), (196, 92)):
+        rect(d, x - 10, y, x + 10, y + 72, OLIVE_D, r=3)
+        for k in range(4):
+            rect(d, x - 6, y + 6 + k * 16, x + 6, y + 16 + k * 16, BRASS, r=1, hl=False)
+    rect(d, 100, 212, 156, 238, STEEL_D, r=4, hl=False)          # crew step (operator side)
+    return shadow(img)
+
+def bofors_gun(d, x, y_muzzle=12, y_breech=150):
+    # barrel with cone flash hider, recoil spring jacket and clip loader on top
+    poly(d, [(x - 9, y_muzzle), (x + 9, y_muzzle), (x + 5, y_muzzle + 16), (x - 5, y_muzzle + 16)], STEEL_D)
+    rect(d, x - 4, y_muzzle + 14, x + 4, y_breech - 50, GUN, r=1.5)
+    rect(d, x - 8, y_breech - 64, x + 8, y_breech - 40, STEEL, r=3)       # recoil spring jacket
+    rect(d, x - 11, y_breech - 42, x + 11, y_breech, STEEL, r=4)          # breech/receiver
+    rect(d, x - 7, y_breech - 36, x + 7, y_breech - 8, BRASS, r=2, hl=False)  # clip in the loader
+
+def top_bofors_twin():
+    img = canvas(); d = ImageDraw.Draw(img)
+    rect(d, 86, 96, 170, 196, OLIVE, r=8)                     # cradle / carriage
+    bofors_gun(d, 104)
+    bofors_gun(d, 152)
+    # gunner's seat and sight between the guns
+    rect(d, 116, 150, 140, 178, OLIVE_D, r=5)
+    circ(d, 128, 130, 9, (30, 60, 80, 255), outline=BLACK)   # reflector sight
+    for x in (94, 162):                                       # elevation / training handwheels
+        circ(d, x, 182, 9, STEEL_D); circ(d, x, 182, 4, BLACK)
+    return img
+
+def top_bofors_quad():
+    img = canvas(); d = ImageDraw.Draw(img)
+    rect(d, 62, 96, 194, 200, OLIVE, r=8)
+    for x in (80, 106, 150, 176):
+        bofors_gun(d, x)
+    rect(d, 116, 150, 140, 180, OLIVE_D, r=5)
+    circ(d, 128, 128, 9, (30, 60, 80, 255), outline=BLACK)
+    for x in (70, 186):
+        circ(d, x, 188, 9, STEEL_D); circ(d, x, 188, 4, BLACK)
+    return img
+
 def icon(base, top, scale_top=1.0):
     a = base.copy()
     a.alpha_composite(top)
@@ -434,8 +483,8 @@ def reposition(t):
     out = canvas(); out.paste(sc_img, (ox, oy), sc_img)
     return out, ds
 
-def icon2(base, top_east, ds):
-    k = ds / 2.0                       # base is drawn at 2 cells
+def icon2(base, top_east, ds, base_cells=2.0):
+    k = ds / base_cells                # base texture covers base_cells cells
     n = int(W * k)
     big = top_east.resize((n, n), Image.LANCZOS)
     layer = canvas(); layer.paste(big, ((W - n) // 2, (W - n) // 2), big)
@@ -443,7 +492,9 @@ def icon2(base, top_east, ds):
     return a
 
 os.makedirs(OUT, exist_ok=True)
-items = {"M240": (base_m240, top_m240), "M2": (base_m2, top_m2), "Mk19": (base_mk19, top_mk19), "M134": (base_m134, top_m134), "Mk44": (base_mk44, top_mk44), "TOW": (base_tow, top_tow), "Hydra": (base_hydra, top_hydra), "CIWS": (base_ciws, top_ciws), "M252": (base_m252, top_m252)}
+items = {"M240": (base_m240, top_m240), "M2": (base_m2, top_m2), "Mk19": (base_mk19, top_mk19), "M134": (base_m134, top_m134), "Mk44": (base_mk44, top_mk44), "TOW": (base_tow, top_tow), "Hydra": (base_hydra, top_hydra), "CIWS": (base_ciws, top_ciws), "M252": (base_m252, top_m252),
+         "BoforsTwin": (base_bofors, top_bofors_twin), "BoforsQuad": (lambda: base_bofors(True), top_bofors_quad)}
+BASE_CELLS = {"BoforsQuad": 3.0}       # buildings whose base texture is drawn at 3x3
 only = sys.argv[2:]
 if only: items = {k: v for k, v in items.items() if k in only}
 sizes = {}
@@ -454,5 +505,5 @@ for name, (fb, ft) in items.items():
     sizes[name] = round(ds, 2)
     finish(b, os.path.join(OUT, f"{name}_Base.png"))
     finish(shadow(t, (2, 3), 4, 90), os.path.join(OUT, f"{name}_Top.png"))
-    finish(icon2(b, t, ds), os.path.join(OUT, f"{name}_Icon.png"))
+    finish(icon2(b, t, ds, BASE_CELLS.get(name, 2.0)), os.path.join(OUT, f"{name}_Icon.png"))
 import json; print(json.dumps(sizes))

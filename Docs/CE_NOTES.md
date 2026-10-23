@@ -23,6 +23,14 @@ Fonte local do CE: `F:\Steam\steamapps\workshop\content\294100\2890901044` (defs
 9. **Cargas × gravidade**: `CompCharges` escolhe a menor carga cujo alcance máximo (45°) cobre a distância; alcance = v²/(9,8·gravityFactor/5). Cargas 30/50/70/90 assumem `gravityFactor` 5 (granada de morteiro: 92/255/500/826 células). Projétil de artilharia precisa de **`speed` 0**: `ProjectileCE.Launch` voa a `Max(carga, def.projectile.speed)`, então um projétil com speed > carga ignora a carga e passa do alvo (APKWS speed 173 → fora do mapa). O único uso do `AmmoSet_70mmAPKWS` no CE é o patch do Glitter Tech (não há arma de pawn), sem garantia de que funcione.
 10. `ProjectilePropertiesCE`: `gravityFactor`, `trajectoryWorker`, `shellingProps`, `isInstant`, `speed`. Altura/queda são calculadas por ângulo+velocidade+gravidade; em `Verb_ShootMortarCE` a velocidade vem da carga (`chargeSpeeds`).
 
+## CIWS (interceptação) — lido no código e em defs em uso
+- Exemplo do CE em `Defs/ThingDefs_Buildings/CIWSExample.xml` está **comentado**; usos reais: `Turret_KPV` do CE (tripulada, `VerbCIWSSkyfaller`) e o patch do CE para o antiaéreo do VFE Security (`ModPatches/Vanilla Furniture Expanded - Security/.../ThingDefs_AntiAir.xml`).
+- Padrão: prédio `CombatExtended.Building_CIWS_CE` (deriva de `Building_Turret_MultiVerbs` → `Building_TurretGunCE`); na gun, `PatchOperationMakeGunCECompatible` e depois **adicionar** verbos `VerbProperties_CIWSProjectile`/`VerbProperties_CIWSSkyfaller` em `verbs` + comp `CombatExtended.CompVerbDisabler`. Os verbos CIWS têm prioridade na busca de alvo (`TryFindNewTarget`).
+- `VerbCIWSProjectile` mira em `ProjectileCE` com `flyOverhead` e `speed` < `maximumSpeed` (padrão 80): granadas de morteiro e mísseis com speed 0 entram. Projétil comum vira `ProjectileCE_CIWS` sozinho.
+- O alvo só é destruído se tiver `CompCIWSImpactHandler`: projéteis que herdam de `BaseBulletCE` (inclui `BaseExplosiveBullet`) já têm.
+- Torreta com `thingClass` herdado da base: adicionar `<thingClass>` no filho (PatchOperationAdd) sobrescreve.
+- Gun vanilla sem `<comps>`: usar `PatchOperationConditional` (match/nomatch) para adicionar comps; o `check_ce.py` acusa a xpath do Conditional (falso positivo).
+
 ## Alcances de referência (CE)
 M240B 62 · Minigun 62 · AGS-30 62 (min 8) · KPV 75 · Autocannon 78 · Sniper turret 86 · Flak 92 (min 16) · CIWS (CE) 55/105 · Medium/Heavy turret 55 · Mortar 700 (min 32). Torreta de mísseis do Glitter Tech: 500 (min 30), burst 25, mag 25, reload 5, `noSnapshot` + `noSingleShot`.
 

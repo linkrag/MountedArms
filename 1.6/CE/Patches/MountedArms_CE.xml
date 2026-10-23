@@ -689,10 +689,6 @@
 		<value><ShootingAccuracyTurret>1.0</ShootingAccuracyTurret></value>
 	</Operation>
 	<Operation Class="PatchOperationReplace">
-		<xpath>Defs/ThingDef[defName="MA_Turret_CIWS_Vulcan"]/description</xpath>
-		<value><description>An automated mount for a six-barrel 20 mm rotary cannon with a radar-driven, very fast traverse. It unloads an enormous burst in a short time, at the cost of high power use and quick barrel heating. Needs ammunition loaded. May explode when damaged.</description></value>
-	</Operation>
-	<Operation Class="PatchOperationReplace">
 		<xpath>Defs/ThingDef[defName="MA_Turret_CIWS_Vulcan"]/comps/li[@Class="MountedArms.CompProperties_BarrelHeat"]/heatPerShot</xpath>
 		<value><heatPerShot>0.0028</heatPerShot></value>
 	</Operation>
@@ -812,6 +808,351 @@
 	<Operation Class="PatchOperationReplace">
 		<xpath>Defs/ThingDef[defName="MA_Turret_APKWS_Battery"]/description</xpath>
 		<value><description>An automated battery that lobs laser-guided 70 mm rockets in a high arc over walls at targets far away. It cannot hit close targets. Needs power and rockets loaded. May explode when damaged.</description></value>
+	</Operation>
+
+
+	<!-- ================================================================= -->
+	<!--  Bofors 40 mm L/60 twin / quad (CE): AmmoSet_40x311mmR            -->
+	<!-- ================================================================= -->
+
+	<!-- Twin Bofors (CE): ground fire like CE's flak/sniper turret (40x311mmR, range 86) plus CIWS
+	     verbs that shoot down artillery shells/missiles and drop pods (pattern of CE's KPV and of
+	     its Vanilla Furniture Expanded anti-air patch). -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>MA_Gun_Bofors_Twin</defName>
+		<statBases>
+			<RangedWeapon_Cooldown>0.5</RangedWeapon_Cooldown>
+			<SightsEfficiency>1</SightsEfficiency>
+			<ShotSpread>0.05</ShotSpread>
+			<SwayFactor>1.2</SwayFactor>
+			<Bulk>70</Bulk>
+		</statBases>
+		<Properties>
+			<recoilAmount>2.2</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_40x311mmR_HE</defaultProjectile>
+			<warmupTime>1.6</warmupTime>
+			<range>86</range>
+			<ticksBetweenBurstShots>15</ticksBetweenBurstShots>
+			<burstShotCount>4</burstShotCount>
+			<soundCast>Shot_Autocannon</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+			<muzzleFlashScale>14</muzzleFlashScale>
+			<recoilPattern>Mounted</recoilPattern>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>16</magazineSize>
+			<reloadTime>6</reloadTime>
+			<ammoSet>AmmoSet_40x311mmR</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aiUseBurstMode>FALSE</aiUseBurstMode>
+			<aiAimMode>AimedShot</aiAimMode>
+			<noSingleShot>true</noSingleShot>
+		</FireModes>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="MA_Gun_Bofors_Twin"]/verbs</xpath>
+		<value>
+			<li Class="CombatExtended.VerbProperties_CIWSProjectile">
+				<verbClass>CombatExtended.VerbCIWSProjectile</verbClass>
+				<recoilAmount>2.2</recoilAmount>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>Bullet_40x311mmR_HE</defaultProjectile>
+				<warmupTime>0.4</warmupTime>
+				<range>100</range>
+				<ticksBetweenBurstShots>15</ticksBetweenBurstShots>
+				<burstShotCount>4</burstShotCount>
+				<soundCast>Shot_Autocannon</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>14</muzzleFlashScale>
+				<recoilPattern>Mounted</recoilPattern>
+				<holdFireLabel>HoldCloseInProjectilesFire</holdFireLabel>
+				<holdFireDesc>HoldCloseInProjectilesFireDesc</holdFireDesc>
+			</li>
+			<li Class="CombatExtended.VerbProperties_CIWSSkyfaller">
+				<verbClass>CombatExtended.VerbCIWSSkyfaller</verbClass>
+				<recoilAmount>2.2</recoilAmount>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>Bullet_40x311mmR_HE</defaultProjectile>
+				<warmupTime>0.6</warmupTime>
+				<range>125</range>
+				<ticksBetweenBurstShots>15</ticksBetweenBurstShots>
+				<burstShotCount>4</burstShotCount>
+				<soundCast>Shot_Autocannon</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>14</muzzleFlashScale>
+				<recoilPattern>Mounted</recoilPattern>
+				<holdFireLabel>HoldCloseInSkyfallersFire</holdFireLabel>
+			</li>
+		</value>
+	</Operation>
+	<!-- the vanilla gun has no <comps>; add the list if missing (same as the rocket battery) -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="MA_Gun_Bofors_Twin"]/comps</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="MA_Gun_Bofors_Twin"]/comps</xpath>
+			<value>
+				<li>
+					<compClass>CombatExtended.CompVerbDisabler</compClass>
+				</li>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="MA_Gun_Bofors_Twin"]</xpath>
+			<value>
+				<comps>
+					<li>
+						<compClass>CombatExtended.CompVerbDisabler</compClass>
+					</li>
+				</comps>
+			</value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="MA_Gun_Bofors_Twin"]</xpath>
+		<value>
+			<li Class="CombatExtended.MultiBarrelExtension">
+				<offsets>
+					<li>(-0.2,0.6)</li>
+					<li>(0.2,0.6)</li>
+				</offsets>
+			</li>
+		</value>
+	</Operation>
+	<!-- the base declares Building_TurretGunCE; this child overrides it with CE's CIWS turret -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Bofors_Twin"]</xpath>
+		<value>
+			<thingClass>CombatExtended.Building_CIWS_CE</thingClass>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Bofors_Twin"]/comps/li[@Class="CompProperties_Refuelable"]</xpath>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Bofors_Twin"]/statBases</xpath>
+		<value>
+			<AimingAccuracy>1.0</AimingAccuracy>
+			<Bulk>260</Bulk>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Bofors_Twin"]/statBases/ShootingAccuracyTurret</xpath>
+		<value><ShootingAccuracyTurret>1.0</ShootingAccuracyTurret></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Bofors_Twin"]/building/turretBurstCooldownTime</xpath>
+		<value><turretBurstCooldownTime>1.5</turretBurstCooldownTime></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Bofors_Twin"]/comps/li[@Class="MountedArms.CompProperties_BarrelHeat"]/heatPerShot</xpath>
+		<value><heatPerShot>0.0330</heatPerShot></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Bofors_Twin"]/description</xpath>
+		<value><description>A manned twin mount for 40 mm Bofors L/60 automatic guns, the classic naval anti-aircraft weapon. The gunner sits between the guns and the mount traverses a full circle. Besides ground targets, it shoots down incoming artillery shells, missiles and drop pods. Needs no power, but needs 40 mm ammunition loaded. May explode when damaged.</description></value>
+	</Operation>
+
+	<!-- Quad Bofors (CE): ground fire like CE's flak/sniper turret (40x311mmR, range 86) plus CIWS
+	     verbs that shoot down artillery shells/missiles and drop pods (pattern of CE's KPV and of
+	     its Vanilla Furniture Expanded anti-air patch). -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>MA_Gun_Bofors_Quad</defName>
+		<statBases>
+			<RangedWeapon_Cooldown>0.5</RangedWeapon_Cooldown>
+			<SightsEfficiency>1</SightsEfficiency>
+			<ShotSpread>0.05</ShotSpread>
+			<SwayFactor>1.2</SwayFactor>
+			<Bulk>130</Bulk>
+		</statBases>
+		<Properties>
+			<recoilAmount>2.2</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_40x311mmR_HE</defaultProjectile>
+			<warmupTime>1.8</warmupTime>
+			<range>86</range>
+			<ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+			<burstShotCount>8</burstShotCount>
+			<soundCast>Shot_Autocannon</soundCast>
+			<soundCastTail>GunTail_Heavy</soundCastTail>
+			<muzzleFlashScale>14</muzzleFlashScale>
+			<recoilPattern>Mounted</recoilPattern>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>32</magazineSize>
+			<reloadTime>8</reloadTime>
+			<ammoSet>AmmoSet_40x311mmR</ammoSet>
+		</AmmoUser>
+		<FireModes>
+			<aiUseBurstMode>FALSE</aiUseBurstMode>
+			<aiAimMode>AimedShot</aiAimMode>
+			<noSingleShot>true</noSingleShot>
+		</FireModes>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="MA_Gun_Bofors_Quad"]/verbs</xpath>
+		<value>
+			<li Class="CombatExtended.VerbProperties_CIWSProjectile">
+				<verbClass>CombatExtended.VerbCIWSProjectile</verbClass>
+				<recoilAmount>2.2</recoilAmount>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>Bullet_40x311mmR_HE</defaultProjectile>
+				<warmupTime>0.4</warmupTime>
+				<range>100</range>
+				<ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+				<burstShotCount>8</burstShotCount>
+				<soundCast>Shot_Autocannon</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>14</muzzleFlashScale>
+				<recoilPattern>Mounted</recoilPattern>
+				<holdFireLabel>HoldCloseInProjectilesFire</holdFireLabel>
+				<holdFireDesc>HoldCloseInProjectilesFireDesc</holdFireDesc>
+			</li>
+			<li Class="CombatExtended.VerbProperties_CIWSSkyfaller">
+				<verbClass>CombatExtended.VerbCIWSSkyfaller</verbClass>
+				<recoilAmount>2.2</recoilAmount>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>Bullet_40x311mmR_HE</defaultProjectile>
+				<warmupTime>0.6</warmupTime>
+				<range>125</range>
+				<ticksBetweenBurstShots>8</ticksBetweenBurstShots>
+				<burstShotCount>8</burstShotCount>
+				<soundCast>Shot_Autocannon</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>14</muzzleFlashScale>
+				<recoilPattern>Mounted</recoilPattern>
+				<holdFireLabel>HoldCloseInSkyfallersFire</holdFireLabel>
+			</li>
+		</value>
+	</Operation>
+	<!-- the vanilla gun has no <comps>; add the list if missing (same as the rocket battery) -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="MA_Gun_Bofors_Quad"]/comps</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="MA_Gun_Bofors_Quad"]/comps</xpath>
+			<value>
+				<li>
+					<compClass>CombatExtended.CompVerbDisabler</compClass>
+				</li>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="MA_Gun_Bofors_Quad"]</xpath>
+			<value>
+				<comps>
+					<li>
+						<compClass>CombatExtended.CompVerbDisabler</compClass>
+					</li>
+				</comps>
+			</value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="MA_Gun_Bofors_Quad"]</xpath>
+		<value>
+			<li Class="CombatExtended.MultiBarrelExtension">
+				<offsets>
+					<li>(-0.4,0.6)</li>
+					<li>(-0.2,0.6)</li>
+					<li>(0.2,0.6)</li>
+					<li>(0.4,0.6)</li>
+				</offsets>
+			</li>
+		</value>
+	</Operation>
+	<!-- the base declares Building_TurretGunCE; this child overrides it with CE's CIWS turret -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Bofors_Quad"]</xpath>
+		<value>
+			<thingClass>CombatExtended.Building_CIWS_CE</thingClass>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Bofors_Quad"]/comps/li[@Class="CompProperties_Refuelable"]</xpath>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Bofors_Quad"]/statBases</xpath>
+		<value>
+			<AimingAccuracy>1.0</AimingAccuracy>
+			<Bulk>480</Bulk>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Bofors_Quad"]/statBases/ShootingAccuracyTurret</xpath>
+		<value><ShootingAccuracyTurret>1.0</ShootingAccuracyTurret></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Bofors_Quad"]/building/turretBurstCooldownTime</xpath>
+		<value><turretBurstCooldownTime>1.5</turretBurstCooldownTime></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Bofors_Quad"]/comps/li[@Class="MountedArms.CompProperties_BarrelHeat"]/heatPerShot</xpath>
+		<value><heatPerShot>0.0181</heatPerShot></value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Bofors_Quad"]/description</xpath>
+		<value><description>A manned quadruple mount for 40 mm Bofors L/60 automatic guns, as fitted to battleships and cruisers. Twice the barrels of the twin mount for a much heavier volume of fire. Besides ground targets, it shoots down incoming artillery shells, missiles and drop pods. Needs no power, but needs 40 mm ammunition loaded. May explode when damaged.</description></value>
+	</Operation>
+
+	<!-- ================================================================= -->
+	<!--  CIWS 20 mm (CE): becomes a real CE CIWS. Keeps its ground verb   -->
+	<!--  and gains a projectile-interception verb (shells and missiles).  -->
+	<!-- ================================================================= -->
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="MA_Gun_CIWS_Vulcan"]/verbs</xpath>
+		<value>
+			<li Class="CombatExtended.VerbProperties_CIWSProjectile">
+				<verbClass>CombatExtended.VerbCIWSProjectile</verbClass>
+				<recoilAmount>1.5</recoilAmount>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>Bullet_20x102mmNATO_AP</defaultProjectile>
+				<warmupTime>0.4</warmupTime>
+				<range>90</range>
+				<ticksBetweenBurstShots>2</ticksBetweenBurstShots>
+				<burstShotCount>30</burstShotCount>
+				<soundCast>Shot_Minigun</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>14</muzzleFlashScale>
+				<recoilPattern>Mounted</recoilPattern>
+				<holdFireLabel>HoldCloseInProjectilesFire</holdFireLabel>
+				<holdFireDesc>HoldCloseInProjectilesFireDesc</holdFireDesc>
+			</li>
+		</value>
+	</Operation>
+	<!-- the vanilla gun has no <comps>; add the list if missing (same as the rocket battery) -->
+	<Operation Class="PatchOperationConditional">
+		<xpath>Defs/ThingDef[defName="MA_Gun_CIWS_Vulcan"]/comps</xpath>
+		<match Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="MA_Gun_CIWS_Vulcan"]/comps</xpath>
+			<value>
+				<li>
+					<compClass>CombatExtended.CompVerbDisabler</compClass>
+				</li>
+			</value>
+		</match>
+		<nomatch Class="PatchOperationAdd">
+			<xpath>Defs/ThingDef[defName="MA_Gun_CIWS_Vulcan"]</xpath>
+			<value>
+				<comps>
+					<li>
+						<compClass>CombatExtended.CompVerbDisabler</compClass>
+					</li>
+				</comps>
+			</value>
+		</nomatch>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="MA_Turret_CIWS_Vulcan"]</xpath>
+		<value>
+			<thingClass>CombatExtended.Building_CIWS_CE</thingClass>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_CIWS_Vulcan"]/description</xpath>
+		<value><description>An automated mount for a six-barrel 20 mm rotary cannon with a radar-driven, very fast traverse. It shoots down incoming artillery shells and missiles, and unloads an enormous burst on ground targets, at the cost of high power use and quick barrel heating. Needs ammunition loaded. May explode when damaged.</description></value>
 	</Operation>
 
 </Patch>

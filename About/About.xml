@@ -15,11 +15,12 @@ Automatic turrets (power):
 
 Manned turrets (colonist operates):
 - M2 Browning .50, Mk19 grenade launcher, TOW anti-tank missile
+- Bofors 40 mm L/60 naval anti-aircraft gun, twin and quad mounts
 
 Portable:
 - M252 81 mm mortar (minifiable)
 
-Features: barrel overheating, turret slew speed, shot dispersion, muzzle at the barrel. Requires Harmony. Combat Extended is optional.</description>
+Features: barrel overheating, turret slew speed, shot dispersion, muzzle at the barrel. Requires Harmony. Combat Extended is optional; with it, the Bofors and the CIWS also shoot down incoming shells and missiles (and the Bofors, drop pods).</description>
   <modDependencies>
     <li>
       <packageId>brrainz.harmony</packageId>
