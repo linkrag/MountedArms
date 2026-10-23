@@ -12,7 +12,7 @@ Valores conferidos nos XML em out/2026. "Testado" = confirmado pelo usuário em 
 | MA_Turret_Mk44_Autocannon / MA_Gun_Mk44_Autocannon | auto | 450/90/10/0 | 250 W | 22000 | MA_Research_Autocannon | 44,9 · – · 6 · 10 | 1,8 / 3,0 | testado |
 | MA_Turret_TOW_ATGM / MA_Gun_TOW_ATGM | tripulada | 300/60/6/2 | – | 22000 | MA_Research_ATGM | 71,9 · 14,9 · 1 | 2,5 / 8,0 | NÃO confirmado |
 | MA_Turret_Hydra_Pod / MA_Gun_Hydra_Pod | auto (foguetes 80mm S-8; defNames guardam "Hydra/70mm" por histórico) | 350/50/8/0 | 200 W | 20000 | MA_Research_Rockets | 49,9 · 9,9 · 7 · 5 | 2,4 / 5,5 | NÃO confirmado |
-| MA_Turret_CIWS_Vulcan / MA_Gun_CIWS_Vulcan | auto | 400/120/8/2 | 450 W | 30000 | MA_Research_CIWS | 33,9 · – · 60 · 2 | 0,8 / 3,0 | NÃO confirmado |
+| MA_Turret_CIWS_Vulcan / MA_Gun_CIWS_Vulcan | auto | 400/120/8/2 | 700 W | 30000 | MA_Research_CIWS | 33,9 · – · 60 · 2 | 0,8 / 3,0 | NÃO confirmado |
 | MA_Turret_M252_Mortar / MA_Gun_M252_Mortar | tripulada, portátil (BaseArtilleryBuilding, minifiável, Mass 12) | 30/0/3/0 | – | 1200 | MA_Research_Mortar | 200 · 19,9 · 1 (isMortar) | 3,0 / 14,0 | NÃO confirmado |
 | MA_Turret_Bofors_Twin / MA_Gun_Bofors_Twin | tripulada 2x2 | 380/0/6/0 | – | 16000 | MA_Research_Bofors | 42,9 · – · 4 · 15 | 1,4 / 3,5 | NÃO confirmado |
 | MA_Turret_Bofors_Quad / MA_Gun_Bofors_Quad | tripulada 3x3 (interação (0,0,-2)) | 600/60/10/0 | – | 26000 | MA_Research_BoforsQuad | 42,9 · – · 8 · 8 | 1,6 / 3,5 | NÃO confirmado |
@@ -39,6 +39,6 @@ Notas vanilla:
 | Bofors quádruplo | AmmoSet_40x311mmR → Bullet_40x311mmR_HE | 86 | 1,8 | 8 × 8 | 32 / 8 | idem |
 | Bateria | MA_AmmoSet_APKWS_Indirect → MA_Bullet_APKWS_Indirect_HE (gravityFactor 5; item Ammo_70mmAPKWS_HEAT) | 700 (32) | 3,0 | 6 × 10 | 24 / 8 | Verb_ShootMortarCE; cargas 30/50/70/90; sem NonSnap |
 
-NonSnapTurretExtension (graus por TICK): M240 0,9 · M134 0,65 · M2 0,65 · Mk19 0,5 · Mk44 0,6 · TOW 0,5 · Foguetes 0,65 · CIWS 1,0 · (M252 e bateria: nenhum).
+NonSnapTurretExtension (graus por TICK): M240 0,9 · M134 0,65 · M2 0,65 · Mk19 0,5 · Mk44 0,6 · TOW 0,5 · Foguetes 0,65 · CIWS 1,67 · Bofors duplo 0,42 · quádruplo 0,33 · (M252 e bateria: nenhum).
 CIWS 20 mm no CE: `Building_CIWS_CE` + verbo `VerbCIWSProjectile` (alcance 90, rajada 30) além do tiro no chão.
 heatPerShot no CE: Bofors duplo 0,0330 · quádruplo 0,0181 · M240 0,0106 · M134 0,0067 · M2 0,0186 · Mk19 0,0333 · Mk44 0,0250 · CIWS 0,0028.

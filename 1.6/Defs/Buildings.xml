@@ -627,7 +627,7 @@
     <comps>
       <li Class="CompProperties_Power">
         <compClass>CompPowerTrader</compClass>
-        <basePowerConsumption>450</basePowerConsumption>
+        <basePowerConsumption>700</basePowerConsumption>  <!-- radar + fast servo drive -->
       </li>
       <li Class="CompProperties_Explosive">
         <wickTicks>240</wickTicks>
@@ -644,7 +644,7 @@
         <burstSpread>0.03</burstSpread>
       </li>
       <li Class="MountedArms.CompProperties_TurretSlew">
-        <degreesPerSecond>60</degreesPerSecond>
+        <degreesPerSecond>100</degreesPerSecond>      <!-- Phalanx-class servo, ~100 deg/s -->
         <aimTolerance>4</aimTolerance>
         <arcDegrees>0</arcDegrees>
       </li>
@@ -871,7 +871,7 @@
         <burstSpread>0.06</burstSpread>
       </li>
       <li Class="MountedArms.CompProperties_TurretSlew">
-        <degreesPerSecond>45</degreesPerSecond>
+        <degreesPerSecond>25</degreesPerSecond>      <!-- manual handwheels -->
         <aimTolerance>4</aimTolerance>
         <arcDegrees>0</arcDegrees>
       </li>
@@ -947,7 +947,7 @@
         <burstSpread>0.06</burstSpread>
       </li>
       <li Class="MountedArms.CompProperties_TurretSlew">
-        <degreesPerSecond>35</degreesPerSecond>
+        <degreesPerSecond>20</degreesPerSecond>      <!-- manual handwheels, heavier mount -->
         <aimTolerance>4</aimTolerance>
         <arcDegrees>0</arcDegrees>
       </li>

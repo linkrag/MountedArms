@@ -696,7 +696,7 @@
 		<xpath>Defs/ThingDef[defName="MA_Turret_CIWS_Vulcan"]</xpath>
 		<value>
 			<li Class="CombatExtended.NonSnapTurretExtension">
-				<speed>1.0</speed>
+				<speed>1.67</speed>  <!-- 100 deg/s, same as vanilla slew -->
 				<angleWeightMultiplier>2</angleWeightMultiplier>
 			</li>
 		</value>
@@ -1153,6 +1153,27 @@
 	<Operation Class="PatchOperationReplace">
 		<xpath>Defs/ThingDef[defName="MA_Turret_CIWS_Vulcan"]/description</xpath>
 		<value><description>An automated mount for a six-barrel 20 mm rotary cannon with a radar-driven, very fast traverse. It shoots down incoming artillery shells and missiles, and unloads an enormous burst on ground targets, at the cost of high power use and quick barrel heating. Needs ammunition loaded. May explode when damaged.</description></value>
+	</Operation>
+
+
+	<!-- Traverse in CE (degrees per TICK = vanilla deg/s / 60): manual handwheels -->
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Bofors_Twin"]</xpath>
+		<value>
+			<li Class="CombatExtended.NonSnapTurretExtension">
+				<speed>0.42</speed>
+				<angleWeightMultiplier>2</angleWeightMultiplier>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Bofors_Quad"]</xpath>
+		<value>
+			<li Class="CombatExtended.NonSnapTurretExtension">
+				<speed>0.33</speed>
+				<angleWeightMultiplier>2</angleWeightMultiplier>
+			</li>
+		</value>
 	</Operation>
 
 </Patch>

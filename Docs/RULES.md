@@ -83,7 +83,8 @@ Outras âncoras CE: MediumTurret 55, HeavyTurret 55, Autocannon 78, Sniper turre
 - **Vanilla** (`Source/SlewArc.cs`, `CompProperties_TurretSlew`): topo gira `degreesPerSecond` (Harmony em `TurretTop.TurretTopTick`) e a rajada só começa com o cano a menos de `aimTolerance`° do alvo; `arcDegrees` limita o campo de tiro (centro = rotação do prédio; só faz sentido nas manuais, que são rotacionáveis); alvos fora do arco são recusados (`IsValidTarget`/`OrderAttack`). Linhas do arco aparecem ao selecionar.
 - **CE**: a mesma coisa usa os sistemas do CE: `CombatExtended.NonSnapTurretExtension` (`speed` em graus POR TICK) e `CompProperties_FireArc` (M2 e Mk19). O comp vanilla fica inerte em `Building_TurretGunCE`.
 - **Dispersão vanilla** (`CompProperties_BarrelHeat.heatSpread/burstSpread`, patch em `Projectile.Launch`): erro de mira em células (a 20 células) = calor*heatSpread + tirosNaRajada*burstSpread. No CE o recuo/dispersão já é do próprio CE.
-- Velocidades: vanilla 55/40/40/30 °/s (M240/M134/M2/Mk19); CE 0.9/0.65/0.65/0.5 °/tick.
+- Velocidades: vanilla 55/40/40/30 °/s (M240/M134/M2/Mk19); CE 0.9/0.65/0.65/0.5 °/tick (CE = vanilla ÷ 60).
+- Ajuste por realismo (out/2026): CIWS 100 °/s (servo tipo Phalanx; CE 1,67) e 700 W; Bofors manual (volantes) duplo 25 °/s (CE 0,42), quádruplo 20 °/s (CE 0,33), sem energia. Os Bofors navais reais tinham acionamento elétrico-hidráulico (~25–30 °/s); mantidos manuais por decisão do usuário.
 
 ## 7. Próximas melhorias de realismo
 **Vanilla**
