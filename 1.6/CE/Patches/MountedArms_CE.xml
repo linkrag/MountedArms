@@ -720,7 +720,7 @@
 		<statBases>
 			<RangedWeapon_Cooldown>0.36</RangedWeapon_Cooldown>
 			<SightsEfficiency>1</SightsEfficiency>
-			<ShotSpread>0.05</ShotSpread>
+			<ShotSpread>1.5</ShotSpread>
 			<SwayFactor>0.1</SwayFactor>
 			<Bulk>12.9</Bulk>
 		</statBases>
@@ -728,14 +728,14 @@
 			<verbClass>CombatExtended.Verb_ShootMortarCE</verbClass>
 			<forceNormalTimeSpeed>false</forceNormalTimeSpeed>
 			<hasStandardCommand>true</hasStandardCommand>
-			<defaultProjectile>Bullet_70mmAPKWS_HEAT</defaultProjectile>
+			<defaultProjectile>MA_Bullet_APKWS_Indirect_HE</defaultProjectile>
 			<warmupTime>3.0</warmupTime>
 			<minRange>32</minRange>
 			<range>700</range>
 			<ticksBetweenBurstShots>10</ticksBetweenBurstShots>
 			<burstShotCount>6</burstShotCount>
-			<circularError>0.7</circularError>
-			<indirectFirePenalty>0.2</indirectFirePenalty>
+			<circularError>1</circularError>
+			<indirectFirePenalty>0</indirectFirePenalty>
 			<soundCast>RocketswarmLauncher_Fire</soundCast>
 			<soundCastTail>GunTail_Heavy</soundCastTail>
 			<muzzleFlashScale>0</muzzleFlashScale>
@@ -748,7 +748,7 @@
 		<AmmoUser>
 			<magazineSize>24</magazineSize>
 			<reloadTime>8</reloadTime>
-			<ammoSet>AmmoSet_70mmAPKWS</ammoSet>
+			<ammoSet>MA_AmmoSet_APKWS_Indirect</ammoSet>
 		</AmmoUser>
 		<FireModes>
 			<aiUseBurstMode>FALSE</aiUseBurstMode>

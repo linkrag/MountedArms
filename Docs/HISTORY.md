@@ -10,5 +10,5 @@
 8. NRE `CompChangeableProjectile.GetParentStoreSettings` (M252 CE) → `fixedStorageSettings` na gun.
 9. "Atacar mundo" no M252 → `CeGizmoFilter`.
 10. Foguetes 70 mm APKWS direto em CE: voo >1 min → S-8 80 mm.
-11. Bateria: vanilla "Not enough squares 254" → `ai_combatDangerous` false + `placeWorkers` Inherit=False. CE: tiros fora do mapa (aberto).
+11. Bateria: vanilla "Not enough squares 254" → `ai_combatDangerous` false + `placeWorkers` Inherit=False. CE: tiros fora do mapa → APKWS com speed 173 (Launch usa Max(carga, speed)) e gravityFactor 1; projétil próprio com speed 0 + gravityFactor 5 (pendente de teste).
 12. Erro meu: replace-all trocou o burst do Mk19 (4→6) em vez da bateria; corrigido por sed por linha.

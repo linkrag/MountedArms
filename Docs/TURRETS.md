@@ -33,7 +33,7 @@ Notas vanilla:
 | Foguetes | AmmoSet_80mmRocket_direct → Bullet_80mmRocket_HE | 62 (12) | 2,4 | 7 × 5 | 21 / 9 | NÃO usar o APKWS 70mm direto (projétil flyOverhead, voo de minutos) |
 | CIWS | AmmoSet_20x102mmNATO → Bullet_20x102mmNATO_AP | 68 | 1,0 | 60 × 2 | 600 / 10 | |
 | M252 | AmmoSet_81mmMortarShell → Bullet_81mmMortarShell_HE | 450 (24) | 3,5 | 1 | 1 / 3 | Verb_ShootMortarCE; cargas 30/50/70 |
-| Bateria | AmmoSet_70mmAPKWS → Bullet_70mmAPKWS_HEAT | 700 (32) | 3,0 | 6 × 10 | 24 / 8 | Verb_ShootMortarCE; cargas 30/50/70/90; sem NonSnap |
+| Bateria | MA_AmmoSet_APKWS_Indirect → MA_Bullet_APKWS_Indirect_HE (gravityFactor 5; item Ammo_70mmAPKWS_HEAT) | 700 (32) | 3,0 | 6 × 10 | 24 / 8 | Verb_ShootMortarCE; cargas 30/50/70/90; sem NonSnap |
 
 NonSnapTurretExtension (graus por TICK): M240 0,9 · M134 0,65 · M2 0,65 · Mk19 0,5 · Mk44 0,6 · TOW 0,5 · Foguetes 0,65 · CIWS 1,0 · (M252 e bateria: nenhum).
 heatPerShot no CE: M240 0,0106 · M134 0,0067 · M2 0,0186 · Mk19 0,0333 · Mk44 0,0250 · CIWS 0,0028.
