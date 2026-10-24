@@ -310,6 +310,16 @@
         <consumeFuelPerShot>1</consumeFuelPerShot>
       </li>
     </verbs>
+    <!-- TOW: launch motor spent at the tube exit (backblast), flight motor lights ~7 m out -->
+    <modExtensions>
+      <li Class="MountedArms.LaunchFxExtension">
+        <ejectPuffs>1</ejectPuffs>
+        <puffSize>0.8</puffSize>
+        <backblastPuffs>3</backblastPuffs>
+        <ignitionDistance>3.5</ignitionDistance>
+        <flashSize>1.3</flashSize>
+      </li>
+    </modExtensions>
   </ThingDef>
 
   <ThingDef ParentName="BaseBullet">
@@ -364,6 +374,16 @@
         <consumeFuelPerShot>1</consumeFuelPerShot>
       </li>
     </verbs>
+    <!-- S-8 / Hydra-class rockets: hot launch straight from the pod -->
+    <modExtensions>
+      <li Class="MountedArms.LaunchFxExtension">
+        <ejectPuffs>1</ejectPuffs>
+        <puffSize>0.7</puffSize>
+        <backblastPuffs>1</backblastPuffs>
+        <ignitionDistance>0</ignitionDistance>
+        <flashSize>0.9</flashSize>
+      </li>
+    </modExtensions>
   </ThingDef>
 
   <ThingDef ParentName="BaseBullet">
@@ -539,6 +559,16 @@
         </targetParams>
       </li>
     </verbs>
+    <!-- APKWS: hot launch from the pod -->
+    <modExtensions>
+      <li Class="MountedArms.LaunchFxExtension">
+        <ejectPuffs>2</ejectPuffs>
+        <puffSize>0.9</puffSize>
+        <backblastPuffs>1</backblastPuffs>
+        <ignitionDistance>0</ignitionDistance>
+        <flashSize>1.1</flashSize>
+      </li>
+    </modExtensions>
   </ThingDef>
 
 
@@ -747,6 +777,16 @@
         <consumeFuelPerShot>1</consumeFuelPerShot>
       </li>
     </verbs>
+    <!-- Stinger soft launch: eject motor out of the tube, coasts ~8.5 m, then the flight motor lights -->
+    <modExtensions>
+      <li Class="MountedArms.LaunchFxExtension">
+        <ejectPuffs>2</ejectPuffs>
+        <puffSize>0.6</puffSize>
+        <backblastPuffs>1</backblastPuffs>
+        <ignitionDistance>4</ignitionDistance>
+        <flashSize>1.0</flashSize>
+      </li>
+    </modExtensions>
   </ThingDef>
 
   <ThingDef ParentName="BaseWeaponTurret">

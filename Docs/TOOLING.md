@@ -5,6 +5,9 @@
 `mcs -target:library -debug- -optimize+ -out:1.6/Assemblies/MountedArms.dll -r:$M/Assembly-CSharp.dll -r:$M/UnityEngine.dll -r:$M/UnityEngine.CoreModule.dll -r:$M/netstandard.dll -r:0Harmony.dll Source/*.cs`
 com `M=<RimWorld>/RimWorldWin64_Data/Managed`. A DLL é ignorada pelo git.
 
+## DLL de efeitos (com e sem CE)
+`powershell -File SourceFx/build_fx.ps1` → `1.6/Assemblies/MountedArmsFx.dll` (C# 5, refs jogo + Harmony + Unity.Mathematics). Existe separada porque a DLL principal usa C# 6 (`nameof`) e a máquina só tem o csc do .NET Framework (C# 5); sem mono/Roslyn. Compile ANTES da DLL só-CE (ela referencia a Fx). Jogo fechado.
+
 ## DLL só-CE
 `powershell -File SourceCE/build_ce.ps1` → `1.6/CE/Assemblies/MountedArmsCE.dll` (csc do .NET Framework, C# 5, contra o mscorlib do jogo; refs CE + Harmony 1.6). `-Out <pasta>` compila em outro lugar (útil com o jogo aberto, que trava a DLL). Ignorada pelo git.
 

@@ -21,7 +21,8 @@ LoadFolders.xml          1.6 sempre; 1.6/CE só com CETeam.CombatExtended
 1.6/Languages/{English,PortugueseBrazilian}/Keyed/MountedArms.xml
 1.6/Textures/MountedArms/<Nome>_{Base,Top,Icon}.png
 Source/                  C# (MountedArms.cs, BarrelHeat.cs, SlewArc.cs, build.sh) — NÃO referencia CE
-SourceCE/                C# só-CE (botão Descarregar), build_ce.ps1 → 1.6/CE/Assemblies/MountedArmsCE.dll
+SourceCE/                C# só-CE (botão Descarregar, efeitos de lançamento no CE), build_ce.ps1 → 1.6/CE/Assemblies/MountedArmsCE.dll
+SourceFx/                C# 5 (efeitos de lançamento, LaunchFxExtension), build_fx.ps1 → 1.6/Assemblies/MountedArmsFx.dll (com e sem CE)
 Docs/                    regras, decisões, notas CE, status, ferramentas
 tools/                   scripts de geração de textura e checagem de XML
 ```

@@ -14,6 +14,7 @@
 - TOW: alcance deve ser longo ("achei pequeno").
 - CIWS: rajada maior (60). Depois (out/2026): no CE vira CIWS real, interceptando projéteis.
 - Lote 4 pedido pelo usuário ("pode fazer todos"): ZU-23-2, Avenger/Stinger (contra drop pods), Goalkeeper, CIWS laser. Interceptação é só do CE; no vanilla essas torretas atiram no chão.
+- **Lançamento mais realista** (pesquisa: Stinger soft launch ~8,5 m; TOW motor de voo ~7 m; foguetes em pod com lançamento quente): só efeitos visuais, porque a interceptação do CE assume voo linear.
 - **Giro e energia realistas**: CIWS gira rápido (100 °/s) e consome mais (700 W); Bofors é manual, mais lento (25/20 °/s) e sem energia.
 - **Bofors 40 mm L/60**: o usuário descreveu o antiaéreo naval de 40 mm com 2 ou 4 canos e atirador sentado entre eles; pediu **as duas versões** (duplo Mk 1 e quádruplo Mk 2). No CE intercepta **projéteis e drop pods** além do tiro no chão.
 - Torretas pedidas depois do Mk44: TOW, foguetes 70 mm, CIWS 20 mm, morteiro 81 mm ("pode fazer os outros 4").

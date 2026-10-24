@@ -20,6 +20,31 @@ namespace MountedArms.CE
     }
 
     /// <summary>
+    /// CE projectiles: launch effects for guns with MountedArms.LaunchFxExtension (MountedArmsFx.dll).
+    /// Every ProjectileCE launch (direct fire, artillery, world shots, CIWS interceptors) ends in this overload,
+    /// with the gun as equipment. Visual only: speed and aim are untouched.
+    /// </summary>
+    [HarmonyPatch(typeof(ProjectileCE), "Launch", new System.Type[] { typeof(Thing), typeof(Vector2), typeof(Thing) })]
+    public static class Patch_ProjectileCE_LaunchFx
+    {
+        public static void Postfix(ProjectileCE __instance, Vector2 origin, Thing equipment)
+        {
+            if (equipment == null)
+            {
+                return;
+            }
+            LaunchFxExtension ext = equipment.def.GetModExtension<LaunchFxExtension>();
+            if (ext == null)
+            {
+                return;
+            }
+            Map map = __instance.Map ?? equipment.MapHeld;
+            Vector2 dir = __instance.Destination - origin;
+            LaunchFx.Play(map, new Vector3(origin.x, 0f, origin.y), new Vector3(dir.x, 0f, dir.y), ext);
+        }
+    }
+
+    /// <summary>
     /// Adds an "Unload" button to Mounted Arms turrets. CE only offers unloading in the reload menu of
     /// a manned turret while it is manned; auto turrets need it too, to empty or swap ammo types.
     /// Building_CIWS_CE / Building_Turret_MultiVerbs call base.GetGizmos, so patching the base covers them.

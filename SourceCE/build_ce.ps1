@@ -16,7 +16,7 @@ New-Item -ItemType Directory -Force $out | Out-Null
 & $csc /nologo /noconfig /target:library /optimize+ /debug- /nostdlib /out:"$out\MountedArmsCE.dll" `
     /r:"$m\mscorlib.dll" /r:"$m\System.dll" /r:"$m\System.Core.dll" /r:"$m\Assembly-CSharp.dll" `
     /r:"$m\UnityEngine.dll" /r:"$m\UnityEngine.CoreModule.dll" /r:"$m\netstandard.dll" `
-    /r:"$CE\Assemblies\CombatExtended.dll" /r:"$Harmony" `
+    /r:"$CE\Assemblies\CombatExtended.dll" /r:"$Harmony" /r:"$root\1.6\Assemblies\MountedArmsFx.dll" /r:"$m\Unity.Mathematics.dll" `
     "$PSScriptRoot\*.cs"
 if ($LASTEXITCODE -ne 0) { throw "csc failed ($LASTEXITCODE)" }
 Get-FileHash "$out\MountedArmsCE.dll" -Algorithm MD5 | Select-Object Hash, Path
