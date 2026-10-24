@@ -25,6 +25,7 @@ Fonte local do CE: `F:\Steam\steamapps\workshop\content\294100\2890901044` (defs
 
 ## CIWS (interceptação) — lido no código e em defs em uso
 - Uma torreta CIWS **não** mira projétil que outra CIWS já está mirando ou que já tem interceptador a caminho (`VerbCIWS.TryFindNewTarget`): com um único projétil, só a primeira torreta que o pega atira.
+- Interceptador que erra continua voando com o alvo "reservado". Com o Strategic ativo, um patch (espoleta de proximidade) o destrói quando passa do alvo, liberando-o para outra torreta.
 - **Só funciona com a opção do CE "Enable CIWS" ligada** (`Controller.settings.EnableCIWS`; confirmado em jogo: desligada, nada era abatido).
 - Exemplo do CE em `Defs/ThingDefs_Buildings/CIWSExample.xml` está **comentado**; usos reais: `Turret_KPV` do CE (tripulada, `VerbCIWSSkyfaller`) e o patch do CE para o antiaéreo do VFE Security (`ModPatches/Vanilla Furniture Expanded - Security/.../ThingDefs_AntiAir.xml`).
 - Padrão: prédio `CombatExtended.Building_CIWS_CE` (deriva de `Building_Turret_MultiVerbs` → `Building_TurretGunCE`); na gun, `PatchOperationMakeGunCECompatible` e depois **adicionar** verbos `VerbProperties_CIWSProjectile`/`VerbProperties_CIWSSkyfaller` em `verbs` + comp `CombatExtended.CompVerbDisabler`. Os verbos CIWS têm prioridade na busca de alvo (`TryFindNewTarget`).
