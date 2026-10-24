@@ -1324,7 +1324,7 @@
 	</Operation>
 
 	<!-- Avenger: pure air defense in CE, like CE's patch of the VFE anti-air turret: the ground verb is
-	     dropped and only the drop-pod verb remains (Stinger vs shells would be unrealistic). -->
+	     dropped; it intercepts projectiles (missiles, shells: user request, game over realism) and drop pods. -->
 	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
 		<defName>MA_Gun_Avenger</defName>
 		<statBases>
@@ -1350,6 +1350,22 @@
 	<Operation Class="PatchOperationAdd">
 		<xpath>Defs/ThingDef[defName="MA_Gun_Avenger"]/verbs</xpath>
 		<value>
+			<li Class="CombatExtended.VerbProperties_CIWSProjectile">
+				<verbClass>CombatExtended.VerbCIWSProjectile</verbClass>
+				<recoilAmount>0.5</recoilAmount>
+				<hasStandardCommand>true</hasStandardCommand>
+				<defaultProjectile>MA_Bullet_FIM92_Stinger</defaultProjectile>
+				<warmupTime>0.8</warmupTime>
+				<range>110</range>
+				<ticksBetweenBurstShots>40</ticksBetweenBurstShots>
+				<burstShotCount>2</burstShotCount>
+				<soundCast>InfernoCannon_Fire</soundCast>
+				<soundCastTail>GunTail_Heavy</soundCastTail>
+				<muzzleFlashScale>12</muzzleFlashScale>
+				<recoilPattern>Mounted</recoilPattern>
+				<holdFireLabel>HoldCloseInProjectilesFire</holdFireLabel>
+				<holdFireDesc>HoldCloseInProjectilesFireDesc</holdFireDesc>
+			</li>
 			<li Class="CombatExtended.VerbProperties_CIWSSkyfaller">
 				<verbClass>CombatExtended.VerbCIWSSkyfaller</verbClass>
 				<recoilAmount>0.5</recoilAmount>
@@ -1419,7 +1435,7 @@
 	</Operation>
 	<Operation Class="PatchOperationReplace">
 		<xpath>Defs/ThingDef[defName="MA_Turret_Avenger"]/description</xpath>
-		<value><description>A powered turret with two pods of four Stinger heat-seeking missiles. It automatically shoots down hostile drop pods and other incoming craft; it cannot attack ground targets. Needs power and Stinger missiles loaded. May explode when damaged.</description></value>
+		<value><description>A powered turret with two pods of four Stinger heat-seeking missiles. It automatically shoots down incoming missiles, artillery shells and hostile drop pods; it cannot attack ground targets. Needs power and Stinger missiles loaded. May explode when damaged.</description></value>
 	</Operation>
 	<!-- PlaceWorker_ShowTurretRadius breaks on turrets without a ground verb (CE note on the VFE patch) -->
 	<Operation Class="PatchOperationAdd">

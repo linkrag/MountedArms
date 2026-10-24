@@ -41,7 +41,8 @@ tools/                   scripts de geração de textura e checagem de XML
 7. Arma de artilharia vanilla (`isMortar`) precisa de `<building><fixedStorageSettings>/<defaultStorageSettings>` na **gun** (senão NRE em `CompChangeableProjectile` no CE).
 8. `CompProperties_BarrelHeat`, `CompProperties_TurretSlew` e as Harmony patches de arco/giro só afetam `Building_TurretGun` (vanilla); em CE (`Building_TurretGunCE` não herda dele) são inertes — o CE tem seus próprios sistemas (`NonSnapTurretExtension`, `CompFireArc`).
 9. Botão "atacar tile do mundo" do CE em artilharia: escondido com `MountedArms.NoWorldStrikeExtension` (Harmony em `Building_TurretGunCE.GetGizmos`).
-10. **Edição de arquivos com replace em massa:** confira que o padrão casou na linha certa (já trocamos o `burstShotCount` do Mk19 em vez do da bateria). Depois de editar, valide o XML e releia o trecho.
+10. **Docs sempre atualizados:** toda edição atualiza os MDs afetados no mesmo commit (ver `Docs/RULES.md` §0).
+11. **Edição de arquivos com replace em massa:** confira que o padrão casou na linha certa (já trocamos o `burstShotCount` do Mk19 em vez do da bateria). Depois de editar, valide o XML e releia o trecho.
 
 ## Fluxo para criar/alterar uma torreta
 Use `Docs/TEMPLATE_NOVA_TORRETA.md` (checklist + esqueletos XML). Resumo: arma real + análogos vanilla/CE → gun/projétil/building/pesquisa/3 texturas (vanilla) → patch CE → checar (`tools/check_defnames.py`, `tools/check.py`, `tools/check_ce.py`, lxml) → compilar se mudou C# → testar vanilla **e** CE → atualizar `Docs/` → commit.
