@@ -34,6 +34,9 @@ Fonte local do CE: `F:\Steam\steamapps\workshop\content\294100\2890901044` (defs
 - Torreta com `thingClass` herdado da base: adicionar `<thingClass>` no filho (PatchOperationAdd) sobrescreve.
 - Gun vanilla sem `<comps>`: usar `PatchOperationConditional` (match/nomatch) para adicionar comps; o `check_ce.py` acusa a xpath do Conditional (falso positivo).
 
+## Chama de projétil (`CompProjectileFleck`)
+Posição = `DrawPos − (lastPos − DrawPos) × originOffset` (o offset é em "ticks de movimento", não em células): projétil lento → chama no centro do sprite. Para chama no bocal use `MountedArms.CompProperties_Exhaust` (`MountedArmsFx.dll`).
+
 ## Alcances de referência (CE)
 M240B 62 · Minigun 62 · AGS-30 62 (min 8) · KPV 75 · Autocannon 78 · Sniper turret 86 · Flak 92 (min 16) · CIWS (CE) 55/105 · Medium/Heavy turret 55 · Mortar 700 (min 32). Torreta de mísseis do Glitter Tech: 500 (min 30), burst 25, mag 25, reload 5, `noSnapshot` + `noSingleShot`.
 

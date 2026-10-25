@@ -9,6 +9,8 @@ Ambiente: RimWorld 1.6, Harmony, Combat Extended 16.7.4 (o usuário testa só no
 - **Lote 5**: botão Descarregar (DLL só-CE `1.6/CE/Assemblies/MountedArmsCE.dll`, Harmony postfix em `Building_TurretGunCE.GetGizmos` para defs `MA_*`), nomes reais nos `label`, CIWS 20 mm mais preciso (CE ShotSpread 0,03, SwayFactor 0,6, recuo 0,6; vanilla heatSpread 1, burstSpread 0,012).
 
 ## Ajustes desta rodada (NÃO testados)
+- **Chama no bocal** (`CompProperties_Exhaust` em `MountedArmsFx.dll`) no APKWS indireto (`comps Inherit="False"` para tirar a chama herdada do CE, que ficava no meio do foguete).
+- **Ignição do Stinger no CE**: posicionada ao longo da trajetória 3D (horizontal × cos do ângulo, altura desenhada +0,84 × altura em z), não mais no chão 4 células à frente em tiros íngremes (achado da revisão).
 - **Lançamento com efeitos (soft launch)**, só visual (velocidade e mira intocadas; a interceptação do CE precisa de voo linear): nova DLL `1.6/Assemblies/MountedArmsFx.dll` (fonte `SourceFx/`, build `SourceFx/build_fx.ps1`, C# 5, carregada com e sem CE) com `LaunchFxExtension` (no def da **arma**) + patch no `Projectile.Launch` do vanilla; no CE, patch em `ProjectileCE.Launch(Thing, Vector2, Thing)` na `MountedArmsCE.dll` (vale também para os interceptadores).
   - Stinger (Avenger): puff de ejeção + backblast, motor de voo acende a 4 células (~8,5 m reais).
   - TOW: motor de lançamento se esgota na saída do tubo (backblast 3), motor de voo a 3,5 células (~7 m reais).

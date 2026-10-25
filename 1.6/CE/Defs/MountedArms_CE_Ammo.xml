@@ -37,7 +37,16 @@
 			<speed>0</speed>
 			<gravityFactor>5</gravityFactor>
 		</projectile>
-		<comps>
+		<!-- Inherit False drops the parent's CE ProjectileFleck (flame placed by speed: it sat mid-rocket);
+		     MountedArms.CompProperties_Exhaust (MountedArmsFx.dll) puts it at the nozzle -->
+		<comps Inherit="False">
+			<li Class="MountedArms.CompProperties_Exhaust">
+				<flameFleck>Fleck_CERocketFlame</flameFleck>
+				<smokeFleck>Fleck_CERocketSmokeTrail</smokeFleck>
+				<nozzleDistance>0.45</nozzleDistance>
+				<flameScale>1</flameScale>
+				<smokeScale>1.5</smokeScale>
+			</li>
 			<li Class="CombatExtended.CompProperties_Fragments">
 				<fragments>
 					<Fragment_Large>6</Fragment_Large>

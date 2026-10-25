@@ -50,8 +50,14 @@ namespace MountedArms
             {
                 FleckMaker.ThrowSmoke(origin - dir * Rand.Range(0.8f, 2f) + Jitter(0.4f), map, ext.puffSize * Rand.Range(1f, 1.4f));
             }
-            Vector3 ignition = origin + dir * ext.ignitionDistance;
-            if (!ignition.ToIntVec3().InBounds(map))
+            PlayIgnition(map, origin + dir * ext.ignitionDistance, ext);
+        }
+
+        /// <summary>Ignition flash/sparks/smoke at a given point (the CE hook passes the drawn 3D position).</summary>
+        public static void PlayIgnition(Map map, Vector3 ignition, LaunchFxExtension ext)
+        {
+            ignition.y = 0f;
+            if (map == null || ext.flashSize <= 0f || !ignition.ToIntVec3().InBounds(map))
             {
                 return;
             }

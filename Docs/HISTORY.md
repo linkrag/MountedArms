@@ -15,5 +15,7 @@
 15. (Strategic) Minuteman errava 30+ células no mapa-mundo → penalidades fixas de luz/fumaça e erro de distância do tiro global do CE; resolvido com `Verb_ShootGuidedCE`.
 16. (Strategic) Minuteman convencional r24,9 derrubava o FPS no impacto → raio 19,5 (limite = Tomahawk do CE).
 17. Efeitos de lançamento: a DLL principal usa C# 6 e a máquina só tem C# 5 → nova `MountedArmsFx.dll` separada em vez de recompilar a principal.
+18. (Strategic) Minuteman travou o jogo: desabamento de teto em cascata e rocha natural destruída → teto arrancado antes, HP direto, rocha intocada.
+19. Chama dos foguetes no meio do sprite: `CompProjectileFleck` do CE usa o deslocamento do tick × originOffset → `CompProperties_Exhaust` no bocal.
 13. Erro meu (lote 4): `MA_Turret_ZU23`, `MA_Gun_ZU23`, `MA_Ammo_FIM92`, `MA_Bullet_FIM92` (e `MAS_*_M777` no Strategic) terminavam em dígito → config error no carregamento. Renomeados para `_ZU23_AA`, `_FIM92_Stinger`, `_M777_Howitzer`; criado `tools/check_defnames.py`.
 12. Erro meu: replace-all trocou o burst do Mk19 (4→6) em vez da bateria; corrigido por sed por linha.
