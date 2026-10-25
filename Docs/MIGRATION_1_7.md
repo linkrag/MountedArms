@@ -46,6 +46,12 @@ A checagem foi feita por metadados (System.Reflection.Metadata contra o `Assembl
 - **`Source/` principal do Mounted Arms:** é C# 6+ e precisa de Roslyn. O caminho recomendado é o SDK .NET 10 (a wiki recomenda .NET 10; VS2022 não suporta).
 - **DLL recompilada para 1.7:** referencia `UnityStubs` e não roda no 1.6. Ao recompilar, separar o conteúdo comum (Defs, Textures, Languages, Patches) das `Assemblies` por versão, para não carregar duas cópias.
 
+## Compilar contra o CE 1.6 na 1.7 (feito no Strategic, lote 11)
+- O CS0012/CS0508 vem dos nomes `UnityEngine.CoreModule`/`IMGUIModule`/`TextRenderingModule`/`InputLegacyModule`/`UI` que o CE referencia. O jogo só os redireciona para `UnityStubs` em tempo de execução.
+- Solução: assemblies de fachada com esses nomes, contendo só `[assembly: TypeForwardedTo(...)]` para cada tipo público `UnityEngine*`/`Unity.Mathematics` do `UnityStubs` (lista lida com o Mono.Cecil do Harmony 1.6). Script: `MountedArmsStrategic/tools/unity_facades.ps1`. Referências extras: `System.Runtime`, `System.Private.CoreLib`, `System.Collections`, `System`, `System.Core`, `System.Linq`, `UnityStubs`, `Waylith`.
+- Avisos esperados e silenciados: CS1701 (versão do CoreLib) e CS1684 (`Unity.Collections.NativeArray`, não usado).
+- A DLL resultante referencia `UnityStubs`, `System.Private.CoreLib` e o `Assembly-CSharp` 1.7, e também o 1.6, que entra pelos tipos do CE. Roda só na 1.7, e por isso cada versão tem a sua pasta `Bin/<versão>/Assemblies`. O mesmo vale para a `MountedArmsCE.dll`, quando ela precisar ser recompilada.
+
 ## Teste a fazer (usuário)
 1. Abrir o 1.7 com Harmony, os dois mods **sem CE**: o Mounted Arms vanilla deve carregar sem erros e as torretas devem atirar, aquecer e girar. O Strategic exige CE e deve só acusar a dependência faltando.
 2. Com o CE 16.7.4 (1.6) ativo: ver se o próprio CE carrega no 1.7. Se carregar, testar as camadas CE e o Strategic como no 1.6.
