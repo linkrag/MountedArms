@@ -3,7 +3,7 @@
 Leia este arquivo inteiro antes de mexer em qualquer coisa. Detalhes ficam em `Docs/` (índice no fim).
 
 ## O que é o projeto
-Mod de RimWorld **1.6** (`packageId: linkrag.mountedarms`, autor Felipe) que adiciona **torretas baseadas em armas montadas modernas** (M240, M134, M2, Mk19, Mk44, TOW, foguetes 80mm, CIWS 20mm, morteiro M252, bateria de foguetes guiados), com equilíbrio "vanilla-friendly" e uma **camada de compatibilidade com Combat Extended (CE)** carregada só quando o CE está ativo. Requer Harmony; nenhum DLC.
+Mod de RimWorld **1.6 e 1.7** (no 1.7 reaproveita `1.6/` e as DLLs de 1.6; ver `Docs/MIGRATION_1_7.md`) (`packageId: linkrag.mountedarms`, autor Felipe) que adiciona **torretas baseadas em armas montadas modernas** (M240, M134, M2, Mk19, Mk44, TOW, foguetes 80mm, CIWS 20mm, morteiro M252, bateria de foguetes guiados), com equilíbrio "vanilla-friendly" e uma **camada de compatibilidade com Combat Extended (CE)** carregada só quando o CE está ativo. Requer Harmony; nenhum DLC.
 
 ## Quem é o usuário e como trabalhar com ele
 - Felipe, brasileiro. **Responda em português (BR)**, de forma concisa e direta. Engenheiro Java/Spring/Kafka, modder de RimWorld com vários mods; testa no jogo e envia logs.
@@ -14,7 +14,7 @@ Mod de RimWorld **1.6** (`packageId: linkrag.mountedarms`, autor Felipe) que adi
 ## Estrutura
 ```
 About/About.xml          metadados (precisa de Harmony)
-LoadFolders.xml          1.6 sempre; 1.6/CE só com CETeam.CombatExtended
+LoadFolders.xml          v1.6 e v1.7: 1.6 sempre; 1.6/CE só com CETeam.CombatExtended
 1.6/Defs/                Research.xml, Weapons.xml, Buildings.xml (vanilla)
 1.6/CE/Patches/MountedArms_CE.xml   toda a camada CE
 1.6/Assemblies/MountedArms.dll      compilado (NÃO versionado; ver Docs/TOOLING.md)
@@ -69,3 +69,4 @@ Veja `Docs/STATUS.md`. Em resumo: M240/M134/M2/Mk 19/Mk44 testados (vanilla e CE
 | `Docs/HISTORY.md` | linha do tempo dos problemas e correções |
 | `Docs/TOOLING.md` | compilar, validar, texturas, caminhos, restrições do ambiente |
 | `Docs/TEMPLATE_NOVA_TORRETA.md` | checklist + esqueletos para nova torreta |
+| `Docs/MIGRATION_1_7.md` | migração para RimWorld 1.7 (Waylith): auditoria, riscos, toolchain (vale para os dois mods) |

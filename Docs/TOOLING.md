@@ -1,5 +1,7 @@
 # Ferramentas e fluxo
 
+> **No RimWorld 1.7 os scripts de build abaixo estão quebrados** (`RimWorldWin64_Data/Managed`, Harmony 1.6 e `Unity.Mathematics.dll` não existem mais). Referências e caminho de migração: `Docs/MIGRATION_1_7.md`.
+
 ## Compilar a DLL
 `Source/build.sh` (variáveis `RW` = pasta do RimWorld, `HARMONY` = 0Harmony.dll). Equivalente:
 `mcs -target:library -debug- -optimize+ -out:1.6/Assemblies/MountedArms.dll -r:$M/Assembly-CSharp.dll -r:$M/UnityEngine.dll -r:$M/UnityEngine.CoreModule.dll -r:$M/netstandard.dll -r:0Harmony.dll Source/*.cs`
