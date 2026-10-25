@@ -37,6 +37,9 @@ Fonte local do CE: `F:\Steam\steamapps\workshop\content\294100\2890901044` (defs
 ## Chama de projétil (`CompProjectileFleck`)
 Posição = `DrawPos − (lastPos − DrawPos) × originOffset` (o offset é em "ticks de movimento", não em células): projétil lento → chama no centro do sprite. Para chama no bocal use `MountedArms.CompProperties_Exhaust` (`MountedArmsFx.dll`).
 
+## Cook-off de munição (`AmmoThing.TryDetonate`)
+Chamado em `PreApplyDamage` quando a pilha leva dano de violência externa: sorteia pela vida perdida e chama `GenExplosionCE.DoExplosion` com `explosionRadius`/dano/`damageDef` do `detonateProjectile`, **sem** passar pelo `thingClass` do projétil. Não destrói a pilha (o dano que segue faz isso). O Strategic intercepta isso para as ogivas grandes.
+
 ## Alcances de referência (CE)
 M240B 62 · Minigun 62 · AGS-30 62 (min 8) · KPV 75 · Autocannon 78 · Sniper turret 86 · Flak 92 (min 16) · CIWS (CE) 55/105 · Medium/Heavy turret 55 · Mortar 700 (min 32). Torreta de mísseis do Glitter Tech: 500 (min 30), burst 25, mag 25, reload 5, `noSnapshot` + `noSingleShot`.
 
