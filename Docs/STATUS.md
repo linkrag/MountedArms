@@ -1,5 +1,8 @@
 # Status atual (atualize sempre que o usuário testar algo)
 
+> **Pausa para migrar ao 1.7 (25/out/2026):** contexto completo em `MountedArmsStrategic/Docs/HANDOFF.md`.
+
+
 Ambiente: RimWorld 1.6, Harmony, Combat Extended 16.7.4 (o usuário testa só no CE por enquanto). Jogo em `F:\Steam\steamapps\common\RimWorld`. DLLs: `Source/build.sh` (principal) e `SourceCE/build_ce.ps1` (só-CE), com o jogo fechado.
 
 ## Confirmado funcionando em jogo
