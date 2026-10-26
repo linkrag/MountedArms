@@ -1,5 +1,20 @@
 # Histórico de bugs e correções
 
+## Lições do Strategic, lote 11 (26/out/2026)
+- **Salva do CE travada no 1º tiro:** o `LockRotationAndAngle` reaproveita a mira do 1º tiro em toda a rajada contra célula ou prédio. Aumentar o `circularError` só desloca a salva inteira; o espalhamento por míssil tem de ser feito no verbo (`Verb_ShootGuidedCE.ShiftTarget`).
+- **Bomb ×4:** o Bomb multiplica o dano por 4 em prédios e plantas. Para tirar HP exato, use um DamageDef próprio com fatores 1 (`MAS_BlastWave`).
+- **`TakeDamage` × `Destroy`:**
+  - O `TakeDamage` letal chama o `Kill`; o `Destroy(KillFinalize)` não.
+  - Boomshroom (Odyssey) e coisas com `explodeOnKilled` explodem no `Kill`.
+  - `CompExplosive.destroyedThroughDetonation = true` faz a coisa virar destroço sem explodir.
+- **Parede de montanha imortal:**
+  - Nunca segure um sustentador de teto em 1 de HP: depois disso o dano vira 0 e ele nunca mais cai.
+  - O desabamento vanilla roda no `MapPreTick` do tick seguinte. Derrubar todos os sustentadores no fim da onda dá um desabamento só.
+- **Shell quebrado em sessão longa:**
+  - Se Bash, PowerShell e Write falham com ENOENT em `%TEMP%\claude\<sessão>\tasks`, a pasta temporária da sessão foi apagada.
+  - Só Read, Grep e Edit continuam funcionando, e os subagentes também falham.
+  - Não insista: atualize os docs e abra uma sessão nova para compilar e commitar.
+
 1. Mk19 mirava e não disparava (CE) → `FireModes` incorreto; resolvido com `aiUseBurstMode FALSE`, `aiAimMode AimedShot`, `noSingleShot`.
 2. DLL antiga em jogo → conferir md5 após copiar; commitar com novo nome e `mv`.
 3. `ShotsPerBurst` é protected → usa `shots=1` por tick.
