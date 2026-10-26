@@ -3,7 +3,7 @@
 Leia este arquivo inteiro antes de mexer em qualquer coisa. Detalhes ficam em `Docs/` (índice no fim).
 
 ## O que é o projeto
-Mod de RimWorld **1.6 e 1.7** (no 1.7 reaproveita `1.6/` e as DLLs de 1.6; ver `Docs/MIGRATION_1_7.md`) (`packageId: linkrag.mountedarms`, autor Felipe) que adiciona **torretas baseadas em armas montadas modernas** (M240, M134, M2, Mk19, Mk44, TOW, foguetes 80mm, CIWS 20mm, morteiro M252, bateria de foguetes guiados), com equilíbrio "vanilla-friendly" e uma **camada de compatibilidade com Combat Extended (CE)** carregada só quando o CE está ativo. Requer Harmony; nenhum DLC.
+Mod de RimWorld **1.6 e 1.7** (conteúdo comum em `1.6/`, DLLs por versão em `Bin/1.6` e `Bin/1.7`; ver `Docs/MIGRATION_1_7.md`) (`packageId: linkrag.mountedarms`, autor Felipe) que adiciona **torretas baseadas em armas montadas modernas** (M240, M134, M2, Mk19, Mk44, TOW, foguetes 80mm, CIWS 20mm, morteiro M252, bateria de foguetes guiados), com equilíbrio "vanilla-friendly" e uma **camada de compatibilidade com Combat Extended (CE)** carregada só quando o CE está ativo. Requer Harmony; nenhum DLC.
 
 ## Quem é o usuário e como trabalhar com ele
 - Felipe, brasileiro. **Responda em português (BR)**, de forma concisa e direta. Engenheiro Java/Spring/Kafka, modder de RimWorld com vários mods; testa no jogo e envia logs.
@@ -14,17 +14,19 @@ Mod de RimWorld **1.6 e 1.7** (no 1.7 reaproveita `1.6/` e as DLLs de 1.6; ver `
 ## Estrutura
 ```
 About/About.xml          metadados (precisa de Harmony)
-LoadFolders.xml          v1.6 e v1.7: 1.6 sempre; 1.6/CE só com CETeam.CombatExtended
+LoadFolders.xml          v1.6/v1.7: 1.6 (conteúdo) + Bin/<versão> (DLLs); 1.6/CE e Bin/<versão>/CE só com CETeam.CombatExtended
 1.6/Defs/                Research.xml, Weapons.xml, Buildings.xml (vanilla)
 1.6/CE/Patches/MountedArms_CE.xml   toda a camada CE
-1.6/Assemblies/MountedArms.dll      compilado (NÃO versionado; ver Docs/TOOLING.md)
+Bin/<versão>/Assemblies/      MountedArms.dll, MountedArmsFx.dll (NÃO versionadas; build.ps1)
+Bin/<versão>/CE/Assemblies/   MountedArmsCE.dll (NÃO versionada)
 1.6/Languages/{English,PortugueseBrazilian}/Keyed/MountedArms.xml
 1.6/Textures/MountedArms/<Nome>_{Base,Top,Icon}.png
-Source/                  C# (MountedArms.cs, BarrelHeat.cs, SlewArc.cs, build.sh) — NÃO referencia CE
-SourceCE/                C# só-CE (botão Descarregar, efeitos de lançamento no CE), build_ce.ps1 → 1.6/CE/Assemblies/MountedArmsCE.dll
-SourceFx/                C# 5 (efeitos de lançamento, LaunchFxExtension), build_fx.ps1 → 1.6/Assemblies/MountedArmsFx.dll (com e sem CE)
+Source/                  C# (MountedArms.cs, BarrelHeat.cs, SlewArc.cs; MountedArms.csproj) — NÃO referencia CE
+SourceCE/                C# só-CE (botão Descarregar, efeitos de lançamento no CE; MountedArmsCE.csproj)
+SourceFx/                C# (efeitos de lançamento, LaunchFxExtension; MountedArmsFx.csproj), carregada com e sem CE
+build.ps1, Directory.Build.props   build das duas versões (SDK .NET 10; ver Docs/TOOLING.md)
 Docs/                    regras, decisões, notas CE, status, ferramentas
-tools/                   scripts de geração de textura e checagem de XML
+tools/                   geração de textura, checagem de XML, unity_facades.ps1 (build da 1.7 contra o CE 1.6)
 ```
 
 ## Regras de ouro (cada uma custou um bug)
@@ -44,12 +46,13 @@ tools/                   scripts de geração de textura e checagem de XML
 9. Botão "atacar tile do mundo" do CE em artilharia: escondido com `MountedArms.NoWorldStrikeExtension` (Harmony em `Building_TurretGunCE.GetGizmos`).
 10. **Docs sempre atualizados:** toda edição atualiza os MDs afetados no mesmo commit (ver `Docs/RULES.md` §0).
 11. **Edição de arquivos com replace em massa:** confira que o padrão casou na linha certa (já trocamos o `burstShotCount` do Mk19 em vez do da bateria). Depois de editar, valide o XML e releia o trecho.
+12. **C#:** compile sempre as duas versões (`powershell -File build.ps1`, jogo fechado). O XML em `1.6/` é carregado pelas duas DLLs, então não referencie classe nova sem compilar as duas. O código precisa compilar em `net472` e em `net10.0`.
 
 ## Fluxo para criar/alterar uma torreta
-Use `Docs/TEMPLATE_NOVA_TORRETA.md` (checklist + esqueletos XML). Resumo: arma real + análogos vanilla/CE → gun/projétil/building/pesquisa/3 texturas (vanilla) → patch CE → checar (`tools/check_defnames.py`, `tools/check.py`, `tools/check_ce.py`, lxml) → compilar se mudou C# → testar vanilla **e** CE → atualizar `Docs/` → commit.
+Use `Docs/TEMPLATE_NOVA_TORRETA.md` (checklist + esqueletos XML). Resumo: arma real + análogos vanilla/CE → gun/projétil/building/pesquisa/3 texturas (vanilla) → patch CE → checar (`tools/check_defnames.py`, `tools/check.py`, `tools/check_ce.py`, lxml) → compilar se mudou C# (`build.ps1`, 1.6 e 1.7) → testar vanilla **e** CE → atualizar `Docs/` → commit.
 
 ## Estado atual
-Veja `Docs/STATUS.md`. Em resumo: M240/M134/M2/Mk 19/Mk44 testados (vanilla e CE); bateria APKWS (CE) corrigida e confirmada; Phalanx intercepta no CE (com a opção "Enable CIWS"); botão Descarregar e nomes reais confirmados. Bofors, ZU-23-2, Avenger, Goalkeeper, Iron Beam, TOW, B-8 e M252 ainda **não confirmados**. Companheiro: `../MountedArmsStrategic` (mísseis/artilharia estratégica, só-CE).
+Veja `Docs/STATUS.md`. Em resumo: M240/M134/M2/Mk 19/Mk44 testados (vanilla e CE); bateria APKWS (CE) corrigida e confirmada; Phalanx intercepta no CE (com a opção "Enable CIWS"); botão Descarregar e nomes reais confirmados. Bofors, ZU-23-2, Avenger, Goalkeeper, Iron Beam, TOW, B-8 e M252 ainda **não confirmados**. RimWorld 1.7: DLLs por versão compiladas, **não testado em jogo** (`Docs/MIGRATION_1_7.md`). Companheiro: `../MountedArmsStrategic` (mísseis/artilharia estratégica, só-CE).
 
 ## Convenções
 - Git: branch `main`; commits curtos e no imperativo. Não versione a DLL nem o `.git` de terceiros. Sem remote ainda (o usuário criará o remote).

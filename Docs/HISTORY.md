@@ -19,5 +19,13 @@
 19. Chama dos foguetes no meio do sprite: `CompProjectileFleck` do CE usa o deslocamento do tick × originOffset → `CompProperties_Exhaust` no bocal.
 20. (Strategic) Explosões grandes passaram a usar zonas reais de sobrepressão (Kingery-Bulmash), em todos os mísseis de grande impacto.
 21. (Strategic) Explosão por zonas feita num tick só: ~1 s de travamento e sem efeito visual → onda de choque espalhada em ticks, com efeito vanilla por célula.
+22. O jogo local passou para o 1.7 (sem `RimWorldWin64_Data` e sem Unity), e os scripts csc/mcs deixaram de funcionar. Foram trocados pelo SDK .NET 10 com alvo duplo (`net472` e `net10.0`, referências `Krafs.Rimworld.Ref`) e DLLs em `Bin/<versão>`. A 1.7 compila contra o CE 1.6 com fachadas.
+    - Bug no meio do caminho: `-p:ModBin` passado na linha de comando não podia ser reatribuído no props, e a saída foi para `ma-bin1.6`. Corrigido com a propriedade derivada `ModBinDir`.
+    - A revisão independente (26/out) achou mais quatro problemas:
+      - o SDK gravava o commit do git na DLL (o MD5 mudava a cada commit);
+      - os dois alvos dividiam o mesmo `obj` (um build sem `-f` pôs uma DLL net10 em `Bin/1.6`, 1 vez em 19);
+      - `.gitignore` com `bin/`, que no Windows ignorava `Bin/` inteira;
+      - `-Out` relativo era resolvido em cada pasta de projeto.
+      Os quatro foram corrigidos.
 13. Erro meu (lote 4): `MA_Turret_ZU23`, `MA_Gun_ZU23`, `MA_Ammo_FIM92`, `MA_Bullet_FIM92` (e `MAS_*_M777` no Strategic) terminavam em dígito → config error no carregamento. Renomeados para `_ZU23_AA`, `_FIM92_Stinger`, `_M777_Howitzer`; criado `tools/check_defnames.py`.
 12. Erro meu: replace-all trocou o burst do Mk19 (4→6) em vez da bateria; corrigido por sed por linha.

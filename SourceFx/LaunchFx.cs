@@ -7,9 +7,9 @@ using Verse;
 
 namespace MountedArms
 {
-    // Separate assembly (1.6/Assemblies/MountedArmsFx.dll, loaded with and without CE) because the main
-    // MountedArms.dll uses C# 6 and this machine only has the C# 5 compiler. No CE references here; the CE
-    // hook lives in MountedArmsCE.dll and reuses LaunchFx.Play.
+    // Separate assembly (Bin/<version>/Assemblies/MountedArmsFx.dll, loaded with and without CE), kept apart from
+    // MountedArms.dll for historical reasons (it was C# 5 when only the .NET Framework csc existed). No CE
+    // references here; the CE hook lives in MountedArmsCE.dll and reuses LaunchFx.Play.
 
     /// <summary>
     /// Launch effects for missile/rocket guns (on the GUN def, i.e. the turret's turretGunDef). Visual only:

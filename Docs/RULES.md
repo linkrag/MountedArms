@@ -1,15 +1,15 @@
 # Mounted Arms — regras do projeto
 
 Documento de referência para criar novas torretas sem quebrar o que já foi acertado.
-packageId: `linkrag.mountedarms` · RimWorld 1.6 (1.7 depois) · Depende de Harmony · CE opcional.
+packageId: `linkrag.mountedarms` · RimWorld 1.6 e 1.7 · Depende de Harmony · CE opcional.
 
 ## 0. Documentação
-- **Depois de toda edição, atualize os MDs afetados** (STATUS, TURRETS, DECISIONS, CE_NOTES, HISTORY, README, AGENTS) no mesmo commit. Pedido do usuário: os docs são a memória do projeto entre sessões.
+- **Depois de toda edição, atualize os MDs afetados** (STATUS, TURRETS, DECISIONS, CE_NOTES, HISTORY, TOOLING, MIGRATION_1_7, README, AGENTS) no mesmo commit. Pedido do usuário: os docs são a memória do projeto entre sessões.
 
 ## 1. Estrutura
-- `About/About.xml`, `LoadFolders.xml` (`1.6/CE` só carrega com `CETeam.CombatExtended`).
+- `About/About.xml`, `LoadFolders.xml` (1.6 e 1.7: conteúdo em `1.6/`, DLLs em `Bin/<versão>`; `1.6/CE` e `Bin/<versão>/CE` só carregam com `CETeam.CombatExtended`).
 - `1.6/Defs`: Research.xml, Weapons.xml, Buildings.xml · `1.6/Textures/MountedArms/<Nome>_{Base,Top,Icon}.png`
-- `1.6/Assemblies/MountedArms.dll` ← compilado de `Source/MountedArms.cs` (mcs, refs: Assembly-CSharp, UnityEngine(.CoreModule), netstandard, 0Harmony).
+- `Bin/<versão>/Assemblies/MountedArms.dll` e `MountedArmsFx.dll`, `Bin/<versão>/CE/Assemblies/MountedArmsCE.dll` ← `build.ps1` (SDK .NET 10, as duas versões; ver `Docs/TOOLING.md`).
 - `1.6/CE/Patches/MountedArms_CE.xml`: toda a camada CE.
 
 ## 2. Regras de defs (erros já cometidos)

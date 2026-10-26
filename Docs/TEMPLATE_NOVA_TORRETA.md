@@ -10,7 +10,7 @@ Troque `XXX` (nome), os números e os textos. Siga RULES.md.
 5. Research.xml: `MA_Research_XXX`.
 6. Calcular `heatPerShot` (fórmula em RULES.md 6b) vanilla e CE.
 7. Patch CE (`MountedArms_CE.xml`): MakeGunCECompatible, MultiBarrelExtension, building (statBases, cooldown, remover Refuelable) e troca de `heatPerShot`.
-8. Rodar `check.py` e `check_ce.py`; compilar DLL se mudou C#.
+8. Rodar `check.py` e `check_ce.py`; compilar as DLLs se mudou C# (`powershell -File build.ps1`, gera 1.6 e 1.7).
 9. Testar vanilla e CE: construir, energia/operador, mirar, atirar, recarregar, superaquecer, tomar dano.
 
 ## Turret (Buildings.xml)

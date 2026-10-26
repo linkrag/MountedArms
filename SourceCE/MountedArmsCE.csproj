@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- MountedArmsCE.dll: CE-only layer (Unload button, CE launch effects); LoadFolders loads it only with CE. -->
+  <PropertyGroup>
+    <AssemblyName>MountedArmsCE</AssemblyName>
+    <RootNamespace>MountedArms</RootNamespace>
+    <UsesCE>true</UsesCE>
+    <OutputPath>$(ModBinDir)$(RimWorldVersion)\CE\Assemblies\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Private=false: MountedArmsFx.dll ships once, in Bin/<version>/Assemblies -->
+    <ProjectReference Include="..\SourceFx\MountedArmsFx.csproj" Private="false" />
+  </ItemGroup>
+</Project>

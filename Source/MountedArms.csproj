@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- MountedArms.dll: barrel heat, slew/arc, muzzle origin, CE gizmo filter (by reflection; no CE reference). -->
+  <PropertyGroup>
+    <AssemblyName>MountedArms</AssemblyName>
+    <RootNamespace>MountedArms</RootNamespace>
+    <OutputPath>$(ModBinDir)$(RimWorldVersion)\Assemblies\</OutputPath>
+  </PropertyGroup>
+</Project>

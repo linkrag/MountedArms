@@ -1,6 +1,7 @@
 # Decisões do projeto (e por quê)
 
 ## Do usuário (Felipe) — não reverter sem perguntar
+- **RimWorld 1.6 e 1.7** (25/out/2026): manter as duas versões. O SDK .NET 10 foi instalado na máquina para compilar ("pode instalar o sdk").
 - **Texturas** são geradas por mim (script `tools/gen_tex.py`); ele não edita sprites.
 - **Balanceamento vanilla-friendly**; alcance vanilla calibrado contra mini-turret (28,9), fuzil (25,9), sniper (41,5), lança-granadas (~38,9).
 - **Alcance no CE = o do próprio CE** ("ele está há muito tempo no jogo, vamos dar ele como balanceado"). Foi pedido comparar com armas reais; ficou decidido usar as turretas/armas do CE e do vanilla como régua, não proporção real.
@@ -20,9 +21,13 @@
 - Torretas pedidas depois do Mk44: TOW, foguetes 70 mm, CIWS 20 mm, morteiro 81 mm ("pode fazer os outros 4").
 
 ## Técnicas (minhas)
+- **1.6 + 1.7 (25/out/2026):** conteúdo comum em `1.6/` e DLLs por versão em `Bin/<versão>`, o mesmo esquema do Strategic.
+  - Não movi o conteúdo para `Common/`: assim nenhum caminho muda em defs, texturas, ferramentas e docs.
+  - As referências vêm do `Krafs.Rimworld.Ref`, porque compilar a 1.6 sem o jogo 1.6 instalado exige referências de fora.
+  - A 1.7 compila contra o CE 1.6 com fachadas, enquanto não houver CE 1.7.
 - Uma camada CE separada, carregada por `LoadFolders IfModActive`, em vez de patches condicionais.
 - Harmony só para: origem do projétil/clarão (`Projectile.Launch` prefix), giro (`TurretTop.TurretTopTick`), arco (`Building_TurretGun.IsValidTarget`/`OrderAttack`), filtro de gizmo do CE (`Building_TurretGunCE.GetGizmos`).
 - `CompBarrelHeat` usa só API pública + reflexão em `burstCooldownTicksLeft`/`burstWarmupTicksLeft`/`ResetCurrentTarget` para funcionar nos dois mundos.
 - Patch XML: `PatchOperationMakeGunCECompatible` para armas; ops manuais para o building. Detalhes em `Docs/CE_NOTES.md`.
 - Sem `aimedBurstShotCount` (warning do CE), sem `noSnapshot` nas armas de burst > 1 não-artilharia (Mk19 quebrava). Artilharia CE (Glitter Tech) usa `noSnapshot` + `noSingleShot`.
-- Mods do usuário que podem conflitar e já foram checados quando ele perguntou: lista em `Docs/STATUS.md` (seção Ambiente de teste).
+- Mods do usuário que podem conflitar e já foram checados quando ele perguntou: a lista não foi registrada nos docs (o `Docs/STATUS.md` só guarda a linha "Ambiente").

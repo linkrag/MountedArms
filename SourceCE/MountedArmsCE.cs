@@ -7,7 +7,7 @@ using Verse;
 
 namespace MountedArms.CE
 {
-    // CE-only assembly (1.6/CE/Assemblies, loaded only with Combat Extended). The main MountedArms.dll
+    // CE-only assembly (Bin/<version>/CE/Assemblies, loaded only with Combat Extended). The main MountedArms.dll
     // must not reference CE, so anything that needs CE types lives here.
 
     [StaticConstructorOnStartup]

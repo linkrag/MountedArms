@@ -1,6 +1,6 @@
 # Mounted Arms
 
-Mod de RimWorld 1.6 que adiciona **torretas baseadas em armas montadas modernas**, com balanceamento "vanilla-friendly" e uma camada de compatibilidade com **Combat Extended** (carregada só quando o CE está ativo). Requer **Harmony**; nenhum DLC.
+Mod de RimWorld 1.6 e 1.7 que adiciona **torretas baseadas em armas montadas modernas**, com balanceamento "vanilla-friendly" e uma camada de compatibilidade com **Combat Extended** (carregada só quando o CE está ativo). Requer **Harmony**; nenhum DLC.
 
 - packageId: `linkrag.mountedarms` · autor: Felipe
 - Aba de pesquisa própria: "Mounted Arms"
@@ -33,7 +33,7 @@ Detalhes e números: `Docs/TURRETS.md`.
 - Explosão ao tomar dano (`CompProperties_Explosive`).
 
 ## Instalação / desenvolvimento
-Pasta do mod em `RimWorld/Mods/MountedArms`. A DLL (`1.6/Assemblies/MountedArms.dll`) não é versionada: compile com `Source/build.sh` (ver `Docs/TOOLING.md`). Ordem de carga: depois de Harmony, DLCs e CE.
+Pasta do mod em `RimWorld/Mods/MountedArms`. As DLLs (`Bin/1.6`, `Bin/1.7`) não são versionadas: compile com `powershell -File build.ps1` (SDK .NET 10; ver `Docs/TOOLING.md`). Ordem de carga: depois de Harmony, DLCs e CE.
 
 ## Documentação do projeto
-`AGENTS.md` (guia para agentes de código — comece por ele), `Docs/RULES.md`, `Docs/DECISIONS.md`, `Docs/TURRETS.md`, `Docs/CE_NOTES.md`, `Docs/STATUS.md`, `Docs/HISTORY.md`, `Docs/TOOLING.md`, `Docs/TEMPLATE_NOVA_TORRETA.md`.
+`AGENTS.md` (guia para agentes de código — comece por ele), `Docs/RULES.md`, `Docs/DECISIONS.md`, `Docs/TURRETS.md`, `Docs/CE_NOTES.md`, `Docs/STATUS.md`, `Docs/HISTORY.md`, `Docs/TOOLING.md`, `Docs/TEMPLATE_NOVA_TORRETA.md`, `Docs/MIGRATION_1_7.md`.

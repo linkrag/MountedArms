@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- MountedArmsFx.dll: launch effects (LaunchFxExtension, exhaust); loaded with and without CE; no CE reference. -->
+  <PropertyGroup>
+    <AssemblyName>MountedArmsFx</AssemblyName>
+    <RootNamespace>MountedArms</RootNamespace>
+    <OutputPath>$(ModBinDir)$(RimWorldVersion)\Assemblies\</OutputPath>
+  </PropertyGroup>
+</Project>
