@@ -1,6 +1,6 @@
 # Migração para RimWorld 1.7 (Waylith), vale para os dois mods
 
-Atualizado em 26/out/2026, jogo 1.7.4985 rev1269. **Ainda não testado em jogo.**
+Atualizado em 26/out/2026, jogo 1.7.4985 rev1269. **Testado em jogo pelo usuário em 26/out/2026: OK** (ver "Teste").
 
 ## Decisões do usuário (25/out/2026)
 - Manter suporte a **1.6 e 1.7**.
@@ -74,10 +74,10 @@ A checagem foi feita por metadados (System.Reflection.Metadata contra o `Assembl
 - **Avisos silenciados no `Directory.Build.props`:** CS1701/CS1702 (versões de CoreLib e de `Assembly-CSharp` pedidas pelo CE e pelas fachadas) e CS1684 (`Unity.Collections.NativeArray`, não usado).
 - **A DLL resultante roda só na 1.7**, porque referencia `UnityStubs` e o `Assembly-CSharp` 1.7. Por isso cada versão tem a sua pasta `Bin/<versão>`.
 
-## Teste a fazer (usuário)
-1. **1.7 sem CE**, com Harmony e Mounted Arms: deve carregar sem erros, e as torretas devem atirar, aquecer e girar. O Strategic exige CE e deve só acusar a dependência faltando.
-2. **1.7 com o CE 16.7.4 (1.6):** primeiro, ver se o próprio CE carrega. Se carregar, testar a camada CE do Mounted Arms (Descarregar, efeitos de lançamento) e o Strategic (lotes 10 e 11, ver o `STATUS` dele).
-3. **Mandar o log.** No 1.7 o local ainda não foi confirmado: o `Player.log` em `AppData/LocalLow/Ludeon Studios/...` ainda é do 1.6.
+## Teste (usuário, 26/out/2026: os três primeiros itens confirmados)
+1. ✅ **1.7 sem CE**, com Harmony e Mounted Arms: deve carregar sem erros, e as torretas devem atirar, aquecer e girar. O Strategic exige CE e deve só acusar a dependência faltando.
+2. ✅ **1.7 com o CE 16.7.4 (1.6):** o CE 1.6 carrega no 1.7; camada CE e Strategic OK. primeiro, ver se o próprio CE carrega. Se carregar, testar a camada CE do Mounted Arms (Descarregar, efeitos de lançamento) e o Strategic (lotes 10 e 11, ver o `STATUS` dele).
+3. **Log:** no 1.7 fica no mesmo lugar do 1.6 (`AppData/LocalLow/Ludeon Studios/RimWorld by Ludeon Studios/Player.log`).
 4. **1.6** não dá para testar nesta máquina, porque o jogo local é 1.7.
    - As DLLs de 1.6 do Mounted Arms foram comparadas por metadados com as testadas.
    - A do Strategic agora inclui o lote 11, que não foi testado em nenhuma versão.
