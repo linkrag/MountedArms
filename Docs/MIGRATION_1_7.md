@@ -12,7 +12,7 @@ Atualizado em 26/out/2026, jogo 1.7.4985 rev1269. **Testado em jogo pelo usuári
 - **`runtimeconfig`:** `AssemblyNameRedirects = UnityEngine*=UnityStubs; Unity.*=UnityStubs`, e vinculação tolerante (`LaxAssemblyBinding`, `LaxMemberSignatures`, `LaxTypeRefResolution`, `LaxPrivateFieldNames`, `SkipAccessChecks`...).
 - **`JitPatchableAssemblies = Assembly-CSharp`.** Hipótese: métodos pequenos de **outros** assemblies (CE) podem ser inlinados e escapar de patches Harmony. Os nossos alvos no CE hoje são virtuais ou grandes.
 - **Harmony 1.7 = Harmony 3** (`2009463077/1.7/Assemblies/0Harmony.dll`). Ele checa tipo e nome de `__instance`/`__result`/parâmetros.
-- **Dubs Rimatomics** já tem pasta `1.7`. `NuclearStrike.Yield` continua `public float`.
+- **Dubs Rimatomics** já tem pasta `1.7`. O Strategic usa dele, por nome: os defs `FissionWarhead`, `Mote_NukeCloud` (campo `AtomicScale`), `nuclearBlastInMap`, `NuclearFallout`/`RadioactiveFallout`, `FatalRad`, e os métodos `DubUtils.applyRads` e `GameCondition_NuclearFallout.GameConditionTick`/`DoCellSteadyEffects` (patches).
 - **Combat Extended** instalado (16.7.4) declara só 1.6. Não há build 1.7 oficial (o CE tem um branch `1.7-Test`; existe um port não oficial no Workshop, com packageId desconhecido).
 
 ## Layout (os dois mods)

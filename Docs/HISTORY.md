@@ -11,6 +11,7 @@
   - Nunca segure um sustentador de teto em 1 de HP: depois disso o dano vira 0 e ele nunca mais cai.
   - O desabamento vanilla roda no `MapPreTick` do tick seguinte. Derrubar todos os sustentadores no fim da onda dá um desabamento só.
 - **Fallout do Rimatomics:** o `NuclearStrike` só cria o `NuclearFallout` com `Yield > 150` (o mesmo limite liga a explosão completa em long events). O fallout dele tem taxa constante, e o toxic buildup multiplica pela `ToxicEnvironmentResistance`, então é 0 para quase todos; quem mata é a radiação (`DubUtils.applyRads`). Antes de culpar a versão do jogo, leia o IL das duas versões. Depois do `FatalRad`, o `applyRads` joga toda dose nele: radiação contínua mata em horas.
+- **Explosão do Rimatomics acima de Yield 150** (`NuclearStrike.BlastWaveThing`, long events): `TakeDamage` em tudo do mapa sem tirar o teto antes → "already-destroyed", pedaços de rocha num mapa nulo e fragmentos do CE fora do mapa. Use a `HeavyBlast`. O `GenRadial.RadialCellsAround` só vai até ~r120: raios maiores precisam listar as células do mapa.
 - **Shell quebrado em sessão longa:**
   - Se Bash, PowerShell e Write falham com ENOENT em `%TEMP%\claude\<sessão>\tasks`, a pasta temporária da sessão foi apagada.
   - Só Read, Grep e Edit continuam funcionando, e os subagentes também falham.
