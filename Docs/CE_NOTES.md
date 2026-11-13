@@ -12,7 +12,7 @@ Fonte local do CE: `F:\Steam\steamapps\workshop\content\294100\2890901044` (defs
 - Tempo de mira = `warmupTime` do verbo CE (não `turretBurstWarmupTime`).
 
 ## Armadilhas
-1. **FireModes**: sempre `aiAimMode AimedShot`. Sem isso: snapshot → "mira e não dispara" (Mk19, TOW). Mk19 funcionou com `aiUseBurstMode FALSE`, `aiAimMode AimedShot`, `noSingleShot true`.
+1. **FireModes**: sempre `aiAimMode AimedShot`. Sem isso: snapshot → "mira e não dispara" (Mk19, TOW). Exceção: arma de fogo contínuo em tiro único (Gatling) usa `SuppressFire` sem `noSnapshot`, porque em torreta o `AimedShot` soma `Lerp(30, 240, dist/100)` ticks de mira a **cada** rajada (`Verb_ShootCE.WarmupComplete`); as torretas do próprio CE (`Gun_M240B`, `Gun_AGSThirty`) usam SuppressFire. `noSnapshot` remove Snapshot **e** SuppressFire (`CompFireModes`). Mk19 funcionou com `aiUseBurstMode FALSE`, `aiAimMode AimedShot`, `noSingleShot true`.
 2. **aimedBurstShotCount ≥ burst**: só gera warning do CE ("burst fire shot count is same or higher than auto fire") e desliga o modo rajada; omita.
 3. **Alcance e anel de colocação**: `PlaceWorker_ShowTurretRadius` quebra em raio 120 (log: "Cannot draw radius ring of radius 120"); mantenha ≤ ~100 em torretas não-morteiro.
 4. **Munição APKWS 70 mm** (`AmmoSet_70mmAPKWS`/`Bullet_70mmAPKWS_HEAT`): projétil `flyOverhead` com speed 173 → só funciona como artilharia (`Verb_ShootMortarCE` + `CompProperties_Charges`). Usado direto em `Verb_ShootCE`, o voo dura mais de um minuto e não acerta.

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- Own Architect tab for every Mounted Arms turret (and, through a patch, the Strategic ones). Vanilla order: Security = 300. -->
+  <DesignationCategoryDef>
+    <defName>MA_Military</defName>
+    <label>military</label>
+    <order>310</order>
+    <specialDesignatorClasses>
+      <li>Designator_Cancel</li>
+      <li>Designator_Deconstruct</li>
+    </specialDesignatorClasses>
+  </DesignationCategoryDef>
+
+</Defs>

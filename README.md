@@ -4,10 +4,12 @@ Mod de RimWorld 1.6 e 1.7 que adiciona **torretas baseadas em armas montadas mod
 
 - packageId: `linkrag.mountedarms` · autor: Felipe
 - Aba de pesquisa própria: "Mounted Arms"
+- Aba própria "Militar" no menu de construção (Architect), compartilhada com o Mounted Arms: Strategic quando os dois estão ativos
 
 ## Torretas
 | Torreta | Tipo | Resumo |
 |---|---|---|
+| Gatling | tripulada, sem energia | 10 canos na manivela, .45-70; a primeira torreta (só Gunsmithing) |
 | M240 | automática (energia) | metralhadora de uso geral 7,62 mm |
 | M134 Minigun | automática | rotativa 7,62 mm, rajada longa |
 | M2 Browning | tripulada | .50 BMG, longo alcance |
@@ -33,7 +35,7 @@ Detalhes e números: `Docs/TURRETS.md`.
 - Explosão ao tomar dano (`CompProperties_Explosive`).
 
 ## Instalação / desenvolvimento
-Pasta do mod em `RimWorld/Mods/MountedArms`. As DLLs (`Bin/1.6`, `Bin/1.7`) não são versionadas: compile com `powershell -File build.ps1` (SDK .NET 10; ver `Docs/TOOLING.md`). Ordem de carga: depois de Harmony, DLCs e CE.
+Fonte em `RimWorld/_dev/src/MountedArms`; o jogo carrega a cópia em `RimWorld/Mods/MountedArms` que o `build.ps1` publica (`tools/deploy.ps1`: só About, LoadFolders.xml, 1.6, Bin). As DLLs (`Bin/1.6`, `Bin/1.7`) não são versionadas: compile com `powershell -File build.ps1` (SDK .NET 10; ver `Docs/TOOLING.md`). Ordem de carga: depois de Harmony, DLCs e CE.
 
 ## Documentação do projeto
-`AGENTS.md` (guia para agentes de código — comece por ele), `Docs/RULES.md`, `Docs/DECISIONS.md`, `Docs/TURRETS.md`, `Docs/CE_NOTES.md`, `Docs/STATUS.md`, `Docs/HISTORY.md`, `Docs/TOOLING.md`, `Docs/TEMPLATE_NOVA_TORRETA.md`, `Docs/MIGRATION_1_7.md`.
+`AGENTS.md` (guia para agentes de código — comece por ele), `Docs/RULES.md`, `Docs/DECISIONS.md`, `Docs/TURRETS.md`, `Docs/CE_NOTES.md`, `Docs/STATUS.md`, `Docs/HISTORY.md`, `Docs/TOOLING.md`, `Docs/TEMPLATE_NOVA_TORRETA.md`, `Docs/MIGRATION_1_7.md`. Regra: toda implementação ou modificação atualiza esses MDs no mesmo commit.

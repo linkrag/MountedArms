@@ -124,6 +124,7 @@
 	<!-- CE ammo injector looks the recipe up as "Make" + ammo defName -->
 	<RecipeDef ParentName="AmmoRecipeBase">
 		<defName>MakeMA_Ammo_FIM92_Stinger</defName>
+		<targetCountAdjustment>4</targetCountAdjustment> <!-- "until X" step = items per craft (CE AmmoRecipeBase says 20) -->
 		<label>make Stinger missiles x4</label>
 		<description>Assemble four Stinger missiles.</description>
 		<jobString>Assembling Stinger missiles.</jobString>

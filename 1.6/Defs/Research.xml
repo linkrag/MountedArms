@@ -25,6 +25,24 @@
     <researchViewY>0.50</researchViewY>
   </ResearchProjectDef>
 
+  <!-- Earliest mount: no power and no turret research, only gunsmithing -->
+  <ResearchProjectDef>
+    <defName>MA_Research_Gatling</defName>
+    <label>hand-cranked machine guns</label>
+    <description>Multi-barrel guns turned by a hand crank, mounted on a wheeled field carriage. Unlocks the Gatling gun.</description>
+    <baseCost>600</baseCost>
+    <techLevel>Industrial</techLevel>
+    <tab>MA_Tab</tab>
+    <prerequisites>
+      <li>Gunsmithing</li>
+    </prerequisites>
+    <hideWhen>
+      <turretsDisabled>true</turretsDisabled>
+    </hideWhen>
+    <researchViewX>0.00</researchViewX>
+    <researchViewY>1.25</researchViewY>
+  </ResearchProjectDef>
+
   <ResearchProjectDef>
     <defName>MA_Research_HMG</defName>
     <label>heavy machine guns</label>
@@ -70,6 +88,7 @@
     <tab>MA_Tab</tab>
     <prerequisites>
       <li>MA_Research_GPMG</li>
+      <li>MA_Research_Gatling</li>
       <li>MultibarrelWeapons</li>
     </prerequisites>
     <requiredResearchBuilding>HiTechResearchBench</requiredResearchBuilding>

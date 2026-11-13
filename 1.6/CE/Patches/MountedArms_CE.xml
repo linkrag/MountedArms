@@ -446,6 +446,100 @@
 	</Operation>
 
 	<!-- ================================================================= -->
+	<!--  Gatling gun (CE): Colt M1883, .45-70 Government (CE AmmoSet_4570Gov), -->
+	<!--  104-round Accles drum, 600 rpm crank; range = CE bolt-action rifle (55) -->
+	<!--  Single shots (burst 1) with no verb warmup and a 0.1 s turret cooldown: -->
+	<!--  Building_TurretGunCE then fires nonstop, retargeting every shot, until -->
+	<!--  the drum runs dry (reload) or the barrels overheat.                    -->
+	<!-- ================================================================= -->
+	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">
+		<defName>MA_Gun_Gatling</defName>
+		<statBases>
+			<RangedWeapon_Cooldown>0.1</RangedWeapon_Cooldown>
+			<SightsEfficiency>0.8</SightsEfficiency>
+			<ShotSpread>0.15</ShotSpread>
+			<SwayFactor>1.60</SwayFactor>
+			<Bulk>60</Bulk>
+		</statBases>
+		<Properties>
+			<recoilAmount>1.0</recoilAmount>
+			<verbClass>CombatExtended.Verb_ShootCE</verbClass>
+			<hasStandardCommand>true</hasStandardCommand>
+			<defaultProjectile>Bullet_4570Gov_FMJ</defaultProjectile>
+			<warmupTime>0</warmupTime>
+			<range>55</range>
+			<burstShotCount>1</burstShotCount>
+			<soundCast>Shot_BoltActionRifle</soundCast>
+			<soundCastTail>GunTail_Medium</soundCastTail>
+			<muzzleFlashScale>12</muzzleFlashScale>
+			<recoilPattern>Mounted</recoilPattern>
+		</Properties>
+		<AmmoUser>
+			<magazineSize>104</magazineSize>
+			<reloadTime>10</reloadTime>
+			<ammoSet>AmmoSet_4570Gov</ammoSet>
+		</AmmoUser>
+		<!-- SuppressFire, like CE's own Gun_M240B/Gun_AGSThirty turrets: on turrets AimedShot adds
+		     Lerp(30, 240, dist/100) aim ticks to EVERY burst (Verb_ShootCE.WarmupComplete), i.e. before
+		     every single shot here. noSnapshot must stay off (it also removes SuppressFire). -->
+		<FireModes>
+			<aiAimMode>SuppressFire</aiAimMode>
+		</FireModes>
+	</Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="MA_Gun_Gatling"]</xpath>
+		<value>
+			<li Class="CombatExtended.MultiBarrelExtension">
+				<offsets>
+					<li>(0,0.6)</li>
+				</offsets>
+			</li>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationRemove">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Gatling"]/comps/li[@Class="CompProperties_Refuelable"]</xpath>
+	</Operation>
+	<Operation Class="PatchOperationAdd">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Gatling"]/statBases</xpath>
+		<value>
+			<AimingAccuracy>0.60</AimingAccuracy>
+			<Bulk>200</Bulk>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Gatling"]/statBases/ShootingAccuracyTurret</xpath>
+		<value>
+			<ShootingAccuracyTurret>0.80</ShootingAccuracyTurret>
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Gatling"]/building/turretBurstCooldownTime</xpath>
+		<value>
+			<turretBurstCooldownTime>0.1</turretBurstCooldownTime>   <!-- 600 rpm -->
+		</value>
+	</Operation>
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Gatling"]/description</xpath>
+		<value>
+			<description>A ten-barrel Gatling gun on a wooden field carriage, firing .45-70 Government from a 104-round drum. A colonist turns the crank and it fires without pause, spraying inaccurate rounds and thick black-powder smoke until the drum runs dry or the barrels overheat. Deadly up close, wasteful at range. Needs no power and is cheap enough to build early on. Needs ammunition loaded. May explode when damaged.</description>
+		</value>
+	</Operation>
+	<!-- one drum (10.4 s) adds ~+0.46, the 10 s reload cools 0.2: overheats on the 4th drum in a row -->
+	<Operation Class="PatchOperationReplace">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Gatling"]/comps/li[@Class="MountedArms.CompProperties_BarrelHeat"]/heatPerShot</xpath>
+		<value><heatPerShot>0.0064</heatPerShot></value>
+	</Operation>
+	<Operation Class="PatchOperationAddModExtension">
+		<xpath>Defs/ThingDef[defName="MA_Turret_Gatling"]</xpath>
+		<value>
+			<li Class="CombatExtended.NonSnapTurretExtension">
+				<speed>0.5</speed>
+				<angleWeightMultiplier>2</angleWeightMultiplier>
+			</li>
+		</value>
+	</Operation>
+
+	<!-- ================================================================= -->
 	<!--  Batch 2 (CE): TOW, 70mm pod, CIWS 20mm, M252 mortar              -->
 	<!-- ================================================================= -->
 	<Operation Class="CombatExtended.PatchOperationMakeGunCECompatible">

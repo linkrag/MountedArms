@@ -6,7 +6,7 @@ Troque `XXX` (nome), os números e os textos. Siga RULES.md.
 1. Escolher arma real + análogos: vanilla (alcance/cadência) e CE (Gun_* do CE em `Defs/ThingDefs_Misc/Weapons_Turrets.xml` e `Patches/Core/ThingDefs_Misc/Weapons_Guns.xml`).
 2. Texturas: `XXX_Base`, `XXX_Top` (aponta para leste), `XXX_Icon` (gen_tex.py).
 3. Weapons.xml: projétil `MA_Bullet_XXX` + gun `MA_Gun_XXX` (sem dígito no fim do defName).
-4. Buildings.xml: turret `MA_Turret_XXX` (filho de `MA_AutoTurretBase` ou `MA_MannedTurretBase`).
+4. Buildings.xml: turret `MA_Turret_XXX` (filho de `MA_AutoTurretBase` ou `MA_MannedTurretBase`; a aba "Militar" do Architect vem de `MA_TurretBase`; se herdar de base vanilla, declare `<designationCategory>MA_Military</designationCategory>`).
 5. Research.xml: `MA_Research_XXX`.
 6. Calcular `heatPerShot` (fórmula em RULES.md 6b) vanilla e CE.
 7. Patch CE (`MountedArms_CE.xml`): MakeGunCECompatible, MultiBarrelExtension, building (statBases, cooldown, remover Refuelable) e troca de `heatPerShot`.

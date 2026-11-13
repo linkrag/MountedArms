@@ -4,11 +4,11 @@ Documento de referência para criar novas torretas sem quebrar o que já foi ace
 packageId: `linkrag.mountedarms` · RimWorld 1.6 e 1.7 · Depende de Harmony · CE opcional.
 
 ## 0. Documentação
-- **Depois de toda edição, atualize os MDs afetados** (STATUS, TURRETS, DECISIONS, CE_NOTES, HISTORY, TOOLING, MIGRATION_1_7, README, AGENTS) no mesmo commit. Pedido do usuário: os docs são a memória do projeto entre sessões.
+- **Depois de toda implementação ou modificação, atualize os MDs afetados** (STATUS, TURRETS, DECISIONS, CE_NOTES, HISTORY, TOOLING, MIGRATION_1_7, README, AGENTS e o CLAUDE.md quando o fluxo mudar) no mesmo commit. Pedido do usuário: os docs são a memória do projeto entre sessões. Vale também para o Mounted Arms Strategic e o Bill Organizer, e a regra está escrita nos `CLAUDE.md` (lidos por padrão) de `Mods/` e de cada mod.
 
 ## 1. Estrutura
 - `About/About.xml`, `LoadFolders.xml` (1.6 e 1.7: conteúdo em `1.6/`, DLLs em `Bin/<versão>`; `1.6/CE` e `Bin/<versão>/CE` só carregam com `CETeam.CombatExtended`).
-- `1.6/Defs`: Research.xml, Weapons.xml, Buildings.xml · `1.6/Textures/MountedArms/<Nome>_{Base,Top,Icon}.png`
+- `1.6/Defs`: Research.xml, Weapons.xml, Buildings.xml, DesignationCategories.xml (aba "Militar" do Architect) · `1.6/Textures/MountedArms/<Nome>_{Base,Top,Icon}.png`
 - `Bin/<versão>/Assemblies/MountedArms.dll` e `MountedArmsFx.dll`, `Bin/<versão>/CE/Assemblies/MountedArmsCE.dll` ← `build.ps1` (SDK .NET 10, as duas versões; ver `Docs/TOOLING.md`).
 - `1.6/CE/Patches/MountedArms_CE.xml`: toda a camada CE.
 
@@ -19,6 +19,7 @@ packageId: `linkrag.mountedarms` · RimWorld 1.6 e 1.7 · Depende de Harmony · 
 - Comp de energia vai **em cada torreta**, nunca na base abstrata (duplica CompPowerTrader).
 - Patches XML rodam antes da herança: para mudar algo herdado, patchear a base abstrata (`@Name="MA_TurretBase"`).
 - Todo turret: ThingDef + gun + projétil + pesquisa + 3 texturas + entrada na camada CE.
+- **Aba do Architect:** `<designationCategory>MA_Military</designationCategory>` (herdada de `MA_TurretBase`; base vanilla, como o M252, declara explicitamente). Prédio novo do Strategic entra pelo patch `MountedArmsStrategic/1.6/MountedArms/Patches/MilitaryCategory.xml`.
 - Explosão ao tomar dano: `CompProperties_Explosive` (mantido também no CE).
 
 ## 3. Texturas
@@ -117,7 +118,7 @@ O M252 só faz sentido se for realmente móvel: é um prédio minifiável (empac
 ## Limites de raio do jogo
 - Vanilla: `AvoidGrid` das torretas usa `range + ~4`; `GenRadial` só tem células até raio ~79,8, então o range vanilla de uma torreta (Building_TurretGun) deve ficar **abaixo de ~75** (exceto morteiros).
 - `DrawRadiusRing` (colocação) falha com raio 120; manter range CE ≤ ~100 para torretas não-morteiro.
-- CE: toda arma com burst 1 também precisa de `<FireModes><aiAimMode>AimedShot</aiAimMode></FireModes>` (sem isso o padrão é snapshot e a torreta mira mas não dispara, como no Mk19 e TOW).
+- CE: toda arma com burst 1 também precisa de `<FireModes><aiAimMode>AimedShot</aiAimMode></FireModes>` (sem isso o padrão é snapshot e a torreta mira mas não dispara, como no Mk19 e TOW). Exceção: arma de fogo contínuo em tiro único (Gatling) usa `SuppressFire` sem `noSnapshot`, porque em torreta o `AimedShot` soma `Lerp(30, 240, dist/100)` ticks de mira a **cada** rajada (`Verb_ShootCE.WarmupComplete`); as torretas do próprio CE (`Gun_M240B`, `Gun_AGSThirty`) usam SuppressFire.
 
 ## Bateria de foguetes guiados (fogo indireto, estilo morteiro)
 - `MA_Turret_APKWS_Battery`: auto, 250 W, pesquisa `MA_Research_Missiles`. Fogo em arco, alvo em ponto do chão, rajada de 6, sem calor. Botão "atacar mundo" escondido (`NoWorldStrikeExtension`).

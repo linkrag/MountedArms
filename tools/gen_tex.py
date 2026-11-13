@@ -545,6 +545,46 @@ def stinger_item():
     rect(d, 106, 30, 150, 46, OLIVE, r=4); rect(d, 106, 210, 150, 226, OLIVE, r=4)
     return shadow(img, (3, 4), 4, 100)
 
+# ------------------------------------------------------------------ Gatling gun (Colt M1883 on a field carriage)
+WOOD   = (118, 82, 48, 255)
+WOOD_L = (150, 108, 66, 255)
+WOOD_D = (78, 54, 32, 255)
+
+def spoked_wheel(d, cx, cy):
+    # wheel seen from above: a narrow upright rim with its hub cap
+    rect(d, cx - 10, cy - 52, cx + 10, cy + 52, WOOD_D, r=8, hl=False)
+    rect(d, cx - 6, cy - 46, cx + 6, cy + 46, WOOD, r=5, hl=False)
+    for k in range(-4, 5):
+        line(d, (cx - 6, cy + k * 10), (cx + 6, cy + k * 10), 1.2, WOOD_D)
+    circ(d, cx, cy, 9, STEEL_D); circ(d, cx, cy, 4, BLACK)
+
+def base_gatling():
+    img = canvas(); d = ImageDraw.Draw(img)
+    rect(d, 46, 120, 210, 136, STEEL_D, r=4)                                      # axle
+    poly(d, [(100, 112), (156, 112), (138, 236), (118, 236)], WOOD)               # trail (operator side)
+    rect(d, 112, 222, 144, 240, STEEL_D, r=4, hl=False)                           # trail spade
+    circ(d, 128, 128, 30, WOOD_D); circ(d, 128, 128, 20, STEEL_D)                 # pintle
+    spoked_wheel(d, 36, 128)
+    spoked_wheel(d, 220, 128)
+    rect(d, 150, 160, 186, 188, WOOD_L, r=3)                                      # ammunition chest
+    rect(d, 154, 164, 182, 184, WOOD_D, r=2, hl=False)
+    return shadow(img)
+
+def top_gatling():
+    img = canvas(); d = ImageDraw.Draw(img)
+    for x in (112, 120, 128, 136, 144):                                           # 10-barrel cluster (5 visible)
+        rect(d, x - 3.5, 16, x + 3.5, 120, GUN if x % 16 else GUN_L, r=1.5, hl=False)
+    rect(d, 104, 22, 152, 32, BRASS, r=3)                                         # muzzle band
+    rect(d, 104, 70, 152, 80, BRASS, r=3)                                         # middle band
+    rect(d, 100, 112, 156, 176, BRASS, r=8)                                       # brass breech casing
+    rect(d, 108, 120, 148, 168, (160, 124, 50, 255), r=5, hl=False)
+    circ(d, 128, 140, 20, STEEL_D); circ(d, 128, 140, 14, GUN)                    # Accles drum on top
+    circ(d, 128, 140, 5, BRASS)
+    rect(d, 156, 150, 178, 158, STEEL_D, r=2)                                     # crank arm and handle
+    circ(d, 182, 154, 7, WOOD_D)
+    rect(d, 120, 176, 136, 200, WOOD, r=3)                                        # cascabel / elevation screw
+    return img
+
 def icon(base, top, scale_top=1.0):
     a = base.copy()
     a.alpha_composite(top)
@@ -579,7 +619,8 @@ os.makedirs(OUT, exist_ok=True)
 items = {"M240": (base_m240, top_m240), "M2": (base_m2, top_m2), "Mk19": (base_mk19, top_mk19), "M134": (base_m134, top_m134), "Mk44": (base_mk44, top_mk44), "TOW": (base_tow, top_tow), "Hydra": (base_hydra, top_hydra), "CIWS": (base_ciws, top_ciws), "M252": (base_m252, top_m252),
          "BoforsTwin": (base_bofors, top_bofors_twin), "BoforsQuad": (lambda: base_bofors(True), top_bofors_quad),
          "ZU23": (base_zu23, top_zu23), "Avenger": (base_avenger, top_avenger),
-         "Goalkeeper": (base_goalkeeper, top_goalkeeper), "LaserCIWS": (base_laser, top_laser)}
+         "Goalkeeper": (base_goalkeeper, top_goalkeeper), "LaserCIWS": (base_laser, top_laser),
+         "Gatling": (base_gatling, top_gatling)}
 BASE_CELLS = {"BoforsQuad": 3.0}       # buildings whose base texture is drawn at 3x3
 only = sys.argv[2:]
 if only: items = {k: v for k, v in items.items() if k in only}

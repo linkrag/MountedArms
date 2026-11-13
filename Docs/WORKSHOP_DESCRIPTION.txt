@@ -1,0 +1,47 @@
+[h1]Mounted Arms[/h1]
+[b]Real-world mounted weapons for your colony's defenses.[/b] From a hand-cranked Gatling gun to the Goalkeeper CIWS and the Iron Beam laser, Mounted Arms adds 17 turrets with their own research tab, a [b]Military[/b] tab in the Architect menu and vanilla-friendly balance. Add Combat Extended and your air-defense guns start shooting incoming shells out of the sky.
+
+[h2]The arsenal[/h2]
+[b]Automatic (powered)[/b]
+[list]
+[*]M240 turret and M134 minigun turret
+[*]Mk44 Bushmaster II 30 mm autocannon
+[*]B-8 rocket pod: seven-rocket 80 mm salvos
+[*]Mk 15 Phalanx CIWS and Goalkeeper CIWS
+[*]AN/TWQ-1 Avenger with Stinger missiles
+[*]Iron Beam laser: no ammunition, but a 2000 W power draw
+[*]APKWS rocket battery: long-range indirect fire, like a mortar
+[/list]
+[b]Manned (no power needed)[/b]
+[list]
+[*]Gatling gun: an early-game turret that only needs Gunsmithing
+[*]M2 Browning .50 and Mk 19 grenade launcher
+[*]BGM-71 TOW anti-tank launcher
+[*]Bofors 40mm L/60 twin and quad mounts, ZU-23-2 twin 23 mm
+[*]M252 mortar: portable, can be uninstalled and carried
+[/list]
+
+[h2]How they fight[/h2]
+[list]
+[*]Barrels overheat and stop firing until they cool; without CE, turrets also traverse gradually and sustained fire spreads more.
+[*]Without CE, barrels and launchers are restocked with steel.
+[*]Shots and muzzle flashes leave the barrel tip; rockets and missiles launch with backblast and motor ignition.
+[*]Turrets may explode when damaged.
+[/list]
+
+[h2]Combat Extended (optional)[/h2]
+[list]
+[*]Real CE ammunition (7.62x51mm, .50 BMG, 40mm grenades, 30x173mm, BGM-71, 81mm shells and more), CE ranges and aiming.
+[*]With CE's "Enable CIWS" option on, the Phalanx, Goalkeeper, Iron Beam, Bofors, ZU-23-2 and Avenger intercept incoming shells and missiles; the last three also shoot down drop pods, and the Avenger becomes pure air defense. Manned guns need an operator.
+[*]Unload button to empty a turret or swap ammunition types.
+[/list]
+
+[h2]Details[/h2]
+[list]
+[*][b]Requires:[/b] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2009463077]Harmony[/url]. No DLC needed.
+[*][b]Optional:[/b] [url=https://steamcommunity.com/sharedfiles/filedetails/?id=2890901044]Combat Extended[/url].
+[*][b]Versions:[/b] RimWorld 1.6 and 1.7.
+[*][b]Load order:[/b] after Harmony, the DLCs and Combat Extended.
+[*][b]Languages:[/b] English; Portuguese (Brazil) for the interface only.
+[*][b]Companion:[/b] Mounted Arms: Strategic (Combat Extended only) shares the Military tab.
+[/list]

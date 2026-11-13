@@ -1,6 +1,7 @@
 # Decisões do projeto (e por quê)
 
 ## Do usuário (Felipe) — não reverter sem perguntar
+- **Fonte fora de `Mods`** (7/nov/2026, escolha do usuário entre as opções): o fonte e os docs ficam em `RimWorld/_dev/src/<mod>`; `Mods/<mod>` é cópia gerada pelo deploy (só About, LoadFolders.xml, 1.6, Bin), e o upload continua pelo botão do jogo. Alternativa recusada: manter tudo e publicar pelo SteamCMD a partir de uma cópia limpa (exige login no SteamCMD e proíbe o botão do jogo).
 - **RimWorld 1.6 e 1.7** (25/out/2026): manter as duas versões. O SDK .NET 10 foi instalado na máquina para compilar ("pode instalar o sdk").
 - **Texturas** são geradas por mim (script `tools/gen_tex.py`); ele não edita sprites.
 - **Balanceamento vanilla-friendly**; alcance vanilla calibrado contra mini-turret (28,9), fuzil (25,9), sniper (41,5), lança-granadas (~38,9).
@@ -31,3 +32,12 @@
 - Patch XML: `PatchOperationMakeGunCECompatible` para armas; ops manuais para o building. Detalhes em `Docs/CE_NOTES.md`.
 - Sem `aimedBurstShotCount` (warning do CE), sem `noSnapshot` nas armas de burst > 1 não-artilharia (Mk19 quebrava). Artilharia CE (Glitter Tech) usa `noSnapshot` + `noSingleShot`.
 - Mods do usuário que podem conflitar e já foram checados quando ele perguntou: a lista não foi registrada nos docs (o `Docs/STATUS.md` só guarda a linha "Ambiente").
+
+## Gatling (out/2026)
+- Modelo: Colt M1883 (10 canos, .45-70 Government, tambor Accles 104, ~600 rpm sustentado na manivela; arma ~90 kg). Fontes: Wikipedia "Gatling gun", American Rifleman "Model 1883 and No. 353 Gatling Guns".
+- Equilíbrio: é a torreta de entrada. Exige só `Gunsmithing` (antes de `GunTurrets`), sem energia, aço + madeira + 2 componentes; em troca é mais fraca que a M240 (dano, AP, precisão, alcance). Abre o caminho do M134 (pré-requisito de `MA_Research_Rotary`).
+- Sem rajadas (pedido do usuário, realismo): a Gatling atira enquanto gira a manivela. Modelado como tiro único com cooldown curto (vanilla e CE), precisão ruim e fumaça de pólvora negra por tiro; o limite é o calor (vanilla) e o tambor + calor (CE). No CE o modo de mira é `SuppressFire` (fogo de varredura), não `AimedShot`.
+- CE: usa a munição .45-70 do próprio CE; alcance 55 = análogo rifle por ferrolho do CE (decisão "alcance CE usa o alcance do próprio CE").
+
+## Aba "Militar" do Architect (2/nov/2026)
+- Pedido do usuário: as torretas saem do Security e ganham a própria aba, compartilhada com o Mounted Arms Strategic. A categoria `MA_Military` (order 310, logo após Security) vive neste mod; o Strategic a usa por patch condicional (ver `../MountedArmsStrategic/Docs/DECISIONS.md`). Sem ícone, como as categorias do vanilla.

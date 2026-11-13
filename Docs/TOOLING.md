@@ -1,7 +1,18 @@
 # Ferramentas e fluxo
 
+
+## Fonte (`_dev/src`) x cópia publicada (`Mods/`) — 7/nov/2026
+- **Por quê:** o uploader da Oficina do jogo envia a pasta `Mods/<mod>` inteira, inclusive ocultas (`.git`), sem lista de exclusão (verificado no `Verse.Steam.Workshop` da 1.7: `SetItemContent(RootDir)`; quando assa os pacotes, `CopyFlattened` com `AttributesToSkip = None`). O 1º upload (7/nov) subiu `Docs/`, `Source*/`, `obj/`, `.git/`, `tools/`, `AGENTS.md` etc.
+- **Layout:** o fonte (git, Source, Docs, tools, `1.6/`, `About/`, build) vive em `RimWorld/_dev/src/<mod>`; o workspace é `RimWorld/_dev/src` (fora de `Mods`, o jogo não lê). `RimWorld/Mods/<mod>` só tem `About/`, `LoadFolders.xml`, `1.6/` e `Bin/`.
+- **Deploy:** `build.ps1` compila e chama `tools/deploy.ps1` (robocopy `/MIR` das quatro entradas e remoção de qualquer outra coisa no topo da cópia). `-Out` ou `-NoDeploy` pulam o deploy. Mudou só XML/textura/Keyed: `powershell -File tools/deploy.ps1`. **Nunca edite em `Mods/<mod>`**: o próximo deploy apaga. `tools/deploy.ps1` é cópia idêntica nos três mods (manter em sincronia).
+- **`About/PublishedFileId.txt`:** o jogo grava na cópia de `Mods` no 1º upload; o deploy traz de volta para o fonte antes de espelhar (senão o próximo upload criaria um item novo). IDs: Mounted Arms 3835654835, Strategic 3835655252, Colony Organizer 3835654283.
+- **Descrição da Oficina:** o jogo só envia a descrição na **criação** do item (`if (creating) SetItemDescription`); cada update reenvia título, `Preview.png`, tags e arquivos. O texto da Oficina fica em `Docs/WORKSHOP_DESCRIPTION.txt` (BBCode, inglês) e é colado à mão na página; `About.xml <description>` é só o texto do menu de mods do jogo.
+- **Preview:** `About/Preview.png` 1280x720, < 1 MB (limite da Steam), gerado por `tools/gen_preview.py` com estilo comum aos três mods (faixa #15171A, Bahnschrift, linha de destaque por mod: dourado no MA, vermelho no Strategic, amarelo no Colony Organizer).
+- **`1.6/Assets.zip*`:** pacotes que o jogo (Waylith) assa no upload; ignorados pelo git, vão junto no deploy.
+- **Lições da mudança:** `Move-Item` de pasta com o VS Code aberto caiu em copiar-e-apagar e parou no meio (arquivos travados); terminado com `robocopy /E /MOVE`. O VS Code regenerou `Source/obj/Debug` sem o `Directory.Build.props` e isso quebrou o build (atributos de assembly duplicados): apague `Source*/obj` se aparecer.
+
 ## Compilar as DLLs (RimWorld 1.6 e 1.7)
-`powershell -File build.ps1`, com o **jogo fechado** (ele trava as DLLs). Precisa do **SDK .NET 10**, instalado em 25/out/2026 com `winget install Microsoft.DotNet.SDK.10`, e de internet no primeiro build (pacotes NuGet). As DLLs são ignoradas pelo git.
+`powershell -File build.ps1` (compila e publica a cópia em `Mods/`, ver acima), com o **jogo fechado** (ele trava as DLLs). Precisa do **SDK .NET 10**, instalado em 25/out/2026 com `winget install Microsoft.DotNet.SDK.10`, e de internet no primeiro build (pacotes NuGet). As DLLs são ignoradas pelo git.
 - **Projetos:** um `.csproj` por DLL: `Source/MountedArms.csproj`, `SourceFx/MountedArmsFx.csproj` e `SourceCE/MountedArmsCE.csproj`.
 - **Alvos (`Directory.Build.props`):**
   - `net472` = RimWorld 1.6 → `Bin/1.6/Assemblies`.

@@ -1,5 +1,9 @@
 # Histórico de bugs e correções
 
+
+## Oficina e fonte fora de Mods (7/nov/2026)
+- 7/nov/2026 (Oficina): o uploader do jogo enviou a pasta inteira do mod (Docs, Source, obj, .git, tools, AGENTS.md); não existe lista de exclusão (lido no `Verse.Steam.Workshop` 1.7). Fonte movido para `RimWorld/_dev/src/<mod>` e `Mods/<mod>` virou cópia limpa (`tools/deploy.ps1`). Lições: `Move-Item` com o VS Code aberto parou no meio (terminado com `robocopy /E /MOVE`); o VS Code gerou `Source/obj/Debug` sem o `Directory.Build.props` e o build acusou atributos de assembly duplicados até apagar essas pastas. A descrição da Oficina só é enviada na criação do item.
+
 ## Lições do Strategic, lote 11 (26/out/2026)
 - **Salva do CE travada no 1º tiro:** o `LockRotationAndAngle` reaproveita a mira do 1º tiro em toda a rajada contra célula ou prédio. Aumentar o `circularError` só desloca a salva inteira; o espalhamento por míssil tem de ser feito no verbo (`Verb_ShootGuidedCE.ShiftTarget`).
 - **Bomb ×4:** o Bomb multiplica o dano por 4 em prédios e plantas. Para tirar HP exato, use um DamageDef próprio com fatores 1 (`MAS_BlastWave`).
@@ -47,5 +51,8 @@
       - `.gitignore` com `bin/`, que no Windows ignorava `Bin/` inteira;
       - `-Out` relativo era resolvido em cada pasta de projeto.
       Os quatro foram corrigidos.
+23. Nova torreta Gatling (Colt M1883) com números das fontes reais (10 canos, .45-70, tambor Accles 104, ~600 rpm sustentado); posicionada como a torreta mais antiga (só Gunsmithing) e pré-requisito do M134.
+24. Gatling no CE atirava mais devagar que no vanilla: em torreta, `AimedShot` soma 30–240 ticks de mira a cada rajada (`Verb_ShootCE`), e em tiro único cada tiro é uma rajada → `aiAimMode SuppressFire` (como as torretas M240B/AGS-30 do CE).
 13. Erro meu (lote 4): `MA_Turret_ZU23`, `MA_Gun_ZU23`, `MA_Ammo_FIM92`, `MA_Bullet_FIM92` (e `MAS_*_M777` no Strategic) terminavam em dígito → config error no carregamento. Renomeados para `_ZU23_AA`, `_FIM92_Stinger`, `_M777_Howitzer`; criado `tools/check_defnames.py`.
 12. Erro meu: replace-all trocou o burst do Mk19 (4→6) em vez da bateria; corrigido por sed por linha.
+- 13/nov/2026: o Stinger (x4) herdava o passo 20 de "Até X" do `AmmoRecipeBase` do CE; declarado `targetCountAdjustment` 4. Lição: toda receita sobre o `AmmoRecipeBase` do CE precisa declarar o passo igual ao lote.
