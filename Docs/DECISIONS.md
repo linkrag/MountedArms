@@ -41,3 +41,8 @@
 
 ## Aba "Militar" do Architect (2/nov/2026)
 - Pedido do usuário: as torretas saem do Security e ganham a própria aba, compartilhada com o Mounted Arms Strategic. A categoria `MA_Military` (order 310, logo após Security) vive neste mod; o Strategic a usa por patch condicional (ver `../MountedArmsStrategic/Docs/DECISIONS.md`). Sem ícone, como as categorias do vanilla.
+
+## Versionamento (13/nov/2026)
+- Pedido do usuário: changelog e versão nas descrições da Oficina.
+- SemVer. 1.0.0 = 1ª publicação na Oficina (7/nov/2026). MINOR = recurso novo, PATCH = só correção ou ajuste. Uma versão por dia com mudança visível (não sabemos quais dias foram enviados à Oficina; a próxima subida leva tudo).
+- Fonte da verdade: `Docs/CHANGELOG.md` (inglês, texto de jogador, sem nomes internos nem "não testado"). Antes de cada "Atualizar na Oficina": subir `<modVersion>` no `About.xml`, o `CHANGELOG.md` e a seção Changelog da `WORKSHOP_DESCRIPTION.txt` juntos, à mão. A descrição precisa ficar abaixo de 8000 caracteres.

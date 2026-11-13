@@ -76,6 +76,7 @@ Veja `Docs/STATUS.md`. Em resumo: M240/M134/M2/Mk 19/Mk44 testados (vanilla e CE
 | `Docs/CE_NOTES.md` | tudo que sabemos do CE (munições, projéteis, verbos, armadilhas) |
 | `Docs/STATUS.md` | testes feitos, pendências, bugs abertos, próximos passos |
 | `Docs/HISTORY.md` | linha do tempo dos problemas e correções |
+| `Docs/CHANGELOG.md` | versões para jogador (inglês), espelhadas na descrição da Oficina |
 | `Docs/TOOLING.md` | compilar, validar, texturas, caminhos, restrições do ambiente |
 | `Docs/TEMPLATE_NOVA_TORRETA.md` | checklist + esqueletos para nova torreta |
 | `Docs/MIGRATION_1_7.md` | migração para RimWorld 1.7 (Waylith): auditoria, riscos, toolchain (vale para os dois mods) |

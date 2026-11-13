@@ -2,6 +2,12 @@
 
 > **RimWorld 1.6 e 1.7 (25/out/2026):** conteúdo comum em `1.6/`; DLLs por versão em `Bin/1.6` e `Bin/1.7`, compiladas juntas pelo `build.ps1` (SDK .NET 10). **Testado em jogo em 26/out: carrega e funciona no 1.7 sem CE e com o CE 16.7.4.** Auditoria, riscos e toolchain: `MountedArms/Docs/MIGRATION_1_7.md`. Contexto anterior: `MountedArmsStrategic/Docs/HANDOFF.md`.
 
+## Versão e changelog (13/nov/2026) - versão atual **1.0.1**, sem efeito no jogo além do número
+- `<modVersion>1.0.1</modVersion>` no `About/About.xml` (o campo existe no `ModMetaData` da 1.6 e da 1.7; o menu de mods mostra a versão).
+- `Docs/CHANGELOG.md` (novo, inglês, para jogador): uma versão por dia com mudança visível desde a publicação (1.0.0 = 7/nov). Montado por workflow de agentes a partir de STATUS/HISTORY/git e conferido item a item por um revisor cético.
+- `Docs/WORKSHOP_DESCRIPTION.txt`: linha "Mod version" ao lado de "Versions" e seção [h2]Changelog[/h2] no fim (a 1.0.0 vira uma linha só, porque os recursos já estão descritos acima; o limite da Steam é 8000 caracteres). **Colar na página da Oficina: pendente com o usuário.**
+- Nada testado no jogo (só o número no menu de mods mudaria).
+
 ## Passo de "Até X" do Stinger (13/nov/2026) - deploy feito, **NÃO testado no jogo**
 - `MakeMA_Ammo_FIM92_Stinger` (`1.6/CE/Defs/MountedArms_CE_Ammo.xml`) herdava `targetCountAdjustment` 20 do `AmmoRecipeBase` do CE, mas faz 4 por construção: agora `<targetCountAdjustment>4</targetCountAdjustment>` (o -/+ de "Até X" anda pelo lote). Achado pela auditoria do Colony Organizer, que também corrige isso em runtime; aqui vale mesmo sem ele. Regra para receitas novas com base no `AmmoRecipeBase`: declarar `targetCountAdjustment` = contagem do produto.
 
